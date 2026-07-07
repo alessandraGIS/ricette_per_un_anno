@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Caveat:wght@500;600;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #EFE3CB; }
+  ::selection { background: #e8c9a0; }
+</style>
+</helmet>
+
+<div style="background:#EFE3CB; min-height:100vh; padding:40px 24px; font-family:'Spectral',Georgia,serif; color:#3A2C22;">
+<div style="max-width:1180px; margin:0 auto; background:#FBF4E6; box-shadow:0 30px 80px rgba(58,44,34,.16); border:1px solid rgba(58,44,34,.08);">
+
+  <!-- topbar -->
+  <div style="display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap; padding:26px clamp(28px,5vw,64px); border-bottom:1px solid rgba(58,44,34,.12);">
+    <a href="index.dc.html" style="text-decoration:none; color:#3A2C22; font-family:'DM Serif Display',serif; font-size:22px; letter-spacing:.01em;">{{ t.brand }}</a>
+    <div style="display:flex; gap:clamp(16px,2.4vw,30px); align-items:center;">
+      <div style="display:flex; gap:clamp(14px,2vw,26px); align-items:center; font-family:'Courier Prime',monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase;">
+        <a href="index.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">Home</a>
+        <a href="Il diario.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">{{ t.navRecipes }}</a>
+        <a href="La nostra storia.dc.html" style="text-decoration:none; color:#BE5A34;">{{ t.navStory }}</a>
+        <a href="Il calendario.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">{{ t.navCal }}</a>
+        <a href="Contatti.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">{{ t.navContact }}</a>
+      </div>
+      <div style="display:flex; gap:9px; align-items:center; font-family:'Spectral',serif; font-size:14px;">
+        <span onClick="{{ onIt }}" style="{{ itStyle }}">IT</span>
+        <span style="color:#C9B79A;">/</span>
+        <span onClick="{{ onEn }}" style="{{ enStyle }}">EN</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- header -->
+  <div style="padding:clamp(44px,6vw,72px) clamp(28px,5vw,64px) 8px; max-width:760px;">
+    <div style="font-family:'Courier Prime',monospace; font-size:12px; letter-spacing:.26em; text-transform:uppercase; color:#9E3F26; margin:0 0 18px;">{{ t.kicker }}</div>
+    <h1 style="font-family:'DM Serif Display',serif; font-size:clamp(44px,6vw,62px); line-height:1.04; margin:0; font-weight:400;">{{ t.title }}</h1>
+    <div style="font-family:'Caveat',cursive; font-size:32px; color:#BE5A34; transform:rotate(-1.5deg); transform-origin:left; display:inline-block; margin-top:16px;">{{ t.subtitle }}</div>
+    <div style="width:56px; height:2px; background:#BE5A34; margin-top:28px;"></div>
+  </div>
+
+  <!-- body -->
+  <div style="padding:36px clamp(28px,5vw,64px) 20px; max-width:760px;">
+    <div style="font-size:20px; line-height:1.78; color:#4A3A2E;">
+      <sc-for list="{{ story }}" as="para" hint-placeholder-count="11">
+        <p style="margin:0 0 22px;">{{ para }}</p>
+      </sc-for>
+    </div>
+    <div style="font-family:'Caveat',cursive; font-size:34px; color:#9E3F26; margin-top:8px;">{{ t.sign }}</div>
+  </div>
+
+  <!-- closing note / back to recipes -->
+  <div style="margin:24px clamp(28px,5vw,64px) 60px; background:#FFFDF6; border:1px solid rgba(58,44,34,.16); padding:32px 36px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:18px;">
+    <div style="font-family:'Spectral',serif; font-style:italic; font-size:18px; color:#7A6552; max-width:520px;">{{ t.closing }}</div>
+    <a href="Contatti.dc.html" style="text-decoration:none; background:#BE5A34; color:#FBF4E6; font-family:'Spectral',serif; font-size:15px; letter-spacing:.02em; padding:13px 26px; border-radius:2px; white-space:nowrap;">{{ t.cta }}</a>
+  </div>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { lang: "it" };
+
+  renderVals() {
+    const en = this.state.lang === "en";
+
+    const IT = {
+      brand: "Le ricette di Mara",
+      navRecipes: "Ricette",
+      navStory: "La nostra storia",
+      navCal: "Calendario",
+      navContact: "Contatti",
+      back: "← Torna alle ricette",
+      kicker: "La nostra storia · 2004 – 2005",
+      title: "Una ricetta per accorciare una distanza",
+      subtitle: "da Venezia a Urbino, una mail al giorno",
+      sign: "— Alessandra",
+      cta: "Scrivici",
+      closing: "Avete un commento o un suggerimento? Scriveteci, ci fa piacere leggervi.",
+      footer: "Raccolte con affetto da Alessandra, dalle mail di sua madre Mara.",
+      story: [
+        "Quando lasciai Venezia per trasferirmi a Urbino e frequentare l'università, ero una studentessa parecchio fuori corso. Dopo qualche scelta sbagliata e diversi cambi di direzione, stavo finalmente cercando di portare a termine un percorso che si era rivelato più lungo e tortuoso del previsto. Condividevo una casa con altri studenti e disponevo di una cucina piuttosto spartana: un forno minuscolo e capriccioso, poche pentole e ancora meno esperienza.",
+        "Cucinare mi è sempre piaciuto: fin da bambina preparavo torte e biscotti con la mamma e le nonne, e da allora non ho mai smesso. A Urbino, però, cucinare divenne per la prima volta un'attività quotidiana e necessaria: dovendo pensare ogni giorno ai miei pasti, quel piacere si trasformò presto in una vera passione. Mi divertivo a sperimentare, a preparare cene improvvisate per i miei coinquilini, a condividere piatti e chiacchiere con amici e compagni di corso. In una città lontana da casa, la cucina divenne un modo per sentirmi meno sola e per costruire nuove amicizie.",
+        "Tra il febbraio 2004 e il gennaio 2005 mia madre, Mara, che all'epoca era assorbita da un incarico particolarmente impegnativo presso il Comune di Venezia e che è sempre stata una cuoca straordinaria, riuscì comunque a trovare ogni giorno il tempo di mandarmi una mail con una ricetta. Una ricetta al giorno, senza eccezioni. Alcune erano grandi classici della cucina di famiglia, altre provenivano da quaderni, ritagli o ricettari accumulati negli anni.",
+        "Io e mia madre non siamo mai state particolarmente brave a parlare di sentimenti ed emozioni. Avevamo — e abbiamo — un rapporto intenso, a volte complicato, talvolta conflittuale, ma sempre attraversato da un affetto profondo. Quelle email erano un modo tutto nostro di restare in contatto, di accorciare la distanza tra Venezia e Urbino e di tenere vivo un dialogo quotidiano.",
+        "Vent'anni dopo sono tornata a quelle email, ancora conservate nella mia casella di posta. Nel corso degli anni non sono state poche le persone che hanno chiesto a me o a mia madre una copia del \u201cleggendario ricettario di Mara\u201d. Alcune ricette sono circolate tra amici e parenti — fotocopiate, trascritte, passate di mano in mano — ma la raccolta completa non è mai stata condivisa.",
+        "Ho deciso di raccoglierla qui, riportando per ciascuna ricetta la data originale della mail da cui proviene. Le email erano spesso accompagnate da poche righe più personali che appartengono alla nostra storia familiare e che ho scelto di tenere per me. In queste pagine troverete soltanto le ricette.",
+        "Questo progetto crescerà lentamente. Le ricette compariranno poco alla volta e in ordine sparso, seguendo il tempo che riuscirò a dedicargli. Partiranno dalle mail originali che mia madre mi inviò vent'anni fa, ma non si fermeranno lì. In questi anni molte di quelle preparazioni sono state rifatte, corrette, semplificate o migliorate, sia da lei che da me. L'idea non è quindi quella di creare un archivio immutabile, ma di proporre una versione aggiornata di quelle ricette, mantenendone lo spirito e la storia.",
+        "Questa raccolta è certamente una collezione di ricette, ma anche la traccia di un dialogo che è durato un anno intero e che, in qualche modo, continua ancora oggi.",
+        "Mia madre vive ancora a Venezia e io in provincia di Varese. Continuiamo quindi a cucinare l'una lontano dall'altra, proprio come allora, anche se oggi possiamo contare su strumenti che nel 2004 sembravano fantascienza: videochiamate, fotografie digitali condivise in tempo reale, messaggi istantanei.",
+        "In fondo è cambiata la tecnologia, ma non l'idea che sta dietro a questo progetto: usare una ricetta per accorciare una distanza. Fra me e lei. Ma anche fra noi e voi."
+      ]
+    };
+
+    const EN = {
+      brand: "Mara's Recipes",
+      navRecipes: "Recipes",
+      navStory: "Our story",
+      navCal: "Calendar",
+      navContact: "Contact",
+      back: "← Back to the recipes",
+      kicker: "Our story · 2004 – 2005",
+      title: "A recipe to close a distance",
+      subtitle: "from Venice to Urbino, one email a day",
+      sign: "— Alessandra",
+      cta: "Write to us",
+      closing: "Got a comment or a suggestion? Write to us — we love hearing from you.",
+      footer: "Collected with love by Alessandra, from her mother Mara's emails.",
+      story: [
+        "When I left Venice to move to Urbino and go to university, I was a student who had fallen well behind. After a few wrong turns and several changes of direction, I was finally trying to finish a path that had proved far longer and more winding than I'd expected. I shared a house with other students and had a rather spartan kitchen: a tiny, temperamental oven, a few pots and even less experience.",
+        "I have always loved cooking: as a child I made cakes and biscuits with my mother and grandmothers, and I never stopped after that. In Urbino, though, cooking became for the first time a daily, necessary activity: having to think about my own meals every day, that pleasure soon turned into a real passion. I loved to experiment, to throw together impromptu dinners for my flatmates, to share dishes and conversation with friends and classmates. In a city far from home, cooking became a way to feel less alone and to build new friendships.",
+        "Between February 2004 and January 2005 my mother Mara — then absorbed by a particularly demanding role at the City of Venice, and always an extraordinary cook — still managed to find the time every single day to send me an email with a recipe. One recipe a day, without exception. Some were great classics of our family's kitchen, others came from notebooks, clippings or recipe books gathered over the years.",
+        "My mother and I have never been especially good at talking about feelings and emotions. We had — and still have — an intense relationship, at times complicated, sometimes stormy, but always run through with a deep affection. Those emails were a way, all our own, of staying in touch, of shortening the distance between Venice and Urbino and of keeping a daily conversation alive.",
+        "Twenty years later I came back to those emails, still kept in my inbox. Over the years, more than a few people have asked my mother or me for a copy of \u201cMara's legendary recipe book\u201d. Some recipes have circulated among friends and relatives — photocopied, transcribed, passed from hand to hand — but the complete collection has never been shared.",
+        "I've decided to gather it here, giving each recipe the original date of the email it comes from. The emails were often accompanied by a few more personal lines that belong to our family history and that I've chosen to keep for myself. On these pages you'll find only the recipes.",
+        "This project will grow slowly. The recipes will appear little by little and in no particular order, as the time I can give them allows. They start from the original emails my mother sent me twenty years ago, but they won't stop there. Over the years many of those dishes have been remade, corrected, simplified or improved, both by her and by me. The idea, then, is not to create an unchanging archive, but to offer an updated version of those recipes, keeping their spirit and their story.",
+        "This collection is certainly a set of recipes, but also the trace of a conversation that lasted a whole year and that, in some way, still continues today.",
+        "My mother still lives in Venice and I live in the province of Varese. So we go on cooking far from each other, just as we did back then — though today we can rely on tools that in 2004 felt like science fiction: video calls, digital photos shared in real time, instant messages.",
+        "In the end the technology has changed, but not the idea behind this project: using a recipe to close a distance. Between her and me. And between us and you."
+      ]
+    };
+
+    const t = en ? EN : IT;
+    const active = { fontWeight: 700, color: "#BE5A34", cursor: "pointer", letterSpacing: ".04em" };
+    const idle = { fontWeight: 400, color: "#9A836C", cursor: "pointer", letterSpacing: ".04em" };
+
+    return {
+      t,
+      story: t.story,
+      itStyle: en ? idle : active,
+      enStyle: en ? active : idle,
+      onIt: () => this.setState({ lang: "it" }),
+      onEn: () => this.setState({ lang: "en" })
+    };
+  }
+}
+</script>
+</body>
+</html>

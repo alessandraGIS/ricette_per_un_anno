@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Caveat:wght@500;600;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<script src="recipes.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #EFE3CB; }
+  ::selection { background: #e8c9a0; }
+  a { color: #9E3F26; }
+  a:hover { color: #BE5A34; }
+</style>
+</helmet>
+
+<div style="background:#EFE3CB; min-height:100vh; padding:40px 24px; font-family:'Spectral',Georgia,serif; color:#3A2C22;">
+<div style="max-width:1180px; margin:0 auto; background:#FBF4E6; box-shadow:0 30px 80px rgba(58,44,34,.16); border:1px solid rgba(58,44,34,.08);">
+
+  <!-- topbar -->
+  <div style="display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap; padding:26px clamp(28px,5vw,64px); border-bottom:1px solid rgba(58,44,34,.12);">
+    <a href="index.dc.html" style="text-decoration:none; color:#3A2C22; font-family:'DM Serif Display',serif; font-size:22px; letter-spacing:.01em;">{{ t.brand }}</a>
+    <div style="display:flex; gap:clamp(16px,2.4vw,30px); align-items:center;">
+      <div style="display:flex; gap:clamp(14px,2vw,26px); align-items:center; font-family:'Courier Prime',monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase;">
+        <a href="index.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">Home</a>
+        <a href="Il diario.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">{{ t.navRecipes }}</a>
+        <a href="La nostra storia.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">{{ t.navStory }}</a>
+        <a href="Il calendario.dc.html" style="text-decoration:none; color:#BE5A34;">{{ t.navCal }}</a>
+        <a href="Contatti.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">{{ t.navContact }}</a>
+      </div>
+      <div style="display:flex; gap:9px; align-items:center; font-family:'Spectral',serif; font-size:14px;">
+        <span onClick="{{ onIt }}" style="{{ itStyle }}">IT</span>
+        <span style="color:#C9B79A;">/</span>
+        <span onClick="{{ onEn }}" style="{{ enStyle }}">EN</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- header -->
+  <div style="padding:clamp(40px,5vw,60px) clamp(28px,5vw,64px) 12px;">
+    <div style="font-family:'Courier Prime',monospace; font-size:12px; letter-spacing:.26em; text-transform:uppercase; color:#9E3F26; margin:0 0 16px;">{{ t.kicker }}</div>
+    <h1 style="font-family:'DM Serif Display',serif; font-size:clamp(40px,5.4vw,58px); line-height:1.04; margin:0; font-weight:400;">{{ t.title }}</h1>
+    <div style="font-family:'Caveat',cursive; font-size:30px; color:#BE5A34; margin-top:10px;">{{ t.sub }}</div>
+    <div style="width:56px; height:2px; background:#BE5A34; margin-top:24px;"></div>
+  </div>
+
+  <!-- progress + legend -->
+  <div style="padding:8px clamp(28px,5vw,64px) 0; display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px;">
+    <div style="font-size:19px; line-height:1.6; color:#4A3A2E; max-width:560px;">
+      <span style="font-family:'DM Serif Display',serif; font-size:30px; color:#BE5A34;">{{ count }}</span>
+      {{ t.progress }}
+    </div>
+    <div style="display:flex; gap:22px; align-items:center; font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:#7A6552;">
+      <span style="display:flex; align-items:center; gap:8px;"><span style="width:14px; height:14px; border-radius:50%; background:#BE5A34; display:inline-block;"></span>{{ t.legFull }}</span>
+      <span style="display:flex; align-items:center; gap:8px;"><span style="width:14px; height:14px; border-radius:50%; border:1px solid rgba(58,44,34,.22); display:inline-block;"></span>{{ t.legEmpty }}</span>
+    </div>
+  </div>
+
+  <!-- year grid -->
+  <div style="padding:clamp(28px,4vw,44px) clamp(28px,5vw,64px) 64px; display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:clamp(24px,3vw,38px);">
+    <sc-for list="{{ months }}" as="m" hint-placeholder-count="12">
+      <div>
+        <div style="display:flex; align-items:baseline; justify-content:space-between; border-bottom:1px solid rgba(58,44,34,.18); padding-bottom:8px; margin-bottom:12px;">
+          <div style="font-family:'DM Serif Display',serif; font-size:22px;">{{ m.name }}</div>
+          <div style="font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:.1em; color:#BE5A34;">{{ m.tag }}</div>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(7,1fr); gap:5px;">
+          <sc-for list="{{ m.dow }}" as="d" hint-placeholder-count="7">
+            <div style="text-align:center; font-family:'Courier Prime',monospace; font-size:10px; letter-spacing:.04em; color:#B9A88F; padding-bottom:2px;">{{ d }}</div>
+          </sc-for>
+          <sc-for list="{{ m.cells }}" as="c" hint-placeholder-count="35">
+            <sc-if value="{{ c.empty }}" hint-placeholder-val="{{ false }}">
+              <div></div>
+            </sc-if>
+            <sc-if value="{{ c.filled }}" hint-placeholder-val="{{ false }}">
+              <a href="{{ c.href }}" title="{{ c.title }}" style="text-decoration:none; aspect-ratio:1; display:flex; align-items:center; justify-content:center; font-family:'Spectral',serif; font-size:14px; border-radius:50%; background:#BE5A34; color:#FBF4E6; font-weight:500;" style-hover="background:#9E3F26;">{{ c.day }}</a>
+            </sc-if>
+            <sc-if value="{{ c.plain }}" hint-placeholder-val="{{ true }}">
+              <div style="aspect-ratio:1; display:flex; align-items:center; justify-content:center; font-family:'Spectral',serif; font-size:14px; color:#6E5A48; border:1px solid rgba(58,44,34,.1); border-radius:50%;">{{ c.day }}</div>
+            </sc-if>
+          </sc-for>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { lang: "it" };
+
+  componentDidMount() {
+    const wait = () => {
+      if (window.MARA_RECIPES) { this.forceUpdate(); return; }
+      setTimeout(wait, 30);
+    };
+    wait();
+  }
+
+  renderVals() {
+    const en = this.state.lang === "en";
+    const langKey = en ? "en" : "it";
+
+    const IT = {
+      brand: "Le ricette di Mara",
+      navRecipes: "Ricette",
+      navStory: "La nostra storia",
+      navCal: "Calendario",
+      navContact: "Contatti",
+      back: "← Torna al ricettario",
+      kicker: "Un anno · 2004 – 2005",
+      title: "Il calendario dell'anno",
+      sub: "Una mail al giorno — un giorno alla volta",
+      progressA: "giorni riempiti finora, su 366.",
+      legFull: "ricetta caricata",
+      legEmpty: "ancora da riempire",
+      monthsFull: ["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"],
+      dow: ["L","M","M","G","V","S","D"]
+    };
+    const EN = {
+      brand: "Mara's Recipes",
+      navRecipes: "Recipes",
+      navStory: "Our story",
+      navCal: "Calendar",
+      navContact: "Contact",
+      back: "← Back to the collection",
+      kicker: "One year · 2004 – 2005",
+      title: "The calendar of the year",
+      sub: "One email a day — one day at a time",
+      progressA: "days filled so far, out of 366.",
+      legFull: "recipe uploaded",
+      legEmpty: "still to fill",
+      monthsFull: ["January","February","March","April","May","June","July","August","September","October","November","December"],
+      dow: ["M","T","W","T","F","S","S"]
+    };
+    const t0 = en ? EN : IT;
+
+    const active = { fontWeight: 700, color: "#BE5A34", cursor: "pointer", letterSpacing: ".04em" };
+    const idle = { fontWeight: 400, color: "#9A836C", cursor: "pointer", letterSpacing: ".04em" };
+    const base = {
+      itStyle: en ? idle : active,
+      enStyle: en ? active : idle,
+      onIt: () => this.setState({ lang: "it" }),
+      onEn: () => this.setState({ lang: "en" })
+    };
+
+    const DB = window.MARA_RECIPES;
+    if (!DB) {
+      return { ...base, t: { ...t0, progress: t0.progressA }, months: [], count: "0" };
+    }
+
+    // Mappa giorno→ricetta usando il mese italiano come chiave canonica.
+    const monthIT = ["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
+    const filled = {}; // key "monthIndex-day" -> recipe entry
+    DB.order.forEach(id => {
+      const r = DB.recipes[id];
+      if (!r.published) return;
+      const mi = monthIT.indexOf(r.mIt);
+      if (mi < 0) return;
+      filled[mi + "-" + parseInt(r.day, 10)] = { id, name: r.name[langKey] };
+    });
+
+    // L'anno delle mail: febbraio 2004 → gennaio 2005 (12 mesi, 366 giorni).
+    const seq = [];
+    for (let k = 0; k < 12; k++) {
+      const abs = 1 + k;                 // 1 = febbraio
+      seq.push({ year: 2004 + Math.floor(abs / 12), mi: abs % 12 });
+    }
+    const months = seq.map(({ year, mi }) => {
+      const name = t0.monthsFull[mi] + (mi === 0 ? " " + year : (mi === 1 ? " " + year : ""));
+      const daysInMonth = new Date(year, mi + 1, 0).getDate();
+      const firstDow = (new Date(year, mi, 1).getDay() + 6) % 7; // lunedì = 0
+      const cells = [];
+      for (let i = 0; i < firstDow; i++) cells.push({ empty: true });
+      let monthCount = 0;
+      for (let d = 1; d <= daysInMonth; d++) {
+        const hit = filled[mi + "-" + d];
+        if (hit) {
+          monthCount++;
+          cells.push({
+            filled: true,
+            day: String(d),
+            href: "Ricetta.dc.html?r=" + hit.id,
+            title: hit.name
+          });
+        } else {
+          cells.push({ plain: true, day: String(d) });
+        }
+      }
+      return {
+        name,
+        tag: monthCount ? String(monthCount) : "",
+        dow: t0.dow,
+        cells
+      };
+    });
+
+    const count = Object.keys(filled).length;
+
+    return {
+      ...base,
+      t: { ...t0, progress: t0.progressA },
+      months,
+      count: String(count)
+    };
+  }
+}
+</script>
+</body>
+</html>

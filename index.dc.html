@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Caveat:wght@500;600;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<script src="recipes.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #EFE3CB; }
+  ::selection { background: #e8c9a0; }
+</style>
+</helmet>
+
+<div style="background:#EFE3CB; min-height:100vh; padding:40px 24px; font-family:'Spectral',Georgia,serif; color:#3A2C22;">
+<div style="max-width:1180px; margin:0 auto; background:#FBF4E6; box-shadow:0 30px 80px rgba(58,44,34,.16); border:1px solid rgba(58,44,34,.08);">
+
+  <!-- topbar -->
+  <div style="display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap; padding:26px clamp(28px,5vw,64px); border-bottom:1px solid rgba(58,44,34,.12);">
+    <div style="font-family:'DM Serif Display',serif; font-size:22px; letter-spacing:.01em;">{{ t.brand }}</div>
+    <div style="display:flex; gap:clamp(16px,2.4vw,30px); align-items:center;">
+      <div style="display:flex; gap:clamp(14px,2vw,26px); align-items:center; font-family:'Courier Prime',monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase;">
+        <a href="index.dc.html" style="text-decoration:none; color:#BE5A34;">Home</a>
+        <a href="Il diario.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">{{ t.navRecipes }}</a>
+        <a href="La nostra storia.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">{{ t.navStory }}</a>
+        <a href="Il calendario.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">{{ t.navCal }}</a>
+        <a href="Contatti.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">{{ t.navContact }}</a>
+      </div>
+      <div style="display:flex; gap:9px; align-items:center; font-family:'Spectral',serif; font-size:14px;">
+        <span onClick="{{ onIt }}" style="{{ itStyle }}">IT</span>
+        <span style="color:#C9B79A;">/</span>
+        <span onClick="{{ onEn }}" style="{{ enStyle }}">EN</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- hero -->
+  <div style="padding:clamp(44px,6vw,68px) clamp(28px,5vw,64px) 8px; text-align:center;">
+    <div style="font-family:'Courier Prime',monospace; font-size:12px; letter-spacing:.26em; text-transform:uppercase; color:#9E3F26; margin-bottom:20px;">{{ t.heroKicker }}</div>
+    <h1 style="font-family:'DM Serif Display',serif; font-size:clamp(48px,6.4vw,72px); line-height:1.02; margin:0 0 16px; font-weight:400;">{{ t.brand }}</h1>
+    <div style="font-family:'Caveat',cursive; font-size:34px; color:#BE5A34; display:inline-block;">{{ t.tagline }}</div>
+  </div>
+
+  <!-- hero illustration -->
+  <div style="padding:clamp(12px,2vw,24px) clamp(20px,4vw,52px) clamp(24px,4vw,40px); text-align:center;">
+    <img src="assets/hero-index.png" alt="Illustrazione a tratto: Urbino e Venezia unite da un cuore, un portatile con una mail di Mara e strumenti di cucina" style="display:block; width:100%; max-width:600px; height:auto; margin:0 auto;">
+  </div>
+
+  <!-- story -->
+  <div style="padding:8px clamp(28px,5vw,64px) 56px; display:grid; grid-template-columns:220px 1fr; gap:clamp(28px,4vw,44px); border-top:1px solid rgba(58,44,34,.12);">
+    <div style="padding-top:8px;">
+      <div style="font-family:'DM Serif Display',serif; font-size:30px; line-height:1.05;">{{ t.storyHead }}</div>
+      <div style="width:44px; height:2px; background:#BE5A34; margin-top:16px;"></div>
+    </div>
+    <div style="font-size:19px; line-height:1.72; color:#4A3A2E; max-width:640px;">
+      <sc-for list="{{ story }}" as="para" hint-placeholder-count="8">
+        <p style="margin:0 0 18px;">{{ para }}</p>
+      </sc-for>
+      <div style="font-family:'Caveat',cursive; font-size:32px; color:#9E3F26; margin:6px 0 20px;">{{ t.sign }}</div>
+      <a href="La nostra storia.dc.html" style="text-decoration:none; display:inline-block; font-family:'Courier Prime',monospace; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#9E3F26; border-bottom:1px solid #BE5A34; padding-bottom:3px; margin-top:4px;">{{ t.readMore }}</a>
+    </div>
+  </div>
+
+  <!-- featured recipe: assaggio card -->
+  <div style="padding:0 clamp(28px,5vw,64px) 60px;">
+    <div style="background:#FFFDF6; border:1px solid rgba(58,44,34,.16); box-shadow:0 10px 30px rgba(58,44,34,.08); padding:clamp(28px,4vw,44px) clamp(26px,4vw,46px); position:relative;">
+      <div style="position:absolute; left:0; top:36px; bottom:36px; width:3px; background:#BE5A34;"></div>
+      <div style="font-family:'Caveat',cursive; font-size:22px; color:#9E3F26; margin-bottom:6px;">{{ t.recipeKicker }}</div>
+      <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:10px; margin-bottom:26px;">
+        <a href="{{ featuredHref }}" style="text-decoration:none; color:#3A2C22; font-family:'DM Serif Display',serif; font-size:clamp(30px,4vw,38px); line-height:1.05;">{{ t.recipeName }}</a>
+        <div style="font-family:'Courier Prime',monospace; font-size:13px; letter-spacing:.1em; color:#7A6552;">{{ t.recipeMeta }}</div>
+      </div>
+      <a href="{{ featuredHref }}" style="text-decoration:none; display:block; aspect-ratio:16/7; background:repeating-linear-gradient(45deg,#ECD9BC 0 11px,#E4CFAC 11px 22px); border:1px solid rgba(58,44,34,.15); display:flex; align-items:flex-end; padding:12px;">
+        <span style="font-family:'Courier Prime',monospace; font-size:12px; color:#7A6552; background:#FFFDF6; padding:4px 7px;">{{ t.photoRecipe }}</span>
+      </a>
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px; margin-top:22px;">
+        <div style="font-family:'Spectral',serif; font-style:italic; font-size:16px; line-height:1.55; color:#7A6552; max-width:440px;">{{ t.recipeNote }}</div>
+        <a href="{{ featuredHref }}" style="text-decoration:none; white-space:nowrap; font-family:'Courier Prime',monospace; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#9E3F26; border-bottom:1px solid #BE5A34; padding-bottom:3px;">{{ t.recipeLink }}</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- diary link -->
+  <div style="padding:0 clamp(28px,5vw,64px) 72px;">
+    <a href="Il diario.dc.html" style="text-decoration:none; display:flex; justify-content:space-between; align-items:center; gap:24px; flex-wrap:wrap; background:#FFFDF6; border:1px solid rgba(58,44,34,.16); box-shadow:0 10px 30px rgba(58,44,34,.08); padding:clamp(26px,4vw,38px) clamp(26px,4vw,46px);" style-hover="background:#F5EAD4;">
+      <div>
+        <div style="font-family:'Courier Prime',monospace; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#9E3F26; margin-bottom:10px;">{{ t.diaryHead }}</div>
+        <div style="font-family:'DM Serif Display',serif; font-size:clamp(26px,3.4vw,34px); color:#3A2C22; line-height:1.1;">{{ t.diaryLinkTitle }}</div>
+        <div style="font-size:16px; font-style:italic; color:#7A6552; margin-top:8px; max-width:520px;">{{ t.diaryLinkSub }}</div>
+      </div>
+      <div style="white-space:nowrap; font-family:'Courier Prime',monospace; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#9E3F26; border-bottom:1px solid #BE5A34; padding-bottom:3px;">{{ t.diaryLinkCta }}</div>
+    </a>
+  </div>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { lang: "it", query: "", cat: "all" };
+
+  componentDidMount() {
+    const wait = () => {
+      if (window.MARA_RECIPES) { this.forceUpdate(); return; }
+      setTimeout(wait, 30);
+    };
+    wait();
+  }
+
+  renderVals() {
+    const en = this.state.lang === "en";
+
+    const IT = {
+      brand: "Le ricette di Mara",
+      navRecipes: "Ricette",
+      navStory: "La nostra storia",
+      navCal: "Calendario",
+      navContact: "Contatti",
+      tagline: "Una mail al giorno, da Venezia a Urbino",
+      heroKicker: "Un ricettario · 2004 – 2005",
+      storyHead: "Benvenuti nel Ricettario di Mara",
+      readMore: "Leggi la nostra storia →",
+      story: [
+        "Tra il 2004 e il 2005, mentre studiavo all'università a Urbino, mia madre, Mara, mi inviò una ricetta al giorno via email. Per un anno intero, senza eccezioni: 366 ricette, perché il 2004 era bisestile.",
+        "Vent'anni dopo ho deciso di raccogliere quelle ricette e condividerle qui. Verranno pubblicate poco alla volta, man mano che avrò il tempo di riscoprirle, provarle e aggiornarle insieme a mia madre.",
+        "Molte persone hanno sentito parlare del \u201cleggendario ricettario di Mara\u201d, ma questa è la prima volta che viene pubblicato in modo organico.",
+        "Le ricette che troverete qui nascono da quelle email, ma portano con sé anche vent'anni di esperienza, prove e miglioramenti."
+      ],
+      sign: "— Alessandra",
+      cta1: "Sfoglia le ricette",
+      cta2: "Leggi l'ultima ricetta",
+      cta3: "Il calendario dell'anno",
+      recipeKicker: "La prima ricetta che mi mandò · 1º febbraio 2004",
+      recipeName: "Torta al cioccolato",
+      recipeMeta: "Dolci · forno 170° · ~25 min",
+      ingHead: "Ingredienti",
+      stepHead: "Preparazione",
+      recipeNote: "N.B. Puoi accompagnare la torta con panna montata, una crema inglese o, per esagerare, una salsa al cioccolato.",
+      recipeLink: "Vai alla ricetta →",
+      diaryHead: "Il diario, 2004 – 2005",
+      diaryLinkTitle: "Sfoglia tutte le ricette pubblicate",
+      diaryLinkSub: "Cerca per nome o ingrediente, filtra per categoria: dolci, primi, secondi e altro.",
+      diaryLinkCta: "Vai al diario →",
+      diarySub: "In ordine sparso, ciascuna con la data originale della sua mail.",
+      searchPlaceholder: "Cerca una ricetta o un ingrediente…",
+      catAll: "tutte",
+      noResults: "Nessuna ricetta corrisponde alla ricerca.",
+      coming: "in arrivo",
+      published: "pubblicata",
+      footer: "Raccolte con affetto da Alessandra, dalle mail di sua madre Mara.",
+      photoHero: "[ foto: una cucina a Urbino, 2004 ]",
+      photoRecipe: "[ foto: la torta al cioccolato con lo zucchero a velo ]",
+      ingredients: [
+        "100 g di burro",
+        "100 g di zucchero",
+        "3 uova",
+        "50 g di farina",
+        "220 g di cioccolato fondente",
+        "50 g di latte",
+        "zucchero a velo"
+      ],
+      steps: [
+        "In una terrina sbatti bene il burro con lo zucchero, aggiungi i tuorli, quindi la farina e il cioccolato fatto fondere a bagnomaria con il latte.",
+        "Sbatti gli albumi a neve ben ferma e uniscili delicatamente all'impasto.",
+        "Versa tutto in una tortiera imburrata e infarinata e cuoci per circa 25 minuti in forno già caldo a 170°.",
+        "Sforna la torta e spolverala di zucchero a velo."
+      ]
+    };
+
+    const EN = {
+      brand: "Mara's Recipes",
+      navRecipes: "Recipes",
+      navStory: "Our story",
+      navCal: "Calendar",
+      navContact: "Contact",
+      tagline: "One email a day, from Venice to Urbino",
+      heroKicker: "A recipe collection · 2004 – 2005",
+      storyHead: "Welcome to Mara's Recipe Book",
+      readMore: "Read our story →",
+      story: [
+        "Between 2004 and 2005, while I was at university in Urbino, my mother Mara sent me a recipe a day by email. For a whole year, without exception: 366 recipes, because 2004 was a leap year.",
+        "Twenty years later I've decided to gather those recipes and share them here. They'll be published little by little, as I find the time to rediscover, test and update them together with my mother.",
+        "Many people have heard of \u201cMara's legendary recipe book\u201d, but this is the first time it's being published in an organised way.",
+        "The recipes you'll find here grow out of those emails, but they also carry twenty years of experience, trials and improvements."
+      ],
+      sign: "— Alessandra",
+      cta1: "Browse the recipes",
+      cta2: "Read the latest recipe",
+      cta3: "The calendar of the year",
+      recipeKicker: "The first recipe she sent me · 1 February 2004",
+      recipeName: "Chocolate cake",
+      recipeMeta: "Dessert · oven 170° · ~25 min",
+      ingHead: "Ingredients",
+      stepHead: "Method",
+      recipeNote: "N.B. You can serve the cake with whipped cream, a crème anglaise or — to go all out — a chocolate sauce.",
+      recipeLink: "Go to the recipe →",
+      diaryHead: "The diary, 2004 – 2005",
+      diaryLinkTitle: "Browse all published recipes",
+      diaryLinkSub: "Search by name or ingredient, filter by category: desserts, first courses, mains and more.",
+      diaryLinkCta: "Go to the diary →",
+      diarySub: "In no particular order, each with the original date of its email.",
+      searchPlaceholder: "Search a recipe or an ingredient…",
+      catAll: "all",
+      noResults: "No recipe matches your search.",
+      coming: "coming soon",
+      published: "published",
+      footer: "Collected with love by Alessandra, from her mother Mara's emails.",
+      photoHero: "[ photo: a Urbino kitchen, 2004 ]",
+      photoRecipe: "[ photo: the chocolate cake dusted with icing sugar ]",
+      ingredients: [
+        "100 g butter",
+        "100 g sugar",
+        "3 eggs",
+        "50 g flour",
+        "220 g dark chocolate",
+        "50 g milk",
+        "icing sugar"
+      ],
+      steps: [
+        "In a bowl beat the butter well with the sugar, add the yolks, then the flour and the chocolate melted in a bain-marie with the milk.",
+        "Whisk the whites to stiff peaks and fold them gently into the batter.",
+        "Pour everything into a buttered and floured tin and bake about 25 minutes in an oven preheated to 170°.",
+        "Turn the cake out and dust it with icing sugar."
+      ]
+    };
+
+    const t0 = en ? EN : IT;
+    const active = { fontWeight: 700, color: "#BE5A34", cursor: "pointer", letterSpacing: ".04em" };
+    const idle = { fontWeight: 400, color: "#9A836C", cursor: "pointer", letterSpacing: ".04em" };
+    const langKey = en ? "en" : "it";
+
+    const base = {
+      itStyle: en ? idle : active,
+      enStyle: en ? active : idle,
+      onIt: () => this.setState({ lang: "it" }),
+      onEn: () => this.setState({ lang: "en" }),
+      query: this.state.query,
+      hasQuery: !!this.state.query,
+      onSearch: (ev) => this.setState({ query: ev.target.value }),
+      onClear: () => this.setState({ query: "" })
+    };
+
+    const DB = window.MARA_RECIPES;
+    if (!DB) {
+      return { ...base, t: t0, story: t0.story, ingredients: [], steps: [], entries: [], cats: [], resultLabel: "", noResults: false, featuredHref: "#" };
+    }
+
+    // diario: tutte le ricette, in ordine; pubblicate cliccabili
+    const allEntries = DB.order.map((id, i) => {
+      const x = DB.recipes[id];
+      const ingText = (x.ing[langKey] || []).map(s => s.replace(/^§/, "")).join(" ");
+      return {
+        n: String(i + 1).padStart(2, "0"),
+        href: x.published ? "Ricetta.dc.html?r=" + id : "#",
+        date: x.day + " " + (en ? x.mEn : x.mIt) + " 2004",
+        name: x.name[langKey],
+        cat: x.cat[langKey],
+        catKey: x.cat.it,
+        search: (x.name[langKey] + " " + x.cat[langKey] + " " + ingText).toLowerCase(),
+        pub: !!x.published,
+        coming: !x.published
+      };
+    });
+
+    // categorie disponibili (chiave canonica = italiano)
+    const seen = [];
+    DB.order.forEach(id => {
+      const c = DB.recipes[id].cat;
+      if (!seen.some(s => s.key === c.it)) seen.push({ key: c.it, label: c[langKey] });
+    });
+    const chipBase = { fontFamily: "'Courier Prime',monospace", fontSize: "11px", letterSpacing: ".1em", textTransform: "uppercase", padding: "7px 13px", borderRadius: "999px", cursor: "pointer", border: "1px solid rgba(58,44,34,.22)" };
+    const chipOn = { ...chipBase, background: "#BE5A34", color: "#FBF4E6", borderColor: "#BE5A34" };
+    const chipOff = { ...chipBase, background: "transparent", color: "#7A6552" };
+    const cats = [{ key: "all", label: t0.catAll }, ...seen].map(c => ({
+      label: c.label,
+      style: this.state.cat === c.key ? chipOn : chipOff,
+      onClick: () => this.setState({ cat: c.key })
+    }));
+
+    // filtro per categoria + ricerca testo
+    const q = this.state.query.trim().toLowerCase();
+    const entries = allEntries.filter(e =>
+      (this.state.cat === "all" || e.catKey === this.state.cat) &&
+      (!q || e.search.includes(q))
+    );
+
+    const n = entries.length;
+    const resultLabel = (this.state.cat === "all" && !q)
+      ? (en ? n + " recipes" : n + " ricette")
+      : (en ? n + (n === 1 ? " recipe found" : " recipes found") : n + (n === 1 ? " ricetta trovata" : " ricette trovate"));
+
+    // in evidenza: l'ultima ricetta pubblicata
+    const pub = DB.order.filter(id => DB.recipes[id].published);
+    const featId = pub.length ? pub[pub.length - 1] : DB.order[0];
+    const f = DB.recipes[featId];
+
+    const t = {
+      ...t0,
+      recipeKicker: (en ? "Featured · " : "In evidenza · ") + f.date[langKey],
+      recipeName: f.name[langKey],
+      recipeMeta: f.meta[langKey],
+      recipeNote: f.note[langKey],
+      photoRecipe: f.photo[langKey]
+    };
+    if (!en) t.recipeKicker = "In evidenza · " + f.date.it;
+
+    const ingredients = f.ing[langKey].map(s => s.startsWith("§") ? s.slice(1).trim() : s);
+    const steps = f.steps[langKey].map((s, i) => ({ num: String(i + 1), text: s }));
+
+    return {
+      ...base,
+      t,
+      story: t0.story,
+      ingredients,
+      steps,
+      entries,
+      cats,
+      resultLabel,
+      noResults: n === 0,
+      hasRecipeNote: !!f.note[langKey],
+      featuredHref: "Ricetta.dc.html?r=" + featId
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Caveat:wght@500;600;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #EFE3CB; }
+  ::selection { background: #e8c9a0; }
+  a { color: #9E3F26; }
+  a:hover { color: #BE5A34; }
+</style>
+</helmet>
+
+<div style="background:#EFE3CB; min-height:100vh; padding:40px 24px; font-family:'Spectral',Georgia,serif; color:#3A2C22;">
+<div style="max-width:1180px; margin:0 auto; background:#FBF4E6; box-shadow:0 30px 80px rgba(58,44,34,.16); border:1px solid rgba(58,44,34,.08);">
+
+  <!-- topbar -->
+  <div style="display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap; padding:26px clamp(28px,5vw,64px); border-bottom:1px solid rgba(58,44,34,.12);">
+    <a href="index.dc.html" style="text-decoration:none; color:#3A2C22; font-family:'DM Serif Display',serif; font-size:22px; letter-spacing:.01em;">{{ t.brand }}</a>
+    <div style="display:flex; gap:clamp(16px,2.4vw,30px); align-items:center;">
+      <div style="display:flex; gap:clamp(14px,2vw,26px); align-items:center; font-family:'Courier Prime',monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase;">
+        <a href="index.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">Home</a>
+        <a href="Il diario.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">{{ t.navRecipes }}</a>
+        <a href="La nostra storia.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">{{ t.navStory }}</a>
+        <a href="Il calendario.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">{{ t.navCal }}</a>
+        <a href="Contatti.dc.html" style="text-decoration:none; color:#BE5A34;">{{ t.navContact }}</a>
+      </div>
+      <div style="display:flex; gap:9px; align-items:center; font-family:'Spectral',serif; font-size:14px;">
+        <span onClick="{{ onIt }}" style="{{ itStyle }}">IT</span>
+        <span style="color:#C9B79A;">/</span>
+        <span onClick="{{ onEn }}" style="{{ enStyle }}">EN</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- header -->
+  <div style="padding:clamp(44px,6vw,72px) clamp(28px,5vw,64px) 8px; max-width:760px;">
+    <div style="font-family:'Courier Prime',monospace; font-size:12px; letter-spacing:.26em; text-transform:uppercase; color:#9E3F26; margin:0 0 18px;">{{ t.kicker }}</div>
+    <h1 style="font-family:'DM Serif Display',serif; font-size:clamp(44px,6vw,62px); line-height:1.04; margin:0; font-weight:400;">{{ t.title }}</h1>
+    <div style="font-family:'Caveat',cursive; font-size:32px; color:#BE5A34; transform:rotate(-1.5deg); transform-origin:left; display:inline-block; margin-top:16px;">{{ t.subtitle }}</div>
+    <div style="width:56px; height:2px; background:#BE5A34; margin-top:28px;"></div>
+  </div>
+
+  <!-- body -->
+  <div style="padding:36px clamp(28px,5vw,64px) 24px; max-width:640px; font-size:20px; line-height:1.78; color:#4A3A2E;">
+    <p style="margin:0 0 26px;">{{ t.intro }}</p>
+  </div>
+
+  <!-- email card -->
+  <div style="margin:0 clamp(28px,5vw,64px) 24px; background:#FFFDF6; border:1px solid rgba(58,44,34,.16); box-shadow:0 10px 30px rgba(58,44,34,.08); padding:clamp(30px,4vw,44px); position:relative;">
+    <div style="position:absolute; left:0; top:32px; bottom:32px; width:3px; background:#BE5A34;"></div>
+    <div style="font-family:'Courier Prime',monospace; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#9E3F26; margin-bottom:14px;">{{ t.emailLabel }}</div>
+    <a href="{{ mailto }}" style="text-decoration:none; font-family:'DM Serif Display',serif; font-size:clamp(26px,4vw,38px); color:#3A2C22; line-height:1.1; word-break:break-word;">{{ t.email }}</a>
+    <div style="font-family:'Spectral',serif; font-style:italic; font-size:16px; color:#7A6552; margin-top:18px;">{{ t.emailNote }}</div>
+  </div>
+
+  <!-- back to recipes -->
+  <div style="margin:0 clamp(28px,5vw,64px) 60px; display:flex; justify-content:flex-start;">
+    <a href="index.dc.html" style="text-decoration:none; background:#BE5A34; color:#FBF4E6; font-family:'Spectral',serif; font-size:15px; letter-spacing:.02em; padding:13px 26px; border-radius:2px;">{{ t.cta }}</a>
+  </div>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { lang: "it" };
+
+  renderVals() {
+    const en = this.state.lang === "en";
+
+    // ✏️ Inserisci qui l'indirizzo email definitivo.
+    const EMAIL = "ricettedimara@example.com";
+
+    const IT = {
+      brand: "Le ricette di Mara",
+      navRecipes: "Ricette",
+      navStory: "La nostra storia",
+      navCal: "Calendario",
+      navContact: "Contatti",
+      back: "← Torna al ricettario",
+      kicker: "Contatti",
+      title: "Scrivici",
+      subtitle: "commenti e suggerimenti",
+      intro: "Se hai un commento o un suggerimento su una ricetta — o semplicemente vuoi dirci la tua — scrivici. Leggiamo volentieri.",
+      emailLabel: "La nostra email",
+      emailNote: "Rispondiamo appena possibile, a distanza tra Venezia e Varese.",
+      cta: "Torna alle ricette"
+    };
+    const EN = {
+      brand: "Mara's Recipes",
+      navRecipes: "Recipes",
+      navStory: "Our story",
+      navCal: "Calendar",
+      navContact: "Contact",
+      back: "← Back to the collection",
+      kicker: "Contact",
+      title: "Write to us",
+      subtitle: "comments and suggestions",
+      intro: "If you have a comment or a suggestion about a recipe — or simply want to say hello — write to us. We love hearing from you.",
+      emailLabel: "Our email",
+      emailNote: "We reply as soon as we can, at a distance between Venice and Varese.",
+      cta: "Back to the recipes"
+    };
+    const t0 = en ? EN : IT;
+
+    const active = { fontWeight: 700, color: "#BE5A34", cursor: "pointer", letterSpacing: ".04em" };
+    const idle = { fontWeight: 400, color: "#9A836C", cursor: "pointer", letterSpacing: ".04em" };
+
+    return {
+      t: { ...t0, email: EMAIL },
+      mailto: "mailto:" + EMAIL,
+      itStyle: en ? idle : active,
+      enStyle: en ? active : idle,
+      onIt: () => this.setState({ lang: "it" }),
+      onEn: () => this.setState({ lang: "en" })
+    };
+  }
+}
+</script>
+</body>
+</html>

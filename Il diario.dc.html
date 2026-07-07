@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Caveat:wght@500;600;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<script src="recipes.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #EFE3CB; }
+  ::selection { background: #e8c9a0; }
+  a { color: #9E3F26; }
+  a:hover { color: #BE5A34; }
+  input::placeholder { color: #B9A88F; }
+</style>
+</helmet>
+
+<div style="background:#EFE3CB; min-height:100vh; padding:40px 24px; font-family:'Spectral',Georgia,serif; color:#3A2C22;">
+<div style="max-width:1180px; margin:0 auto; background:#FBF4E6; box-shadow:0 30px 80px rgba(58,44,34,.16); border:1px solid rgba(58,44,34,.08);">
+
+  <!-- topbar -->
+  <div style="display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap; padding:26px clamp(28px,5vw,64px); border-bottom:1px solid rgba(58,44,34,.12);">
+    <a href="index.dc.html" style="text-decoration:none; color:#3A2C22; font-family:'DM Serif Display',serif; font-size:22px; letter-spacing:.01em;">{{ t.brand }}</a>
+    <div style="display:flex; gap:clamp(16px,2.4vw,30px); align-items:center;">
+      <div style="display:flex; gap:clamp(14px,2vw,26px); align-items:center; font-family:'Courier Prime',monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase;">
+        <a href="index.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">Home</a>
+        <a href="Il diario.dc.html" style="text-decoration:none; color:#BE5A34;">{{ t.navRecipes }}</a>
+        <a href="La nostra storia.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">{{ t.navStory }}</a>
+        <a href="Il calendario.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">{{ t.navCal }}</a>
+        <a href="Contatti.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">{{ t.navContact }}</a>
+      </div>
+      <div style="display:flex; gap:9px; align-items:center; font-family:'Spectral',serif; font-size:14px;">
+        <span onClick="{{ onIt }}" style="{{ itStyle }}">IT</span>
+        <span style="color:#C9B79A;">/</span>
+        <span onClick="{{ onEn }}" style="{{ enStyle }}">EN</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- header -->
+  <div style="padding:clamp(40px,5vw,60px) clamp(28px,5vw,64px) 12px;">
+    <div style="font-family:'Courier Prime',monospace; font-size:12px; letter-spacing:.26em; text-transform:uppercase; color:#9E3F26; margin-bottom:16px;">{{ t.kicker }}</div>
+    <h1 style="font-family:'DM Serif Display',serif; font-size:clamp(40px,5.4vw,58px); line-height:1.04; margin:0; font-weight:400;">{{ t.diaryHead }}</h1>
+    <div style="font-family:'Caveat',cursive; font-size:30px; color:#BE5A34; margin-top:10px;">{{ t.diarySub }}</div>
+    <div style="width:56px; height:2px; background:#BE5A34; margin-top:24px;"></div>
+  </div>
+
+  <!-- diary -->
+  <div style="padding:8px clamp(28px,5vw,64px) 64px;">
+
+    <!-- search + filters -->
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px 24px; padding:18px 0 10px; border-bottom:2px solid #3A2C22;">
+      <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
+        <sc-for list="{{ cats }}" as="c" hint-placeholder-count="6">
+          <span onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.label }}</span>
+        </sc-for>
+      </div>
+      <div style="position:relative; display:flex; align-items:center;">
+        <span style="position:absolute; left:12px; font-family:'Courier Prime',monospace; font-size:13px; color:#B9A88F; pointer-events:none;">⌕</span>
+        <input type="text" value="{{ query }}" onInput="{{ onSearch }}" placeholder="{{ t.searchPlaceholder }}" style="font-family:'Spectral',serif; font-size:15px; color:#3A2C22; background:#FFFDF6; border:1px solid rgba(58,44,34,.22); border-radius:2px; padding:9px 30px 9px 30px; width:260px; outline:none;">
+        <sc-if value="{{ hasQuery }}" hint-placeholder-val="{{ false }}">
+          <span onClick="{{ onClear }}" style="position:absolute; right:10px; cursor:pointer; font-family:'Courier Prime',monospace; font-size:15px; color:#9E3F26; line-height:1;">×</span>
+        </sc-if>
+      </div>
+    </div>
+
+    <div style="font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#A08561; padding:12px 0 4px;">{{ resultLabel }}</div>
+
+    <sc-for list="{{ entries }}" as="e" hint-placeholder-count="6">
+      <a href="{{ e.href }}" style="text-decoration:none; display:grid; grid-template-columns:190px 1fr 150px auto; gap:20px; align-items:center; padding:15px 0; border-bottom:1px solid rgba(58,44,34,.12);" style-hover="background:#F5EAD4;">
+        <div style="font-family:'Caveat',cursive; font-size:23px; color:#9E3F26;">{{ e.date }}</div>
+        <div style="font-family:'Spectral',serif; font-size:19px; color:#3A2C22;">{{ e.name }}</div>
+        <div style="font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#A08561;">{{ e.cat }}</div>
+        <sc-if value="{{ e.pub }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex; align-items:center; gap:8px; font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:#6E6B33;"><span style="width:8px; height:8px; border-radius:50%; background:#6E6B33; display:inline-block;"></span>{{ t.published }}</div>
+        </sc-if>
+        <sc-if value="{{ e.coming }}" hint-placeholder-val="{{ false }}">
+          <div style="font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:#B9A88F;">{{ t.coming }}</div>
+        </sc-if>
+      </a>
+    </sc-for>
+    <sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:44px 0; text-align:center; font-family:'Spectral',serif; font-style:italic; font-size:17px; color:#7A6552;">{{ t.noResults }}</div>
+    </sc-if>
+  </div>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { lang: "it", query: "", cat: "all" };
+
+  componentDidMount() {
+    const wait = () => {
+      if (window.MARA_RECIPES) { this.forceUpdate(); return; }
+      setTimeout(wait, 30);
+    };
+    wait();
+  }
+
+  renderVals() {
+    const en = this.state.lang === "en";
+    const langKey = en ? "en" : "it";
+
+    const IT = {
+      brand: "Le ricette di Mara",
+      navRecipes: "Ricette",
+      navStory: "La nostra storia",
+      navCal: "Calendario",
+      navContact: "Contatti",
+      kicker: "Il ricettario · 2004 – 2005",
+      diaryHead: "Il diario",
+      diarySub: "Una mail al giorno, un anno intero",
+      searchPlaceholder: "Cerca una ricetta o un ingrediente…",
+      catAll: "tutte",
+      noResults: "Nessuna ricetta corrisponde alla ricerca.",
+      coming: "in arrivo",
+      published: "pubblicata"
+    };
+    const EN = {
+      brand: "Mara's Recipes",
+      navRecipes: "Recipes",
+      navStory: "Our story",
+      navCal: "Calendar",
+      navContact: "Contact",
+      kicker: "The recipe book · 2004 – 2005",
+      diaryHead: "The diary",
+      diarySub: "One email a day, a whole year",
+      searchPlaceholder: "Search a recipe or an ingredient…",
+      catAll: "all",
+      noResults: "No recipe matches your search.",
+      coming: "coming soon",
+      published: "published"
+    };
+    const t0 = en ? EN : IT;
+
+    const active = { fontWeight: 700, color: "#BE5A34", cursor: "pointer", letterSpacing: ".04em" };
+    const idle = { fontWeight: 400, color: "#9A836C", cursor: "pointer", letterSpacing: ".04em" };
+    const base = {
+      itStyle: en ? idle : active,
+      enStyle: en ? active : idle,
+      onIt: () => this.setState({ lang: "it" }),
+      onEn: () => this.setState({ lang: "en" }),
+      query: this.state.query,
+      hasQuery: !!this.state.query,
+      onSearch: (ev) => this.setState({ query: ev.target.value }),
+      onClear: () => this.setState({ query: "" })
+    };
+
+    const DB = window.MARA_RECIPES;
+    if (!DB) {
+      return { ...base, t: t0, entries: [], cats: [], resultLabel: "", noResults: false };
+    }
+
+    const allEntries = DB.order.map((id) => {
+      const x = DB.recipes[id];
+      const ingText = (x.ing[langKey] || []).map(s => s.replace(/^§/, "")).join(" ");
+      return {
+        href: x.published ? "Ricetta.dc.html?r=" + id : "#",
+        date: x.day + " " + (en ? x.mEn : x.mIt) + " 2004",
+        name: x.name[langKey],
+        cat: x.cat[langKey],
+        catKey: x.cat.it,
+        search: (x.name[langKey] + " " + x.cat[langKey] + " " + ingText).toLowerCase(),
+        pub: !!x.published,
+        coming: !x.published
+      };
+    });
+
+    const seen = [];
+    DB.order.forEach(id => {
+      const c = DB.recipes[id].cat;
+      if (!seen.some(s => s.key === c.it)) seen.push({ key: c.it, label: c[langKey] });
+    });
+    const chipBase = { fontFamily: "'Courier Prime',monospace", fontSize: "11px", letterSpacing: ".1em", textTransform: "uppercase", padding: "7px 13px", borderRadius: "999px", cursor: "pointer", border: "1px solid rgba(58,44,34,.22)" };
+    const chipOn = { ...chipBase, background: "#BE5A34", color: "#FBF4E6", borderColor: "#BE5A34" };
+    const chipOff = { ...chipBase, background: "transparent", color: "#7A6552" };
+    const cats = [{ key: "all", label: t0.catAll }, ...seen].map(c => ({
+      label: c.label,
+      style: this.state.cat === c.key ? chipOn : chipOff,
+      onClick: () => this.setState({ cat: c.key })
+    }));
+
+    const q = this.state.query.trim().toLowerCase();
+    const entries = allEntries.filter(e =>
+      (this.state.cat === "all" || e.catKey === this.state.cat) &&
+      (!q || e.search.includes(q))
+    );
+
+    const n = entries.length;
+    const resultLabel = (this.state.cat === "all" && !q)
+      ? (en ? n + " recipes" : n + " ricette")
+      : (en ? n + (n === 1 ? " recipe found" : " recipes found") : n + (n === 1 ? " ricetta trovata" : " ricette trovate"));
+
+    return { ...base, t: t0, entries, cats, resultLabel, noResults: n === 0 };
+  }
+}
+</script>
+</body>
+</html>

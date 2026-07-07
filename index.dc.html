@@ -17,6 +17,10 @@
   * { box-sizing: border-box; }
   body { margin: 0; background: #EFE3CB; }
   ::selection { background: #e8c9a0; }
+  .story-grid { display:grid; grid-template-columns:220px 1fr; gap:clamp(28px,4vw,44px); }
+  @media (max-width:640px) {
+    .story-grid { grid-template-columns:1fr; }
+  }
 </style>
 </helmet>
 
@@ -55,7 +59,7 @@
   </div>
 
   <!-- story -->
-  <div style="padding:8px clamp(28px,5vw,64px) 56px; display:grid; grid-template-columns:220px 1fr; gap:clamp(28px,4vw,44px); border-top:1px solid rgba(58,44,34,.12);">
+  <div class="story-grid" style="padding:8px clamp(28px,5vw,64px) 56px; border-top:1px solid rgba(58,44,34,.12);">
     <div style="padding-top:8px;">
       <div style="font-family:'DM Serif Display',serif; font-size:30px; line-height:1.05;">{{ t.storyHead }}</div>
       <div style="width:44px; height:2px; background:#BE5A34; margin-top:16px;"></div>

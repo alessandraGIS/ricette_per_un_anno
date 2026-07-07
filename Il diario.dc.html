@@ -20,6 +20,10 @@
   a { color: #9E3F26; }
   a:hover { color: #BE5A34; }
   input::placeholder { color: #B9A88F; }
+  .diary-row { display:grid; grid-template-columns:190px 1fr 150px auto; gap:20px; align-items:center; }
+  @media (max-width:640px) {
+    .diary-row { grid-template-columns:1fr; row-gap:4px; }
+  }
 </style>
 </helmet>
 
@@ -63,9 +67,9 @@
           <span onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.label }}</span>
         </sc-for>
       </div>
-      <div style="position:relative; display:flex; align-items:center;">
+      <div style="position:relative; display:flex; align-items:center; flex:1; min-width:200px; max-width:320px;">
         <span style="position:absolute; left:12px; font-family:'Courier Prime',monospace; font-size:13px; color:#B9A88F; pointer-events:none;">⌕</span>
-        <input type="text" value="{{ query }}" onInput="{{ onSearch }}" placeholder="{{ t.searchPlaceholder }}" style="font-family:'Spectral',serif; font-size:15px; color:#3A2C22; background:#FFFDF6; border:1px solid rgba(58,44,34,.22); border-radius:2px; padding:9px 30px 9px 30px; width:260px; outline:none;">
+        <input type="text" value="{{ query }}" onInput="{{ onSearch }}" placeholder="{{ t.searchPlaceholder }}" style="font-family:'Spectral',serif; font-size:15px; color:#3A2C22; background:#FFFDF6; border:1px solid rgba(58,44,34,.22); border-radius:2px; padding:9px 30px 9px 30px; width:100%; outline:none;">
         <sc-if value="{{ hasQuery }}" hint-placeholder-val="{{ false }}">
           <span onClick="{{ onClear }}" style="position:absolute; right:10px; cursor:pointer; font-family:'Courier Prime',monospace; font-size:15px; color:#9E3F26; line-height:1;">×</span>
         </sc-if>
@@ -75,7 +79,7 @@
     <div style="font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#A08561; padding:12px 0 4px;">{{ resultLabel }}</div>
 
     <sc-for list="{{ entries }}" as="e" hint-placeholder-count="6">
-      <a href="{{ e.href }}" style="text-decoration:none; display:grid; grid-template-columns:190px 1fr 150px auto; gap:20px; align-items:center; padding:15px 0; border-bottom:1px solid rgba(58,44,34,.12);" style-hover="background:#F5EAD4;">
+      <a href="{{ e.href }}" class="diary-row" style="text-decoration:none; padding:15px 0; border-bottom:1px solid rgba(58,44,34,.12);" style-hover="background:#F5EAD4;">
         <div style="font-family:'Caveat',cursive; font-size:23px; color:#9E3F26;">{{ e.date }}</div>
         <div style="font-family:'Spectral',serif; font-size:19px; color:#3A2C22;">{{ e.name }}</div>
         <div style="font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#A08561;">{{ e.cat }}</div>

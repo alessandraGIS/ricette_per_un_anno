@@ -19,6 +19,7 @@
   ::selection { background: #e8c9a0; }
   a { color: #9E3F26; }
   a:hover { color: #BE5A34; }
+  .cal-dot:hover { filter: brightness(0.87); }
 </style>
 </helmet>
 
@@ -58,8 +59,10 @@
       <span style="font-family:'DM Serif Display',serif; font-size:30px; color:#BE5A34;">{{ count }}</span>
       {{ t.progress }}
     </div>
-    <div style="display:flex; gap:22px; align-items:center; font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:#7A6552;">
-      <span style="display:flex; align-items:center; gap:8px;"><span style="width:14px; height:14px; border-radius:50%; background:#BE5A34; display:inline-block;"></span>{{ t.legFull }}</span>
+    <div style="display:flex; gap:18px; align-items:center; flex-wrap:wrap; font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:#7A6552;">
+      <sc-for list="{{ catLegend }}" as="cl" hint-placeholder-count="5">
+        <span style="display:flex; align-items:center; gap:8px;"><span style="{{ cl.dotStyle }}"></span>{{ cl.label }}</span>
+      </sc-for>
       <span style="display:flex; align-items:center; gap:8px;"><span style="width:14px; height:14px; border-radius:50%; border:1px solid rgba(58,44,34,.22); display:inline-block;"></span>{{ t.legEmpty }}</span>
     </div>
   </div>
@@ -81,7 +84,7 @@
               <div></div>
             </sc-if>
             <sc-if value="{{ c.filled }}" hint-placeholder-val="{{ false }}">
-              <a href="{{ c.href }}" title="{{ c.title }}" style="text-decoration:none; aspect-ratio:1; display:flex; align-items:center; justify-content:center; font-family:'Spectral',serif; font-size:14px; border-radius:50%; background:#BE5A34; color:#FBF4E6; font-weight:500;" style-hover="background:#9E3F26;">{{ c.day }}</a>
+              <a href="{{ c.href }}" title="{{ c.title }}" class="cal-dot" style="{{ c.dotStyle }}">{{ c.day }}</a>
             </sc-if>
             <sc-if value="{{ c.plain }}" hint-placeholder-val="{{ true }}">
               <div style="aspect-ratio:1; display:flex; align-items:center; justify-content:center; font-family:'Spectral',serif; font-size:14px; color:#6E5A48; border:1px solid rgba(58,44,34,.1); border-radius:50%;">{{ c.day }}</div>
@@ -122,7 +125,6 @@ class Component extends DCLogic {
       title: "Il calendario dell'anno",
       sub: "Una mail al giorno — un giorno alla volta",
       progressA: "giorni riempiti finora, su 366.",
-      legFull: "ricetta caricata",
       legEmpty: "ancora da riempire",
       monthsFull: ["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"],
       dow: ["L","M","M","G","V","S","D"]
@@ -138,7 +140,6 @@ class Component extends DCLogic {
       title: "The calendar of the year",
       sub: "One email a day — one day at a time",
       progressA: "days filled so far, out of 366.",
-      legFull: "recipe uploaded",
       legEmpty: "still to fill",
       monthsFull: ["January","February","March","April","May","June","July","August","September","October","November","December"],
       dow: ["M","T","W","T","F","S","S"]
@@ -156,8 +157,21 @@ class Component extends DCLogic {
 
     const DB = window.MARA_RECIPES;
     if (!DB) {
-      return { ...base, t: { ...t0, progress: t0.progressA }, months: [], count: "0" };
+      return { ...base, t: { ...t0, progress: t0.progressA }, months: [], catLegend: [], count: "0" };
     }
+
+    // Un colore per categoria (chiave canonica = italiano), fisso e condiviso ovunque compaia la categoria.
+    const CAT_COLORS = {
+      "dolci": "#BE5A34",
+      "primi piatti": "#7C8C3E",
+      "secondi piatti": "#4F5FA0",
+      "piatti unici": "#3E7D6E",
+      "preparazioni di base": "#8A4A78"
+    };
+    const FALLBACK_COLOR = "#9A836C";
+    const dotStyle = (color) => ({
+      width: "14px", height: "14px", borderRadius: "50%", background: color, display: "inline-block"
+    });
 
     // Mappa giorno→ricetta usando il mese italiano come chiave canonica.
     const monthIT = ["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
@@ -167,8 +181,18 @@ class Component extends DCLogic {
       if (!r.published) return;
       const mi = monthIT.indexOf(r.mIt);
       if (mi < 0) return;
-      filled[mi + "-" + parseInt(r.day, 10)] = { id, name: r.name[langKey] };
+      filled[mi + "-" + parseInt(r.day, 10)] = { id, name: r.name[langKey], catKey: r.cat.it, catLabel: r.cat[langKey] };
     });
+
+    const seenCats = [];
+    DB.order.forEach(id => {
+      const c = DB.recipes[id].cat;
+      if (!seenCats.some(s => s.key === c.it)) seenCats.push({ key: c.it, label: c[langKey] });
+    });
+    const catLegend = seenCats.map(c => ({
+      label: c.label,
+      dotStyle: dotStyle(CAT_COLORS[c.key] || FALLBACK_COLOR)
+    }));
 
     // L'anno delle mail: febbraio 2004 → gennaio 2005 (12 mesi, 366 giorni).
     const seq = [];
@@ -191,7 +215,12 @@ class Component extends DCLogic {
             filled: true,
             day: String(d),
             href: "Ricetta.dc.html?r=" + hit.id,
-            title: hit.name
+            title: hit.name + " — " + hit.catLabel,
+            dotStyle: {
+              textDecoration: "none", aspectRatio: "1", display: "flex", alignItems: "center", justifyContent: "center",
+              fontFamily: "'Spectral',serif", fontSize: "14px", borderRadius: "50%",
+              background: CAT_COLORS[hit.catKey] || FALLBACK_COLOR, color: "#FBF4E6", fontWeight: 500
+            }
           });
         } else {
           cells.push({ plain: true, day: String(d) });
@@ -211,6 +240,7 @@ class Component extends DCLogic {
       ...base,
       t: { ...t0, progress: t0.progressA },
       months,
+      catLegend,
       count: String(count)
     };
   }

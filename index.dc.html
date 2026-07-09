@@ -92,16 +92,31 @@
     </div>
   </div>
 
-  <!-- diary link -->
+  <!-- diary: recent recipes + browse all -->
   <div style="padding:0 clamp(28px,5vw,64px) 72px;">
-    <a href="Il diario.dc.html" style="text-decoration:none; display:flex; justify-content:space-between; align-items:center; gap:24px; flex-wrap:wrap; background:#FFFDF6; border:1px solid rgba(58,44,34,.16); box-shadow:0 10px 30px rgba(58,44,34,.08); padding:clamp(26px,4vw,38px) clamp(26px,4vw,46px);" style-hover="background:#F5EAD4;">
-      <div>
-        <div style="font-family:'Courier Prime',monospace; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#9E3F26; margin-bottom:10px;">{{ t.diaryHead }}</div>
-        <div style="font-family:'DM Serif Display',serif; font-size:clamp(26px,3.4vw,34px); color:#3A2C22; line-height:1.1;">{{ t.diaryLinkTitle }}</div>
-        <div style="font-size:16px; font-style:italic; color:#7A6552; margin-top:8px; max-width:520px;">{{ t.diaryLinkSub }}</div>
+    <div style="background:#FFFDF6; border:1px solid rgba(58,44,34,.16); box-shadow:0 10px 30px rgba(58,44,34,.08); padding:clamp(28px,4vw,44px) clamp(26px,4vw,46px);">
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px; margin-bottom:22px;">
+        <div>
+          <div style="font-family:'Courier Prime',monospace; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#9E3F26; margin-bottom:10px;">{{ t.diaryHead }}</div>
+          <div style="font-family:'DM Serif Display',serif; font-size:clamp(26px,3.4vw,34px); color:#3A2C22; line-height:1.1;">{{ t.diaryLinkTitle }}</div>
+          <div style="font-size:16px; font-style:italic; color:#7A6552; margin-top:8px; max-width:520px;">{{ t.diaryLinkSub }}</div>
+        </div>
+        <a href="Il diario.dc.html" style="text-decoration:none; white-space:nowrap; font-family:'Courier Prime',monospace; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#9E3F26; border-bottom:1px solid #BE5A34; padding-bottom:3px;">{{ t.diaryLinkCta }}</a>
       </div>
-      <div style="white-space:nowrap; font-family:'Courier Prime',monospace; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#9E3F26; border-bottom:1px solid #BE5A34; padding-bottom:3px;">{{ t.diaryLinkCta }}</div>
-    </a>
+      <sc-if value="{{ hasRecent }}" hint-placeholder-val="{{ true }}">
+      <div style="border-top:1px solid rgba(58,44,34,.12); padding-top:18px;">
+        <div style="font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A08561; margin-bottom:6px;">{{ t.recentHead }}</div>
+        <sc-for list="{{ recentEntries }}" as="re" hint-placeholder-count="3">
+          <a href="{{ re.href }}" style="text-decoration:none; display:flex; align-items:center; gap:16px; flex-wrap:wrap; padding:14px 0; border-bottom:1px solid rgba(58,44,34,.12);" style-hover="background:#F5EAD4;">
+            <span style="{{ re.dotStyle }}"></span>
+            <span style="font-family:'Caveat',cursive; font-size:20px; color:#9E3F26; min-width:110px;">{{ re.date }}</span>
+            <span style="font-family:'Spectral',serif; font-size:18px; color:#3A2C22; flex:1;">{{ re.name }}</span>
+            <span style="font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#A08561;">{{ re.catLabel }}</span>
+          </a>
+        </sc-for>
+      </div>
+      </sc-if>
+    </div>
   </div>
 
 </div>
@@ -134,7 +149,7 @@ class Component extends DCLogic {
       readMore: "Leggi la nostra storia →",
       story: [
         "Tra il 2004 e il 2005, mentre studiavo all'università a Urbino, mia madre, Mara, mi inviò una ricetta al giorno via email. Per un anno intero, senza eccezioni: 366 ricette, perché il 2004 era bisestile.",
-        "Vent'anni dopo ho deciso di raccogliere quelle ricette e condividerle qui. Verranno pubblicate poco alla volta, man mano che avrò il tempo di riscoprirle, provarle e aggiornarle insieme a mia madre.",
+        "Vent'anni dopo ho deciso di raccogliere quelle ricette e condividerle in queste pagine. Verranno pubblicate poco alla volta, man mano che avrò il tempo di riscoprirle, provarle e aggiornarle insieme a mia madre.",
         "Molte persone hanno sentito parlare del \u201cleggendario ricettario di Mara\u201d, ma questa è la prima volta che viene pubblicato in modo organico.",
         "Le ricette che troverete qui nascono da quelle email, ma portano con sé anche vent'anni di esperienza, prove e miglioramenti."
       ],
@@ -149,6 +164,7 @@ class Component extends DCLogic {
       stepHead: "Preparazione",
       recipeNote: "N.B. Puoi accompagnare la torta con panna montata, una crema inglese o, per esagerare, una salsa al cioccolato.",
       recipeLink: "Vai alla ricetta →",
+      recentHead: "Le ultime pubblicate",
       diaryHead: "Il diario, 2004 – 2005",
       diaryLinkTitle: "Sfoglia tutte le ricette pubblicate",
       diaryLinkSub: "Cerca per nome o ingrediente, filtra per categoria: dolci, primi, secondi e altro.",
@@ -206,6 +222,7 @@ class Component extends DCLogic {
       stepHead: "Method",
       recipeNote: "N.B. You can serve the cake with whipped cream, a crème anglaise or — to go all out — a chocolate sauce.",
       recipeLink: "Go to the recipe →",
+      recentHead: "Latest published",
       diaryHead: "The diary, 2004 – 2005",
       diaryLinkTitle: "Browse all published recipes",
       diaryLinkSub: "Search by name or ingredient, filter by category: desserts, first courses, mains and more.",
@@ -254,8 +271,18 @@ class Component extends DCLogic {
 
     const DB = window.MARA_RECIPES;
     if (!DB) {
-      return { ...base, t: t0, story: t0.story, ingredients: [], steps: [], entries: [], cats: [], resultLabel: "", noResults: false, featuredHref: "#" };
+      return { ...base, t: t0, story: t0.story, ingredients: [], steps: [], entries: [], cats: [], resultLabel: "", noResults: false, featuredHref: "#", recentEntries: [], hasRecent: false };
     }
+
+    // stesso colore per categoria usato nel calendario (chiave canonica = italiano)
+    const CAT_COLORS = {
+      "dolci": "#BE5A34",
+      "primi piatti": "#7C8C3E",
+      "secondi piatti": "#4F5FA0",
+      "piatti unici": "#3E7D6E",
+      "preparazioni di base": "#8A4A78"
+    };
+    const FALLBACK_COLOR = "#9A836C";
 
     // diario: tutte le ricette, in ordine; pubblicate cliccabili
     const allEntries = DB.order.map((id, i) => {
@@ -319,6 +346,18 @@ class Component extends DCLogic {
     const ingredients = f.ing[langKey].map(s => s.startsWith("§") ? s.slice(1).trim() : s);
     const steps = f.steps[langKey].map((s, i) => ({ num: String(i + 1), text: s }));
 
+    // ultime 3 ricette pubblicate prima di quella già in evidenza
+    const recentEntries = pub.slice(0, -1).slice(-3).reverse().map(id => {
+      const x = DB.recipes[id];
+      return {
+        href: "Ricetta.dc.html?r=" + id,
+        date: x.day + " " + (en ? x.mEn : x.mIt),
+        name: x.name[langKey],
+        catLabel: x.cat[langKey],
+        dotStyle: { width: "10px", height: "10px", borderRadius: "50%", flexShrink: "0", display: "inline-block", background: CAT_COLORS[x.cat.it] || FALLBACK_COLOR }
+      };
+    });
+
     return {
       ...base,
       t,
@@ -330,7 +369,9 @@ class Component extends DCLogic {
       resultLabel,
       noResults: n === 0,
       hasRecipeNote: !!f.note[langKey],
-      featuredHref: "Ricetta.dc.html?r=" + featId
+      featuredHref: "Ricetta.dc.html?r=" + featId,
+      recentEntries,
+      hasRecent: recentEntries.length > 0
     };
   }
 }

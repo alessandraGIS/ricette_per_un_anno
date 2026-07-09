@@ -33,7 +33,7 @@
         <a href="Il diario.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">{{ t.navRecipes }}</a>
         <a href="Il calendario.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">{{ t.navCal }}</a>
         <a href="La nostra storia.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">{{ t.navStory }}</a>
-        <a href="Contatti.dc.html" style="text-decoration:none; color:#BE5A34;">{{ t.navContact }}</a>
+        <a href="Contatti.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">{{ t.navContact }}</a>
       </div>
       <div style="display:flex; gap:9px; align-items:center; font-family:'Spectral',serif; font-size:14px;">
         <span onClick="{{ onIt }}" style="{{ itStyle }}">IT</span>
@@ -47,21 +47,27 @@
   <div style="padding:clamp(44px,6vw,72px) clamp(28px,5vw,64px) 8px; max-width:760px;">
     <div style="font-family:'Courier Prime',monospace; font-size:12px; letter-spacing:.26em; text-transform:uppercase; color:#9E3F26; margin:0 0 18px;">{{ t.kicker }}</div>
     <h1 style="font-family:'DM Serif Display',serif; font-size:clamp(44px,6vw,62px); line-height:1.04; margin:0; font-weight:400;">{{ t.title }}</h1>
-    <div style="font-family:'Caveat',cursive; font-size:32px; color:#BE5A34; transform:rotate(-1.5deg); transform-origin:left; display:inline-block; margin-top:16px;">{{ t.subtitle }}</div>
     <div style="width:56px; height:2px; background:#BE5A34; margin-top:28px;"></div>
   </div>
 
-  <!-- body -->
-  <div style="padding:36px clamp(28px,5vw,64px) 24px; max-width:640px; font-size:20px; line-height:1.78; color:#4A3A2E;">
-    <p style="margin:0 0 26px;">{{ t.intro }}</p>
+  <!-- privacy -->
+  <div style="padding:36px clamp(28px,5vw,64px) 8px; max-width:680px;">
+    <div style="font-family:'DM Serif Display',serif; font-size:26px; margin-bottom:14px;">{{ t.privacyHead }}</div>
+    <div style="font-size:18px; line-height:1.75; color:#4A3A2E;">
+      <sc-for list="{{ t.privacyBody }}" as="para" hint-placeholder-count="4">
+        <p style="margin:0 0 18px;">{{ para }}</p>
+      </sc-for>
+    </div>
   </div>
 
-  <!-- email card -->
-  <div style="margin:0 clamp(28px,5vw,64px) 24px; background:#FFFDF6; border:1px solid rgba(58,44,34,.16); box-shadow:0 10px 30px rgba(58,44,34,.08); padding:clamp(30px,4vw,44px); position:relative;">
-    <div style="position:absolute; left:0; top:32px; bottom:32px; width:3px; background:#BE5A34;"></div>
-    <div style="font-family:'Courier Prime',monospace; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#9E3F26; margin-bottom:14px;">{{ t.emailLabel }}</div>
-    <a href="{{ mailto }}" style="text-decoration:none; font-family:'DM Serif Display',serif; font-size:clamp(26px,4vw,38px); color:#3A2C22; line-height:1.1; word-break:break-word;">{{ t.email }}</a>
-    <div style="font-family:'Spectral',serif; font-style:italic; font-size:16px; color:#7A6552; margin-top:18px;">{{ t.emailNote }}</div>
+  <!-- riutilizzo -->
+  <div style="padding:16px clamp(28px,5vw,64px) 48px; max-width:680px;">
+    <div style="font-family:'DM Serif Display',serif; font-size:26px; margin-bottom:14px;">{{ t.reuseHead }}</div>
+    <div style="font-size:18px; line-height:1.75; color:#4A3A2E;">
+      <sc-for list="{{ t.reuseBody }}" as="para" hint-placeholder-count="2">
+        <p style="margin:0 0 18px;">{{ para }}</p>
+      </sc-for>
+    </div>
   </div>
 
   <!-- back to recipes -->
@@ -72,7 +78,6 @@
   <!-- footer -->
   <div style="padding:22px clamp(28px,5vw,64px) 32px; border-top:1px solid rgba(58,44,34,.12); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
     <div style="font-size:13px; font-style:italic; color:#7A6552;">{{ t.footer }}</div>
-    <a href="Privacy.dc.html" style="text-decoration:none; font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:#9E3F26; border-bottom:1px solid #BE5A34; padding-bottom:2px;">{{ t.privacyLink }}</a>
   </div>
 
 </div>
@@ -85,25 +90,27 @@ class Component extends DCLogic {
   renderVals() {
     const en = this.state.lang === "en";
 
-    // ✏️ Inserisci qui l'indirizzo email definitivo.
-    const EMAIL = "ricettedimara@example.com";
-
     const IT = {
       brand: "Le ricette di Mara",
       navRecipes: "Ricette",
       navStory: "La nostra storia",
       navCal: "Calendario",
       navContact: "Contatti",
-      back: "← Torna al ricettario",
-      kicker: "Contatti",
-      title: "Scrivici",
-      subtitle: "commenti e suggerimenti",
-      intro: "Se hai un commento o un suggerimento su una ricetta — o semplicemente vuoi dirci la tua — scrivici. Leggiamo volentieri.",
-      emailLabel: "La nostra email",
-      emailNote: "Rispondiamo appena possibile, a distanza tra Venezia e Varese.",
+      kicker: "Note legali",
+      title: "Privacy e riutilizzo",
+      privacyHead: "Privacy",
+      privacyBody: [
+        "Questo sito non raccoglie né conserva dati personali, e non usiamo cookie, strumenti di analisi o tracciamento di alcun tipo.",
+        "Le pagine caricano i caratteri da Google Fonts: per mostrarli, il tuo browser contatta i server di Google, che potrebbero registrare il tuo indirizzo IP secondo la loro informativa.",
+        "Se ci scrivi dalla pagina Contatti, si apre semplicemente il tuo programma di posta: non raccogliamo né conserviamo sul sito l'indirizzo o il contenuto del messaggio."
+      ],
+      reuseHead: "Riutilizzo dei contenuti",
+      reuseBody: [
+        "Le ricette pubblicate qui nascono dalle mail che Mara ha inviato ad Alessandra: le condividiamo perché in tanti, negli anni, ce le hanno chieste.",
+        "Siamo felici se vuoi provarle, cucinarle o ricondividerle altrove — ti chiediamo solo la cortesia di citare la fonte (“Le ricette di Mara”, con un link a questo sito) quando lo fai. Grazie!"
+      ],
       cta: "Torna alle ricette",
-      footer: "Questo sito non usa cookie.",
-      privacyLink: "Privacy e riutilizzo →"
+      footer: "Questo sito non usa cookie."
     };
     const EN = {
       brand: "Mara's Recipes",
@@ -111,16 +118,21 @@ class Component extends DCLogic {
       navStory: "Our story",
       navCal: "Calendar",
       navContact: "Contact",
-      back: "← Back to the collection",
-      kicker: "Contact",
-      title: "Write to us",
-      subtitle: "comments and suggestions",
-      intro: "If you have a comment or a suggestion about a recipe — or simply want to say hello — write to us. We love hearing from you.",
-      emailLabel: "Our email",
-      emailNote: "We reply as soon as we can, at a distance between Venice and Varese.",
+      kicker: "Legal notes",
+      title: "Privacy & reuse",
+      privacyHead: "Privacy",
+      privacyBody: [
+        "This site does not collect or store any personal data, and we don't use cookies, analytics or tracking tools of any kind.",
+        "Pages load fonts from Google Fonts: to display them, your browser contacts Google's servers, which may log your IP address under their own policy.",
+        "If you write to us from the Contact page, it simply opens your own email app: we don't collect or store the address or the message content on the site."
+      ],
+      reuseHead: "Reusing this content",
+      reuseBody: [
+        "The recipes published here come from the emails Mara sent Alessandra: we share them because, over the years, many people have asked us for them.",
+        "We're happy if you'd like to try them, cook them or share them elsewhere — we'd just ask that you credit the source (“Mara's Recipes”, with a link back to this site) when you do. Thank you!"
+      ],
       cta: "Back to the recipes",
-      footer: "This site does not use cookies.",
-      privacyLink: "Privacy & reuse →"
+      footer: "This site does not use cookies."
     };
     const t0 = en ? EN : IT;
 
@@ -128,8 +140,7 @@ class Component extends DCLogic {
     const idle = { fontWeight: 400, color: "#9A836C", cursor: "pointer", letterSpacing: ".04em" };
 
     return {
-      t: { ...t0, email: EMAIL },
-      mailto: "mailto:" + EMAIL,
+      t: t0,
       itStyle: en ? idle : active,
       enStyle: en ? active : idle,
       onIt: () => this.setState({ lang: "it" }),

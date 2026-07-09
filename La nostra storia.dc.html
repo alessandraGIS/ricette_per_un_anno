@@ -65,6 +65,12 @@
     <a href="Contatti.dc.html" style="text-decoration:none; background:#BE5A34; color:#FBF4E6; font-family:'Spectral',serif; font-size:15px; letter-spacing:.02em; padding:13px 26px; border-radius:2px; white-space:nowrap;">{{ t.cta }}</a>
   </div>
 
+  <!-- footer -->
+  <div style="padding:22px clamp(28px,5vw,64px) 32px; border-top:1px solid rgba(58,44,34,.12); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+    <div style="font-size:13px; font-style:italic; color:#7A6552;">{{ t.footer }}</div>
+    <a href="Privacy.dc.html" style="text-decoration:none; font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:#9E3F26; border-bottom:1px solid #BE5A34; padding-bottom:2px;">{{ t.privacyLink }}</a>
+  </div>
+
 </div>
 </div>
 </x-dc>
@@ -88,7 +94,8 @@ class Component extends DCLogic {
       sign: "— Alessandra",
       cta: "Scrivici",
       closing: "Avete un commento o un suggerimento? Scriveteci, ci fa piacere leggervi.",
-      footer: "Raccolte con affetto da Alessandra, dalle mail di sua madre Mara.",
+      footer: "Questo sito non usa cookie.",
+      privacyLink: "Privacy e riutilizzo →",
       story: [
         "Quando lasciai Venezia per trasferirmi a Urbino e frequentare l'università, ero una studentessa parecchio fuori corso. Dopo qualche scelta sbagliata e diversi cambi di direzione, stavo finalmente cercando di portare a termine un percorso che si era rivelato più lungo e tortuoso del previsto. Condividevo una casa con altri studenti e disponevo di una cucina piuttosto spartana: un forno minuscolo e capriccioso, poche pentole e ancora meno esperienza.",
         "Cucinare mi è sempre piaciuto: fin da bambina preparavo torte e biscotti con la mamma e le nonne, e da allora non ho mai smesso. A Urbino, però, cucinare divenne per la prima volta un'attività quotidiana e necessaria: dovendo pensare ogni giorno ai miei pasti, quel piacere si trasformò presto in una vera passione. Mi divertivo a sperimentare, a preparare cene improvvisate per i miei coinquilini, a condividere piatti e chiacchiere con amici e compagni di corso. In una città lontana da casa, la cucina divenne un modo per sentirmi meno sola e per costruire nuove amicizie.",
@@ -116,7 +123,8 @@ class Component extends DCLogic {
       sign: "— Alessandra",
       cta: "Write to us",
       closing: "Got a comment or a suggestion? Write to us — we love hearing from you.",
-      footer: "Collected with love by Alessandra, from her mother Mara's emails.",
+      footer: "This site does not use cookies.",
+      privacyLink: "Privacy & reuse →",
       story: [
         "When I left Venice to move to Urbino and go to university, I was a student who had fallen well behind. After a few wrong turns and several changes of direction, I was finally trying to finish a path that had proved far longer and more winding than I'd expected. I shared a house with other students and had a rather spartan kitchen: a tiny, temperamental oven, a few pots and even less experience.",
         "I have always loved cooking: as a child I made cakes and biscuits with my mother and grandmothers, and I never stopped after that. In Urbino, though, cooking became for the first time a daily, necessary activity: having to think about my own meals every day, that pleasure soon turned into a real passion. I loved to experiment, to throw together impromptu dinners for my flatmates, to share dishes and conversation with friends and classmates. In a city far from home, cooking became a way to feel less alone and to build new friendships.",

@@ -96,6 +96,12 @@
     </sc-if>
   </div>
 
+  <!-- footer -->
+  <div style="padding:22px clamp(28px,5vw,64px) 32px; border-top:1px solid rgba(58,44,34,.12); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+    <div style="font-size:13px; font-style:italic; color:#7A6552;">{{ t.footer }}</div>
+    <a href="Privacy.dc.html" style="text-decoration:none; font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:#9E3F26; border-bottom:1px solid #BE5A34; padding-bottom:2px;">{{ t.privacyLink }}</a>
+  </div>
+
 </div>
 </div>
 </x-dc>
@@ -128,7 +134,9 @@ class Component extends DCLogic {
       catAll: "tutte",
       noResults: "Nessuna ricetta corrisponde alla ricerca.",
       coming: "in arrivo",
-      published: "pubblicata"
+      published: "pubblicata",
+      footer: "Questo sito non usa cookie.",
+      privacyLink: "Privacy e riutilizzo →"
     };
     const EN = {
       brand: "Mara's Recipes",
@@ -143,7 +151,9 @@ class Component extends DCLogic {
       catAll: "all",
       noResults: "No recipe matches your search.",
       coming: "coming soon",
-      published: "published"
+      published: "published",
+      footer: "This site does not use cookies.",
+      privacyLink: "Privacy & reuse →"
     };
     const t0 = en ? EN : IT;
 

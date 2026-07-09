@@ -63,7 +63,6 @@
       <sc-for list="{{ catLegend }}" as="cl" hint-placeholder-count="5">
         <span style="display:flex; align-items:center; gap:8px;"><span style="{{ cl.dotStyle }}"></span>{{ cl.label }}</span>
       </sc-for>
-      <span style="display:flex; align-items:center; gap:8px;"><span style="width:14px; height:14px; border-radius:50%; border:1px solid rgba(58,44,34,.22); display:inline-block;"></span>{{ t.legEmpty }}</span>
     </div>
   </div>
 
@@ -87,12 +86,18 @@
               <a href="{{ c.href }}" title="{{ c.title }}" class="cal-dot" style="{{ c.dotStyle }}">{{ c.day }}</a>
             </sc-if>
             <sc-if value="{{ c.plain }}" hint-placeholder-val="{{ true }}">
-              <div style="aspect-ratio:1; display:flex; align-items:center; justify-content:center; font-family:'Spectral',serif; font-size:14px; color:#6E5A48; border:1px solid rgba(58,44,34,.1); border-radius:50%;">{{ c.day }}</div>
+              <div style="aspect-ratio:1; display:flex; align-items:center; justify-content:center; font-family:'Spectral',serif; font-size:14px; color:#6E5A48;">{{ c.day }}</div>
             </sc-if>
           </sc-for>
         </div>
       </div>
     </sc-for>
+  </div>
+
+  <!-- footer -->
+  <div style="padding:22px clamp(28px,5vw,64px) 32px; border-top:1px solid rgba(58,44,34,.12); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+    <div style="font-size:13px; font-style:italic; color:#7A6552;">{{ t.footer }}</div>
+    <a href="Privacy.dc.html" style="text-decoration:none; font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:#9E3F26; border-bottom:1px solid #BE5A34; padding-bottom:2px;">{{ t.privacyLink }}</a>
   </div>
 
 </div>
@@ -125,7 +130,8 @@ class Component extends DCLogic {
       title: "Il calendario dell'anno",
       sub: "Una mail al giorno — un giorno alla volta",
       progressA: "giorni riempiti finora, su 366.",
-      legEmpty: "ancora da riempire",
+      footer: "Questo sito non usa cookie.",
+      privacyLink: "Privacy e riutilizzo →",
       monthsFull: ["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"],
       dow: ["L","M","M","G","V","S","D"]
     };
@@ -140,7 +146,8 @@ class Component extends DCLogic {
       title: "The calendar of the year",
       sub: "One email a day — one day at a time",
       progressA: "days filled so far, out of 366.",
-      legEmpty: "still to fill",
+      footer: "This site does not use cookies.",
+      privacyLink: "Privacy & reuse →",
       monthsFull: ["January","February","March","April","May","June","July","August","September","October","November","December"],
       dow: ["M","T","W","T","F","S","S"]
     };

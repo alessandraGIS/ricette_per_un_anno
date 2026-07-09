@@ -82,8 +82,13 @@
         <a href="{{ featuredHref }}" style="text-decoration:none; color:#3A2C22; font-family:'DM Serif Display',serif; font-size:clamp(30px,4vw,38px); line-height:1.05;">{{ t.recipeName }}</a>
         <div style="font-family:'Courier Prime',monospace; font-size:13px; letter-spacing:.1em; color:#7A6552;">{{ t.recipeMeta }}</div>
       </div>
-      <a href="{{ featuredHref }}" style="text-decoration:none; display:block; aspect-ratio:16/7; background:repeating-linear-gradient(45deg,#ECD9BC 0 11px,#E4CFAC 11px 22px); border:1px solid rgba(58,44,34,.15); display:flex; align-items:flex-end; padding:12px;">
-        <span style="font-family:'Courier Prime',monospace; font-size:12px; color:#7A6552; background:#FFFDF6; padding:4px 7px;">{{ t.photoRecipe }}</span>
+      <a href="{{ featuredHref }}" style="text-decoration:none; display:flex; justify-content:center; padding:14px 0 24px;">
+        <div style="position:relative; transform:rotate(-3deg); background:#fff; padding:18px 18px 38px; width:400px; max-width:100%; box-shadow:0 20px 42px rgba(58,44,34,.22);">
+          <div style="aspect-ratio:4/3; background:repeating-linear-gradient(45deg,#ECD9BC 0 11px,#E4CFAC 11px 22px); display:flex; align-items:flex-end; padding:12px;">
+            <span style="font-family:'Courier Prime',monospace; font-size:12px; color:#7A6552; background:#FFFDF6; padding:4px 7px;">{{ t.photoRecipe }}</span>
+          </div>
+          <div style="position:absolute; top:-16px; left:50%; transform:translateX(-50%) rotate(-5deg); width:104px; height:36px; background:rgba(255,255,255,.55); box-shadow:0 2px 5px rgba(0,0,0,.08);"></div>
+        </div>
       </a>
       <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px; margin-top:22px;">
         <div style="font-family:'Spectral',serif; font-style:italic; font-size:16px; line-height:1.55; color:#7A6552; max-width:440px;">{{ t.recipeNote }}</div>

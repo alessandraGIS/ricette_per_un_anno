@@ -33,8 +33,8 @@
       <div style="display:flex; flex-wrap:wrap; row-gap:8px; gap:clamp(14px,2vw,26px); align-items:center; font-family:'Courier Prime',monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase;">
         <a href="index.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">Home</a>
         <a href="Il diario.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">{{ t.navRecipes }}</a>
-        <a href="La nostra storia.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">{{ t.navStory }}</a>
         <a href="Il calendario.dc.html" style="text-decoration:none; color:#BE5A34;">{{ t.navCal }}</a>
+        <a href="La nostra storia.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">{{ t.navStory }}</a>
         <a href="Contatti.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">{{ t.navContact }}</a>
       </div>
       <div style="display:flex; gap:9px; align-items:center; font-family:'Spectral',serif; font-size:14px;">
@@ -160,15 +160,19 @@ class Component extends DCLogic {
       return { ...base, t: { ...t0, progress: t0.progressA }, months: [], catLegend: [], count: "0" };
     }
 
-    // Un colore per categoria (chiave canonica = italiano), fisso e condiviso ovunque compaia la categoria.
-    const CAT_COLORS = {
-      "dolci": "#BE5A34",
-      "primi piatti": "#7C8C3E",
-      "secondi piatti": "#4F5FA0",
-      "piatti unici": "#3E7D6E",
-      "preparazioni di base": "#8A4A78"
-    };
-    const FALLBACK_COLOR = "#9A836C";
+    const seenCats = [];
+    DB.order.forEach(id => {
+      const c = DB.recipes[id].cat;
+      if (!seenCats.some(s => s.key === c.it)) seenCats.push({ key: c.it, label: c[langKey] });
+    });
+
+    // Palette fissa condivisa fra le pagine: assegnata per ordine di prima comparsa
+    // in DB.order, così ogni categoria mantiene sempre lo stesso colore e le nuove
+    // categorie ricevono automaticamente il colore successivo (fino a 8; oltre,
+    // i colori ricominciano dal primo).
+    const CAT_PALETTE = ["#BE5A34", "#4F5FA0", "#7C8C3E", "#8A4A78", "#3E7D6E", "#5E8A4C", "#6E5690", "#A8435F"];
+    const catColorMap = {};
+    seenCats.forEach((c, i) => { catColorMap[c.key] = CAT_PALETTE[i % CAT_PALETTE.length]; });
     const dotStyle = (color) => ({
       width: "14px", height: "14px", borderRadius: "50%", background: color, display: "inline-block"
     });
@@ -184,14 +188,16 @@ class Component extends DCLogic {
       filled[mi + "-" + parseInt(r.day, 10)] = { id, name: r.name[langKey], catKey: r.cat.it, catLabel: r.cat[langKey] };
     });
 
-    const seenCats = [];
-    DB.order.forEach(id => {
-      const c = DB.recipes[id].cat;
-      if (!seenCats.some(s => s.key === c.it)) seenCats.push({ key: c.it, label: c[langKey] });
-    });
-    const catLegend = seenCats.map(c => ({
+    // Ordine di visualizzazione della legenda (fisso, non legato all'ordine di comparsa
+    // usato per i colori); le categorie non elencate qui finiscono in coda.
+    const CATEGORY_DISPLAY_ORDER = ["primi piatti", "secondi piatti", "piatti unici", "dolci", "preparazioni di base"];
+    const catLegend = [...seenCats].sort((a, b) => {
+      const ia = CATEGORY_DISPLAY_ORDER.indexOf(a.key);
+      const ib = CATEGORY_DISPLAY_ORDER.indexOf(b.key);
+      return (ia === -1 ? CATEGORY_DISPLAY_ORDER.length : ia) - (ib === -1 ? CATEGORY_DISPLAY_ORDER.length : ib);
+    }).map(c => ({
       label: c.label,
-      dotStyle: dotStyle(CAT_COLORS[c.key] || FALLBACK_COLOR)
+      dotStyle: dotStyle(catColorMap[c.key])
     }));
 
     // L'anno delle mail: febbraio 2004 → gennaio 2005 (12 mesi, 366 giorni).
@@ -219,7 +225,7 @@ class Component extends DCLogic {
             dotStyle: {
               textDecoration: "none", aspectRatio: "1", display: "flex", alignItems: "center", justifyContent: "center",
               fontFamily: "'Spectral',serif", fontSize: "14px", borderRadius: "50%",
-              background: CAT_COLORS[hit.catKey] || FALLBACK_COLOR, color: "#FBF4E6", fontWeight: 500
+              background: catColorMap[hit.catKey], color: "#FBF4E6", fontWeight: 500
             }
           });
         } else {

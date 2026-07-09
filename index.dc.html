@@ -34,8 +34,8 @@
       <div style="display:flex; flex-wrap:wrap; row-gap:8px; gap:clamp(14px,2vw,26px); align-items:center; font-family:'Courier Prime',monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase;">
         <a href="index.dc.html" style="text-decoration:none; color:#BE5A34;">Home</a>
         <a href="Il diario.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">{{ t.navRecipes }}</a>
-        <a href="La nostra storia.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">{{ t.navStory }}</a>
         <a href="Il calendario.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">{{ t.navCal }}</a>
+        <a href="La nostra storia.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">{{ t.navStory }}</a>
         <a href="Contatti.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">{{ t.navContact }}</a>
       </div>
       <div style="display:flex; gap:9px; align-items:center; font-family:'Spectral',serif; font-size:14px;">
@@ -274,15 +274,20 @@ class Component extends DCLogic {
       return { ...base, t: t0, story: t0.story, ingredients: [], steps: [], entries: [], cats: [], resultLabel: "", noResults: false, featuredHref: "#", recentEntries: [], hasRecent: false };
     }
 
-    // stesso colore per categoria usato nel calendario (chiave canonica = italiano)
-    const CAT_COLORS = {
-      "dolci": "#BE5A34",
-      "primi piatti": "#7C8C3E",
-      "secondi piatti": "#4F5FA0",
-      "piatti unici": "#3E7D6E",
-      "preparazioni di base": "#8A4A78"
-    };
-    const FALLBACK_COLOR = "#9A836C";
+    // categorie disponibili (chiave canonica = italiano)
+    const seen = [];
+    DB.order.forEach(id => {
+      const c = DB.recipes[id].cat;
+      if (!seen.some(s => s.key === c.it)) seen.push({ key: c.it, label: c[langKey] });
+    });
+
+    // Palette fissa condivisa fra le pagine: assegnata per ordine di prima comparsa
+    // in DB.order, così ogni categoria mantiene sempre lo stesso colore e le nuove
+    // categorie ricevono automaticamente il colore successivo (fino a 8; oltre,
+    // i colori ricominciano dal primo).
+    const CAT_PALETTE = ["#BE5A34", "#4F5FA0", "#7C8C3E", "#8A4A78", "#3E7D6E", "#5E8A4C", "#6E5690", "#A8435F"];
+    const catColorMap = {};
+    seen.forEach((c, i) => { catColorMap[c.key] = CAT_PALETTE[i % CAT_PALETTE.length]; });
 
     // diario: tutte le ricette, in ordine; pubblicate cliccabili
     const allEntries = DB.order.map((id, i) => {
@@ -301,12 +306,6 @@ class Component extends DCLogic {
       };
     });
 
-    // categorie disponibili (chiave canonica = italiano)
-    const seen = [];
-    DB.order.forEach(id => {
-      const c = DB.recipes[id].cat;
-      if (!seen.some(s => s.key === c.it)) seen.push({ key: c.it, label: c[langKey] });
-    });
     const chipBase = { fontFamily: "'Courier Prime',monospace", fontSize: "11px", letterSpacing: ".1em", textTransform: "uppercase", padding: "7px 13px", borderRadius: "999px", cursor: "pointer", border: "1px solid rgba(58,44,34,.22)" };
     const chipOn = { ...chipBase, background: "#BE5A34", color: "#FBF4E6", borderColor: "#BE5A34" };
     const chipOff = { ...chipBase, background: "transparent", color: "#7A6552" };
@@ -354,7 +353,7 @@ class Component extends DCLogic {
         date: x.day + " " + (en ? x.mEn : x.mIt),
         name: x.name[langKey],
         catLabel: x.cat[langKey],
-        dotStyle: { width: "10px", height: "10px", borderRadius: "50%", flexShrink: "0", display: "inline-block", background: CAT_COLORS[x.cat.it] || FALLBACK_COLOR }
+        dotStyle: { width: "10px", height: "10px", borderRadius: "50%", flexShrink: "0", display: "inline-block", background: catColorMap[x.cat.it] }
       };
     });
 

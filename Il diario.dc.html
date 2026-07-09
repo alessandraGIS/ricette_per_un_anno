@@ -37,8 +37,8 @@
       <div style="display:flex; flex-wrap:wrap; row-gap:8px; gap:clamp(14px,2vw,26px); align-items:center; font-family:'Courier Prime',monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase;">
         <a href="index.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">Home</a>
         <a href="Il diario.dc.html" style="text-decoration:none; color:#BE5A34;">{{ t.navRecipes }}</a>
-        <a href="La nostra storia.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">{{ t.navStory }}</a>
         <a href="Il calendario.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">{{ t.navCal }}</a>
+        <a href="La nostra storia.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">{{ t.navStory }}</a>
         <a href="Contatti.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">{{ t.navContact }}</a>
       </div>
       <div style="display:flex; gap:9px; align-items:center; font-family:'Spectral',serif; font-size:14px;">
@@ -82,9 +82,9 @@
       <a href="{{ e.href }}" class="diary-row" style="text-decoration:none; padding:15px 0; border-bottom:1px solid rgba(58,44,34,.12);" style-hover="background:#F5EAD4;">
         <div style="font-family:'Caveat',cursive; font-size:23px; color:#9E3F26;">{{ e.date }}</div>
         <div style="font-family:'Spectral',serif; font-size:19px; color:#3A2C22;">{{ e.name }}</div>
-        <div style="font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#A08561;">{{ e.cat }}</div>
+        <div style="display:flex; align-items:center; gap:8px; font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#A08561;"><span style="{{ e.catDotStyle }}"></span>{{ e.cat }}</div>
         <sc-if value="{{ e.pub }}" hint-placeholder-val="{{ true }}">
-          <div style="display:flex; align-items:center; gap:8px; font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:#6E6B33;"><span style="width:8px; height:8px; border-radius:50%; background:#6E6B33; display:inline-block;"></span>{{ t.published }}</div>
+          <div style="font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:#6E6B33;">{{ t.published }}</div>
         </sc-if>
         <sc-if value="{{ e.coming }}" hint-placeholder-val="{{ false }}">
           <div style="font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:#B9A88F;">{{ t.coming }}</div>
@@ -165,6 +165,20 @@ class Component extends DCLogic {
       return { ...base, t: t0, entries: [], cats: [], resultLabel: "", noResults: false };
     }
 
+    const seen = [];
+    DB.order.forEach(id => {
+      const c = DB.recipes[id].cat;
+      if (!seen.some(s => s.key === c.it)) seen.push({ key: c.it, label: c[langKey] });
+    });
+
+    // Palette fissa condivisa fra le pagine: assegnata per ordine di prima comparsa
+    // in DB.order, così ogni categoria mantiene sempre lo stesso colore e le nuove
+    // categorie ricevono automaticamente il colore successivo (fino a 8; oltre,
+    // i colori ricominciano dal primo).
+    const CAT_PALETTE = ["#BE5A34", "#4F5FA0", "#7C8C3E", "#8A4A78", "#3E7D6E", "#5E8A4C", "#6E5690", "#A8435F"];
+    const catColorMap = {};
+    seen.forEach((c, i) => { catColorMap[c.key] = CAT_PALETTE[i % CAT_PALETTE.length]; });
+
     const allEntries = DB.order.map((id) => {
       const x = DB.recipes[id];
       const ingText = (x.ing[langKey] || []).map(s => s.replace(/^§/, "")).join(" ");
@@ -174,21 +188,26 @@ class Component extends DCLogic {
         name: x.name[langKey],
         cat: x.cat[langKey],
         catKey: x.cat.it,
+        catDotStyle: { width: "8px", height: "8px", borderRadius: "50%", flexShrink: "0", display: "inline-block", background: catColorMap[x.cat.it] },
         search: (x.name[langKey] + " " + x.cat[langKey] + " " + ingText).toLowerCase(),
         pub: !!x.published,
         coming: !x.published
       };
     });
 
-    const seen = [];
-    DB.order.forEach(id => {
-      const c = DB.recipes[id].cat;
-      if (!seen.some(s => s.key === c.it)) seen.push({ key: c.it, label: c[langKey] });
+    // Ordine di visualizzazione dei filtri (fisso, non legato all'ordine di comparsa
+    // usato per i colori); le categorie non elencate qui finiscono in coda.
+    const CATEGORY_DISPLAY_ORDER = ["primi piatti", "secondi piatti", "piatti unici", "dolci", "preparazioni di base"];
+    const seenForDisplay = [...seen].sort((a, b) => {
+      const ia = CATEGORY_DISPLAY_ORDER.indexOf(a.key);
+      const ib = CATEGORY_DISPLAY_ORDER.indexOf(b.key);
+      return (ia === -1 ? CATEGORY_DISPLAY_ORDER.length : ia) - (ib === -1 ? CATEGORY_DISPLAY_ORDER.length : ib);
     });
+
     const chipBase = { fontFamily: "'Courier Prime',monospace", fontSize: "11px", letterSpacing: ".1em", textTransform: "uppercase", padding: "7px 13px", borderRadius: "999px", cursor: "pointer", border: "1px solid rgba(58,44,34,.22)" };
     const chipOn = { ...chipBase, background: "#BE5A34", color: "#FBF4E6", borderColor: "#BE5A34" };
     const chipOff = { ...chipBase, background: "transparent", color: "#7A6552" };
-    const cats = [{ key: "all", label: t0.catAll }, ...seen].map(c => ({
+    const cats = [{ key: "all", label: t0.catAll }, ...seenForDisplay].map(c => ({
       label: c.label,
       style: this.state.cat === c.key ? chipOn : chipOff,
       onClick: () => this.setState({ cat: c.key })

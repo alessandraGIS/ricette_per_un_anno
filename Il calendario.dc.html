@@ -126,7 +126,7 @@ class Component extends DCLogic {
       navCal: "Calendario",
       navContact: "Contatti",
       back: "← Torna al ricettario",
-      kicker: "Un anno · 2004 – 2005",
+      kicker: "Un anno · 2004",
       title: "Il calendario dell'anno",
       sub: "Una mail al giorno — un giorno alla volta",
       progressA: "giorni riempiti finora, su 366.",
@@ -142,7 +142,7 @@ class Component extends DCLogic {
       navCal: "Calendar",
       navContact: "Contact",
       back: "← Back to the collection",
-      kicker: "One year · 2004 – 2005",
+      kicker: "One year · 2004",
       title: "The calendar of the year",
       sub: "One email a day — one day at a time",
       progressA: "days filled so far, out of 366.",
@@ -192,7 +192,7 @@ class Component extends DCLogic {
       if (!r.published) return;
       const mi = monthIT.indexOf(r.mIt);
       if (mi < 0) return;
-      filled[mi + "-" + parseInt(r.day, 10)] = { id, name: r.name[langKey], catKey: r.cat.it, catLabel: r.cat[langKey] };
+      filled[mi + "-" + parseInt(r.day, 10)] = { id, name: r.name[langKey], catKey: r.cat.it };
     });
 
     // Ordine di visualizzazione della legenda (fisso, non legato all'ordine di comparsa
@@ -207,14 +207,9 @@ class Component extends DCLogic {
       dotStyle: dotStyle(catColorMap[c.key])
     }));
 
-    // L'anno delle mail: febbraio 2004 → gennaio 2005 (12 mesi, 366 giorni).
-    const seq = [];
-    for (let k = 0; k < 12; k++) {
-      const abs = 1 + k;                 // 1 = febbraio
-      seq.push({ year: 2004 + Math.floor(abs / 12), mi: abs % 12 });
-    }
-    const months = seq.map(({ year, mi }) => {
-      const name = t0.monthsFull[mi] + (mi === 0 ? " " + year : (mi === 1 ? " " + year : ""));
+    // L'anno delle mail: gennaio → dicembre 2004 (12 mesi, 366 giorni: il 2004 è bisestile).
+    const year = 2004;
+    const months = t0.monthsFull.map((name, mi) => {
       const daysInMonth = new Date(year, mi + 1, 0).getDate();
       const firstDow = (new Date(year, mi, 1).getDay() + 6) % 7; // lunedì = 0
       const cells = [];
@@ -228,7 +223,7 @@ class Component extends DCLogic {
             filled: true,
             day: String(d),
             href: "Ricetta.dc.html?r=" + hit.id,
-            title: hit.name + " — " + hit.catLabel,
+            title: hit.name,
             dotStyle: {
               textDecoration: "none", aspectRatio: "1", display: "flex", alignItems: "center", justifyContent: "center",
               fontFamily: "'Spectral',serif", fontSize: "14px", borderRadius: "50%",

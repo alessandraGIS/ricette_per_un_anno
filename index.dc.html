@@ -58,6 +58,13 @@
     <img src="assets/hero-index.png" alt="Illustrazione a tratto: Urbino e Venezia unite da un cuore, un portatile con una mail di Mara e strumenti di cucina" style="display:block; width:100%; max-width:600px; height:auto; margin:0 auto;">
   </div>
 
+  <!-- dated notes -->
+  <div style="padding:0 clamp(28px,5vw,64px); display:flex; flex-direction:column; gap:2px;">
+    <sc-for list="{{ notes }}" as="n" hint-placeholder-count="1">
+      <div style="font-family:'Caveat',cursive; font-size:22px; color:#9E3F26; transform:rotate(-1.5deg); transform-origin:left; display:inline-block;">{{ n }}</div>
+    </sc-for>
+  </div>
+
   <!-- story -->
   <div class="story-grid" style="padding:8px clamp(28px,5vw,64px) 56px; border-top:1px solid rgba(58,44,34,.12);">
     <div style="padding-top:8px;">
@@ -154,14 +161,17 @@ class Component extends DCLogic {
       navCal: "Calendario",
       navContact: "Contatti",
       tagline: "Una mail al giorno, da Venezia a Urbino",
-      heroKicker: "Un ricettario · 2004 – 2005",
+      heroKicker: "Un ricettario · 2004",
       storyHead: "Benvenuti nel Ricettario di Mara",
       readMore: "Leggi la nostra storia →",
+      notes: [
+        "Luglio 2026."
+      ],
       story: [
-        "Tra il 2004 e il 2005, mentre studiavo all'università a Urbino, mia madre, Mara, mi inviò una ricetta al giorno via email. Per un anno intero, senza eccezioni: 366 ricette, perché il 2004 era bisestile.",
-        "Vent'anni dopo ho deciso di raccogliere quelle ricette e condividerle in queste pagine. Verranno pubblicate poco alla volta, man mano che avrò il tempo di riscoprirle, provarle e aggiornarle insieme a mia madre.",
+        "Nel 2004, mentre studiavo all'università a Urbino, mia madre, Mara, mi inviò una ricetta al giorno via email. Per un anno intero, senza eccezioni: 366 ricette, perché il 2004 era bisestile.",
+        "Ventidue anni dopo ho deciso di raccogliere quelle ricette e condividerle in queste pagine. Verranno pubblicate poco alla volta, man mano che avrò il tempo di riscoprirle, provarle e aggiornarle insieme a mia madre.",
         "Molte persone hanno sentito parlare del \u201cleggendario ricettario di Mara\u201d, ma questa è la prima volta che viene pubblicato in modo organico.",
-        "Le ricette che troverete qui nascono da quelle email, ma portano con sé anche vent'anni di esperienza, prove e miglioramenti."
+        "Le ricette che troverete qui nascono da quelle email, ma portano con sé anche ventidue anni di esperienza, prove e miglioramenti."
       ],
       sign: "— Alessandra",
       cta1: "Sfoglia le ricette",
@@ -175,7 +185,7 @@ class Component extends DCLogic {
       recipeNote: "N.B. Puoi accompagnare la torta con panna montata, una crema inglese o, per esagerare, una salsa al cioccolato.",
       recipeLink: "Vai alla ricetta →",
       recentHead: "Le ultime pubblicate",
-      diaryHead: "Il diario, 2004 – 2005",
+      diaryHead: "Il diario, 2004",
       diaryLinkTitle: "Sfoglia tutte le ricette pubblicate",
       diaryLinkSub: "Cerca per nome o ingrediente, filtra per categoria: dolci, primi, secondi e altro.",
       diaryLinkCta: "Vai al diario →",
@@ -213,14 +223,17 @@ class Component extends DCLogic {
       navCal: "Calendar",
       navContact: "Contact",
       tagline: "One email a day, from Venice to Urbino",
-      heroKicker: "A recipe collection · 2004 – 2005",
+      heroKicker: "A recipe collection · 2004",
       storyHead: "Welcome to Mara's Recipe Book",
       readMore: "Read our story →",
+      notes: [
+        "July 2026."
+      ],
       story: [
-        "Between 2004 and 2005, while I was at university in Urbino, my mother Mara sent me a recipe a day by email. For a whole year, without exception: 366 recipes, because 2004 was a leap year.",
-        "Twenty years later I've decided to gather those recipes and share them here. They'll be published little by little, as I find the time to rediscover, test and update them together with my mother.",
+        "Throughout 2004, while I was at university in Urbino, my mother Mara sent me a recipe a day by email. For a whole year, without exception: 366 recipes, because 2004 was a leap year.",
+        "Twenty-two years later I've decided to gather those recipes and share them here. They'll be published little by little, as I find the time to rediscover, test and update them together with my mother.",
         "Many people have heard of \u201cMara's legendary recipe book\u201d, but this is the first time it's being published in an organised way.",
-        "The recipes you'll find here grow out of those emails, but they also carry twenty years of experience, trials and improvements."
+        "The recipes you'll find here grow out of those emails, but they also carry twenty-two years of experience, trials and improvements."
       ],
       sign: "— Alessandra",
       cta1: "Browse the recipes",
@@ -234,7 +247,7 @@ class Component extends DCLogic {
       recipeNote: "N.B. You can serve the cake with whipped cream, a crème anglaise or — to go all out — a chocolate sauce.",
       recipeLink: "Go to the recipe →",
       recentHead: "Latest published",
-      diaryHead: "The diary, 2004 – 2005",
+      diaryHead: "The diary, 2004",
       diaryLinkTitle: "Browse all published recipes",
       diaryLinkSub: "Search by name or ingredient, filter by category: desserts, first courses, mains and more.",
       diaryLinkCta: "Go to the diary →",
@@ -283,7 +296,7 @@ class Component extends DCLogic {
 
     const DB = window.MARA_RECIPES;
     if (!DB) {
-      return { ...base, t: t0, story: t0.story, ingredients: [], steps: [], entries: [], cats: [], resultLabel: "", noResults: false, featuredHref: "#", recentEntries: [], hasRecent: false };
+      return { ...base, t: t0, story: t0.story, notes: t0.notes, ingredients: [], steps: [], entries: [], cats: [], resultLabel: "", noResults: false, featuredHref: "#", recentEntries: [], hasRecent: false };
     }
 
     // categorie disponibili (chiave canonica = italiano)
@@ -373,6 +386,7 @@ class Component extends DCLogic {
       ...base,
       t,
       story: t0.story,
+      notes: t0.notes,
       ingredients,
       steps,
       entries,

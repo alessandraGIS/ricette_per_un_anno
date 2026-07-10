@@ -122,7 +122,6 @@
           <a href="{{ re.href }}" style="text-decoration:none; display:flex; align-items:center; gap:16px; flex-wrap:wrap; padding:14px 0; border-bottom:1px solid rgba(58,44,34,.12);" style-hover="background:#F5EAD4;">
             <span style="font-family:'Caveat',cursive; font-size:20px; color:#9E3F26; min-width:110px;">{{ re.date }}</span>
             <span style="font-family:'Spectral',serif; font-size:18px; color:#3A2C22; flex:1;">{{ re.name }}</span>
-            <span style="display:flex; align-items:center; gap:8px; width:150px; flex-shrink:0; font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#A08561;"><span style="{{ re.dotStyle }}"></span>{{ re.catLabel }}</span>
           </a>
         </sc-for>
       </div>
@@ -376,9 +375,7 @@ class Component extends DCLogic {
       return {
         href: "Ricetta.dc.html?r=" + id,
         date: x.day + " " + (en ? x.mEn : x.mIt),
-        name: x.name[langKey],
-        catLabel: x.cat[langKey],
-        dotStyle: { width: "10px", height: "10px", borderRadius: "50%", flexShrink: "0", display: "inline-block", background: catColorMap[x.cat.it] }
+        name: x.name[langKey]
       };
     });
 

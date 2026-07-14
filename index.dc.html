@@ -89,18 +89,24 @@
       <div style="font-family:'Caveat',cursive; font-size:22px; color:#9E3F26; margin-bottom:6px;">{{ t.recipeKicker }}</div>
       <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:10px; margin-bottom:26px;">
         <a href="{{ featuredHref }}" style="text-decoration:none; color:#3A2C22; font-family:'DM Serif Display',serif; font-size:clamp(30px,4vw,38px); line-height:1.05;">{{ t.recipeName }}</a>
-        <div style="font-family:'Courier Prime',monospace; font-size:13px; letter-spacing:.1em; color:#7A6552;">{{ t.recipeMeta }}</div>
+        <div style="font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:#A08561; border:1px solid rgba(160,133,97,.5); padding:3px 10px; border-radius:999px;">{{ t.recipeCat }}</div>
       </div>
       <a href="{{ featuredHref }}" style="text-decoration:none; display:flex; justify-content:center; padding:14px 0 24px;">
         <div style="position:relative; transform:rotate(-3deg); background:#fff; padding:18px 18px 38px; width:400px; max-width:100%; box-shadow:0 20px 42px rgba(58,44,34,.22);">
-          <div style="aspect-ratio:4/3; background:repeating-linear-gradient(45deg,#ECD9BC 0 11px,#E4CFAC 11px 22px); display:flex; align-items:flex-end; padding:12px;">
-            <span style="font-family:'Courier Prime',monospace; font-size:12px; color:#7A6552; background:#FFFDF6; padding:4px 7px;">{{ t.photoRecipe }}</span>
-          </div>
-          <div style="position:absolute; top:-16px; left:50%; transform:translateX(-50%) rotate(-5deg); width:104px; height:36px; background:rgba(255,255,255,.55); box-shadow:0 2px 5px rgba(0,0,0,.08);"></div>
+          <sc-if value="{{ featuredImg }}" hint-placeholder-val="{{ false }}">
+            <div style="aspect-ratio:1/1; overflow:hidden;">
+              <img src="{{ featuredImg }}" alt="{{ t.photoRecipe }}" style="display:block; width:100%; height:100%; object-fit:contain;">
+            </div>
+          </sc-if>
+          <sc-if value="{{ !featuredImg }}" hint-placeholder-val="{{ true }}">
+            <div style="aspect-ratio:4/3; background:repeating-linear-gradient(45deg,#ECD9BC 0 11px,#E4CFAC 11px 22px); display:flex; align-items:flex-end; padding:12px;">
+              <span style="font-family:'Courier Prime',monospace; font-size:12px; color:#7A6552; background:#FFFDF6; padding:4px 7px;">{{ t.photoRecipe }}</span>
+            </div>
+          </sc-if>
+          <div style="position:absolute; top:-16px; left:50%; transform:translateX(-50%) rotate(-5deg); width:104px; height:36px; background:rgba(178,140,92,.55); box-shadow:0 2px 5px rgba(0,0,0,.08);"></div>
         </div>
       </a>
-      <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px; margin-top:22px;">
-        <div style="font-family:'Spectral',serif; font-style:italic; font-size:16px; line-height:1.55; color:#7A6552; max-width:440px;">{{ t.recipeNote }}</div>
+      <div style="display:flex; justify-content:flex-end; margin-top:22px;">
         <a href="{{ featuredHref }}" style="text-decoration:none; white-space:nowrap; font-family:'Courier Prime',monospace; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#9E3F26; border-bottom:1px solid #BE5A34; padding-bottom:3px;">{{ t.recipeLink }}</a>
       </div>
     </div>
@@ -180,10 +186,9 @@ class Component extends DCLogic {
       cta3: "Il calendario dell'anno",
       recipeKicker: "La prima ricetta che mi mandò · 1º febbraio 2004",
       recipeName: "Torta al cioccolato",
-      recipeMeta: "Dolci · forno 170° · ~25 min",
+      recipeCat: "dolci",
       ingHead: "Ingredienti",
       stepHead: "Preparazione",
-      recipeNote: "N.B. Puoi accompagnare la torta con panna montata, una crema inglese o, per esagerare, una salsa al cioccolato.",
       recipeLink: "Vai alla ricetta →",
       recentHead: "Le ultime pubblicate",
       diaryHead: "Il diario, 2004",
@@ -242,10 +247,9 @@ class Component extends DCLogic {
       cta3: "The calendar of the year",
       recipeKicker: "The first recipe she sent me · 1 February 2004",
       recipeName: "Chocolate cake",
-      recipeMeta: "Dessert · oven 170° · ~25 min",
+      recipeCat: "dessert",
       ingHead: "Ingredients",
       stepHead: "Method",
-      recipeNote: "N.B. You can serve the cake with whipped cream, a crème anglaise or — to go all out — a chocolate sauce.",
       recipeLink: "Go to the recipe →",
       recentHead: "Latest published",
       diaryHead: "The diary, 2004",
@@ -297,7 +301,7 @@ class Component extends DCLogic {
 
     const DB = window.MARA_RECIPES;
     if (!DB) {
-      return { ...base, t: t0, story: t0.story, notes: t0.notes, ingredients: [], steps: [], entries: [], cats: [], resultLabel: "", noResults: false, featuredHref: "#", recentEntries: [], hasRecent: false };
+      return { ...base, t: t0, story: t0.story, notes: t0.notes, ingredients: [], steps: [], entries: [], cats: [], resultLabel: "", noResults: false, featuredHref: "#", featuredImg: "", recentEntries: [], hasRecent: false };
     }
 
     // categorie disponibili (chiave canonica = italiano)
@@ -362,8 +366,7 @@ class Component extends DCLogic {
       ...t0,
       recipeKicker: (en ? "Featured · " : "In evidenza · ") + f.date[langKey],
       recipeName: f.name[langKey],
-      recipeMeta: f.meta[langKey],
-      recipeNote: f.note[langKey],
+      recipeCat: f.cat[langKey],
       photoRecipe: f.photo[langKey]
     };
     if (!en) t.recipeKicker = "In evidenza · " + f.date.it;
@@ -392,8 +395,8 @@ class Component extends DCLogic {
       cats,
       resultLabel,
       noResults: n === 0,
-      hasRecipeNote: !!f.note[langKey],
       featuredHref: "Ricetta.dc.html?r=" + featId,
+      featuredImg: f.img || "",
       recentEntries,
       hasRecent: recentEntries.length > 0
     };

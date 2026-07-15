@@ -62,8 +62,13 @@
   <!-- photo -->
   <div style="padding:24px clamp(28px,5vw,64px) 0;">
     <sc-if value="{{ hasFramedImg }}" hint-placeholder-val="{{ false }}">
-      <div style="aspect-ratio:1/1; max-width:520px; margin:0 auto; background:#FBF4E6; border:4px solid rgba(190,90,52,.7); overflow:hidden;">
-        <img src="{{ r.img }}" alt="{{ r.photo }}" style="display:block; width:100%; height:100%; object-fit:contain;">
+      <div style="display:flex; justify-content:center; padding:10px 0 24px;">
+        <div style="position:relative; transform:rotate(-2deg); background:#fff; padding:18px 18px 38px; width:400px; max-width:100%; box-shadow:0 20px 42px rgba(58,44,34,.22);">
+          <div style="aspect-ratio:1/1; overflow:hidden;">
+            <img src="{{ r.img }}" alt="{{ r.photo }}" style="display:block; width:100%; height:100%; object-fit:contain;">
+          </div>
+          <div style="{{ pinStyle }}"></div>
+        </div>
       </div>
     </sc-if>
     <sc-if value="{{ hasPlainImg }}" hint-placeholder-val="{{ false }}">
@@ -182,7 +187,7 @@ class Component extends DCLogic {
 
     const DB = window.MARA_RECIPES;
     if (!DB || !this.state.id || !DB.recipes[this.state.id]) {
-      return { ...base, r: {}, ingredients: [], steps: [], hasNote: false, hasFramedImg: false, hasPlainImg: false, provenance: "",
+      return { ...base, r: {}, ingredients: [], steps: [], hasNote: false, hasFramedImg: false, hasPlainImg: false, pinStyle: {}, provenance: "",
         prevHref: "#", nextHref: "#", prevName: "", nextName: "",
         prevStyle: { visibility: "hidden", flex: "1" }, nextStyle: { visibility: "hidden", flex: "1" } };
     }
@@ -196,6 +201,18 @@ class Component extends DCLogic {
     const r = { date: src.date[lang], cat: src.cat[lang], name: src.name[lang], meta: src.meta[lang], photo: src.photo[lang], note: src.note[lang], img: src.img || "", servings: src.servings ? src.servings[lang] : "", time: src.time ? src.time[lang] : "", noteSign };
     const hasFramedImg = !!r.img && !src.illustration;
     const hasPlainImg = !!r.img && !!src.illustration;
+
+    // Stessa palette e stessa regola (ordine di prima comparsa in DB.order) usate
+    // in "Il calendario.dc.html", così il colore di una categoria è coerente ovunque.
+    const CAT_PALETTE = ["#BE5A34", "#4F5FA0", "#7C8C3E", "#8A4A78", "#3E7D6E", "#5E8A4C", "#6E5690", "#A8435F"];
+    const seenCatKeys = [];
+    DB.order.forEach(k => { const ck = DB.recipes[k].cat.it; if (!seenCatKeys.includes(ck)) seenCatKeys.push(ck); });
+    const catColor = CAT_PALETTE[seenCatKeys.indexOf(src.cat.it) % CAT_PALETTE.length];
+    const pinStyle = {
+      position: "absolute", top: "-13px", left: "50%", transform: "translateX(-50%)",
+      width: "22px", height: "22px", borderRadius: "50%", background: catColor,
+      boxShadow: "0 3px 6px rgba(58,44,34,.35), inset 0 -2px 3px rgba(0,0,0,.25), inset 0 2px 2px rgba(255,255,255,.45)"
+    };
     const ingredients = src.ing[lang].map(s => {
       const sub = s.startsWith("§");
       return { text: sub ? s.slice(1).trim() : s, sub, item: !sub };
@@ -213,7 +230,7 @@ class Component extends DCLogic {
     const hidden = { visibility: "hidden", flex: "1" };
 
     return {
-      ...base, r, ingredients, steps, hasNote: !!r.note, hasFramedImg, hasPlainImg, provenance,
+      ...base, r, ingredients, steps, hasNote: !!r.note, hasFramedImg, hasPlainImg, pinStyle, provenance,
       prevHref: prevId ? "Ricetta.dc.html?r=" + prevId : "#",
       nextHref: nextId ? "Ricetta.dc.html?r=" + nextId : "#",
       prevName: prevId ? DB.recipes[prevId].name[lang] : "",

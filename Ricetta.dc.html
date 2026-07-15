@@ -18,20 +18,23 @@
   body { margin: 0; background: #EFE3CB; }
   ::selection { background: #e8c9a0; }
   .recipe-grid { display:grid; grid-template-columns:.8fr 1.2fr; gap:clamp(30px,4vw,52px); }
+  .nav-toggle { display:none; }
   @media (max-width:640px) {
     .recipe-grid { grid-template-columns:1fr; }
+    .nav-links { display:none !important; }
+    .nav-toggle { display:inline-flex !important; }
   }
 </style>
 </helmet>
 
 <div style="background:#EFE3CB; min-height:100vh; padding:40px 24px; font-family:'Spectral',Georgia,serif; color:#3A2C22;">
-<div style="max-width:1180px; margin:0 auto; background:#FBF4E6; box-shadow:0 30px 80px rgba(58,44,34,.16); border:1px solid rgba(58,44,34,.08);">
+<div style="max-width:1180px; margin:0 auto; background:#FBF4E6; box-shadow:0 30px 80px rgba(58,44,34,.16);">
 
   <!-- topbar -->
   <div style="display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap; padding:26px clamp(28px,5vw,64px); border-bottom:1px solid rgba(58,44,34,.12);">
     <a href="index.dc.html" style="text-decoration:none; color:#3A2C22; font-family:'DM Serif Display',serif; font-size:22px; letter-spacing:.01em;">{{ t.brand }}</a>
     <div style="display:flex; gap:clamp(16px,2.4vw,30px); align-items:center;">
-      <div style="display:flex; flex-wrap:wrap; row-gap:8px; gap:clamp(14px,2vw,26px); align-items:center; font-family:'Courier Prime',monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase;">
+      <div class="nav-links" style="display:flex; flex-wrap:wrap; row-gap:8px; gap:clamp(14px,2vw,26px); align-items:center; font-family:'Courier Prime',monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase;">
         <a href="index.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">Home</a>
         <a href="Il diario.dc.html" style="text-decoration:none; color:#BE5A34;">{{ t.navRecipes }}</a>
         <a href="Il calendario.dc.html" style="text-decoration:none; color:#7A6552;" style-hover="color:#BE5A34;">{{ t.navCal }}</a>
@@ -43,8 +46,18 @@
         <span style="color:#C9B79A;">/</span>
         <span onClick="{{ onEn }}" style="{{ enStyle }}">EN</span>
       </div>
+      <div class="nav-toggle" onClick="{{ onMenuToggle }}" style="align-items:center; justify-content:center; width:34px; height:34px; border:1px solid rgba(58,44,34,.25); border-radius:6px; cursor:pointer; font-size:16px; color:#3A2C22;">☰</div>
     </div>
   </div>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="display:flex; flex-direction:column; padding:6px clamp(28px,5vw,64px) 18px; border-bottom:1px solid rgba(58,44,34,.12); font-family:'Courier Prime',monospace; font-size:13px; letter-spacing:.1em; text-transform:uppercase;">
+      <a href="index.dc.html" style="text-decoration:none; color:#7A6552; padding:10px 0;">Home</a>
+      <a href="Il diario.dc.html" style="text-decoration:none; color:#BE5A34; padding:10px 0;">{{ t.navRecipes }}</a>
+      <a href="Il calendario.dc.html" style="text-decoration:none; color:#7A6552; padding:10px 0;">{{ t.navCal }}</a>
+      <a href="La nostra storia.dc.html" style="text-decoration:none; color:#7A6552; padding:10px 0;">{{ t.navStory }}</a>
+      <a href="Contatti.dc.html" style="text-decoration:none; color:#7A6552; padding:10px 0;">{{ t.navContact }}</a>
+    </div>
+  </sc-if>
 
   <!-- header -->
   <div style="padding:clamp(40px,5vw,60px) clamp(28px,5vw,64px) 12px;">
@@ -151,7 +164,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { lang: "it", id: null, ready: false };
+  state = { lang: "it", id: null, ready: false, menuOpen: false };
 
   componentDidMount() {
     const apply = () => {
@@ -182,7 +195,9 @@ class Component extends DCLogic {
       itStyle: en ? idle : active,
       enStyle: en ? active : idle,
       onIt: () => this.setState({ lang: "it" }),
-      onEn: () => this.setState({ lang: "en" })
+      onEn: () => this.setState({ lang: "en" }),
+      menuOpen: this.state.menuOpen,
+      onMenuToggle: () => this.setState({ menuOpen: !this.state.menuOpen })
     };
 
     const DB = window.MARA_RECIPES;

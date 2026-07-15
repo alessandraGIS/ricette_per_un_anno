@@ -13,17 +13,17 @@ window.MARA_RECIPES = {
       cat: { it: "preparazioni di base", en: "basics" },
       name: { it: "Pastella per friggere", en: "Frying batter" },
       meta: { it: "", en: "" },
-      time: { it: "Riposo 1h", en: "Rest 1h" },
+      time: { it: "Riposo 15 min", en: "Rest 15 min" },
       img: "photos/pastella.png",
       illustration: true,
       photo: { it: "[ foto: verdure in pastella appena fritte ]", en: "[ photo: freshly fried battered vegetables ]" },
       ing: {
-        it: ["150 g di farina", "sale", "1 bicchiere di birra", "1 cucchiaio di grappa (facoltativa)"],
-        en: ["150 g flour", "salt", "1 glass of beer", "1 tbsp grappa (optional)"]
+        it: ["150 g di farina 00", "200 ml di acqua frizzante ben fredda", "1 cucchiaio di grappa", "1 pizzico di sale"],
+        en: ["150 g plain flour (type 00)", "200 ml well-chilled sparkling water", "1 tbsp grappa", "1 pinch of salt"]
       },
       steps: {
-        it: ["Metti in una terrina la farina con un pizzico di sale e un bicchiere e mezzo di acqua tiepida. Mescola bene.", "Aggiungi adagio il bicchiere di birra e lascia riposare per un'ora.", "Incorpora la grappa."],
-        en: ["Put the flour in a bowl with a pinch of salt and one and a half glasses of warm water. Mix well.", "Slowly add the glass of beer and let it rest for an hour.", "Fold in the grappa."]
+        it: ["Versa la farina in una ciotola e aggiungi il sale.", "Unisci la grappa e l'acqua frizzante ben fredda, mescolando con una frusta fino a ottenere una pastella liscia e priva di grumi.", "Copri la ciotola e lascia riposare la pastella in frigorifero per 15 minuti."],
+        en: ["Pour the flour into a bowl and add the salt.", "Add the grappa and the well-chilled sparkling water, whisking until you get a smooth, lump-free batter.", "Cover the bowl and let the batter rest in the fridge for 15 minutes."]
       },
       note: { it: "Questa pastella è adatta a verdure (carciofi a quarti, radicchio di Treviso, zucchine a listarelle, anelli di cipolla, melanzane a fette, listarelle di peperoni) o frutta (mele, banane, ananas): tuffale nella pastella e friggi.", en: "This batter is suitable for vegetables (quartered artichokes, Treviso radicchio, courgette strips, onion rings, aubergine slices, pepper strips) or fruit (apples, bananas, pineapple): dip them in the batter and fry." }
     },

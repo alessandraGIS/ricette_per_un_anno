@@ -26,12 +26,14 @@
     .diary-row { grid-template-columns:1fr; row-gap:4px; }
     .nav-links { display:none !important; }
     .nav-toggle { display:inline-flex !important; }
+    .page-outer { padding:0 !important; }
+    .page-card { max-width:100% !important; }
   }
 </style>
 </helmet>
 
-<div style="background:#EFE3CB; min-height:100vh; padding:40px 24px; font-family:'Spectral',Georgia,serif; color:#3A2C22;">
-<div style="max-width:1180px; margin:0 auto; background:#FBF4E6;">
+<div class="page-outer" style="background:#EFE3CB; min-height:100vh; padding:40px 24px; font-family:'Spectral',Georgia,serif; color:#3A2C22;">
+<div class="page-card" style="max-width:1180px; margin:0 auto; background:#FBF4E6;">
 
   <!-- topbar -->
   <div style="display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap; padding:26px clamp(28px,5vw,64px); border-bottom:1px solid rgba(58,44,34,.12);">

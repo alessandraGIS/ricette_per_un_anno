@@ -19,12 +19,15 @@
   ::selection { background: #e8c9a0; }
   .recipe-grid { display:grid; grid-template-columns:.8fr 1.2fr; gap:clamp(30px,4vw,52px); }
   .nav-toggle { display:none; }
+  .notes-mobile { display:none; }
   @media (max-width:640px) {
     .recipe-grid { grid-template-columns:1fr; }
     .nav-links { display:none !important; }
     .nav-toggle { display:inline-flex !important; }
     .page-outer { padding:0 !important; }
     .page-card { max-width:100% !important; }
+    .notes-desktop { display:none !important; }
+    .notes-mobile { display:block; }
   }
 </style>
 </helmet>
@@ -117,7 +120,7 @@
           </sc-if>
         </sc-for>
       </div>
-      <div style="margin-top:auto;">
+      <div class="notes-desktop" style="margin-top:auto;">
         <sc-for list="{{ leftNotes }}" as="noteItem" hint-placeholder-count="0">
           <div style="position:relative; margin:40px auto 0; max-width:400px; transform:rotate(-1.5deg); background:#FFF8E7; border:1px solid rgba(58,44,34,.1); padding:22px 24px 18px; box-shadow:0 12px 26px rgba(58,44,34,.16);">
             <div style="position:absolute; top:-14px; left:50%; transform:translateX(-50%) rotate(-3deg); width:92px; height:30px; background:rgba(178,140,92,.55); box-shadow:0 2px 5px rgba(0,0,0,.08);"></div>
@@ -142,7 +145,7 @@
           </div>
         </sc-for>
       </div>
-      <div style="margin-top:auto;">
+      <div class="notes-desktop" style="margin-top:auto;">
         <sc-for list="{{ rightNotes }}" as="noteItem" hint-placeholder-count="0">
           <div style="position:relative; margin:40px auto 0; max-width:400px; transform:rotate(-1.5deg); background:#FFF8E7; border:1px solid rgba(58,44,34,.1); padding:22px 24px 18px; box-shadow:0 12px 26px rgba(58,44,34,.16);">
             <div style="position:absolute; top:-14px; left:50%; transform:translateX(-50%) rotate(-3deg); width:92px; height:30px; background:rgba(178,140,92,.55); box-shadow:0 2px 5px rgba(0,0,0,.08);"></div>
@@ -152,6 +155,17 @@
         </sc-for>
       </div>
     </div>
+  </div>
+
+  <!-- notes: on mobile the two columns stack, so notes are shown together here at the end -->
+  <div class="notes-mobile" style="padding:0 clamp(28px,5vw,64px) 20px;">
+    <sc-for list="{{ notes }}" as="noteItem" hint-placeholder-count="0">
+      <div style="position:relative; margin:40px auto 0; max-width:400px; transform:rotate(-1.5deg); background:#FFF8E7; border:1px solid rgba(58,44,34,.1); padding:22px 24px 18px; box-shadow:0 12px 26px rgba(58,44,34,.16);">
+        <div style="position:absolute; top:-14px; left:50%; transform:translateX(-50%) rotate(-3deg); width:92px; height:30px; background:rgba(178,140,92,.55); box-shadow:0 2px 5px rgba(0,0,0,.08);"></div>
+        <div style="font-family:'Caveat',cursive; font-weight:600; font-size:21px; line-height:1.45; color:#4A3A2E;">{{ noteItem.text }}</div>
+        <div style="font-family:'Caveat',cursive; font-size:18px; color:#9E3F26; margin-top:10px; text-align:right;">{{ noteItem.sign }}</div>
+      </div>
+    </sc-for>
   </div>
 
   <!-- prev / next -->
@@ -215,7 +229,7 @@ class Component extends DCLogic {
 
     const DB = window.MARA_RECIPES;
     if (!DB || !this.state.id || !DB.recipes[this.state.id]) {
-      return { ...base, r: {}, ingredients: [], steps: [], leftNotes: [], rightNotes: [], hasFramedImg: false, hasPlainImg: false, pinStyle: {}, provenance: "",
+      return { ...base, r: {}, ingredients: [], steps: [], notes: [], leftNotes: [], rightNotes: [], hasFramedImg: false, hasPlainImg: false, pinStyle: {}, provenance: "",
         prevHref: "#", nextHref: "#", prevName: "", nextName: "",
         prevStyle: { visibility: "hidden", flex: "1" }, nextStyle: { visibility: "hidden", flex: "1" } };
     }
@@ -262,7 +276,7 @@ class Component extends DCLogic {
     const hidden = { visibility: "hidden", flex: "1" };
 
     return {
-      ...base, r, ingredients, steps, leftNotes, rightNotes, hasFramedImg, hasPlainImg, pinStyle, provenance,
+      ...base, r, ingredients, steps, notes, leftNotes, rightNotes, hasFramedImg, hasPlainImg, pinStyle, provenance,
       prevHref: prevId ? "Ricetta.dc.html?r=" + prevId : "#",
       nextHref: nextId ? "Ricetta.dc.html?r=" + nextId : "#",
       prevName: prevId ? DB.recipes[prevId].name[lang] : "",

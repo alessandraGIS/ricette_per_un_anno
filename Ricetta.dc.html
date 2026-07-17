@@ -28,6 +28,7 @@
     .page-card { max-width:100% !important; }
     .notes-desktop { display:none !important; }
     .notes-mobile { display:block; }
+    .grid-cell { grid-column:auto !important; grid-row:auto !important; }
   }
 </style>
 </helmet>
@@ -103,7 +104,7 @@
 
   <!-- body: ingredients + steps -->
   <div class="recipe-grid" style="padding:clamp(32px,4vw,48px) clamp(28px,5vw,64px) 20px;">
-    <div style="display:flex; flex-direction:column;">
+    <div class="grid-cell" style="grid-column:1; grid-row:1;">
       <div style="display:flex; align-items:baseline; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:16px;">
         <div style="font-family:'Courier Prime',monospace; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#9E3F26;">{{ t.ingHead }}</div>
         <sc-if value="{{ r.servings }}" hint-placeholder-val="{{ false }}">
@@ -120,17 +121,8 @@
           </sc-if>
         </sc-for>
       </div>
-      <div class="notes-desktop" style="margin-top:auto;">
-        <sc-for list="{{ leftNotes }}" as="noteItem" hint-placeholder-count="0">
-          <div style="position:relative; margin:40px auto 0; max-width:400px; transform:rotate(-1.5deg); background:#FFF8E7; border:1px solid rgba(58,44,34,.1); padding:22px 24px 18px; box-shadow:0 12px 26px rgba(58,44,34,.16);">
-            <div style="position:absolute; top:-14px; left:50%; transform:translateX(-50%) rotate(-3deg); width:92px; height:30px; background:rgba(178,140,92,.55); box-shadow:0 2px 5px rgba(0,0,0,.08);"></div>
-            <div style="font-family:'Caveat',cursive; font-weight:600; font-size:21px; line-height:1.45; color:#4A3A2E;">{{ noteItem.text }}</div>
-            <div style="font-family:'Caveat',cursive; font-size:18px; color:#9E3F26; margin-top:10px; text-align:right;">{{ noteItem.sign }}</div>
-          </div>
-        </sc-for>
-      </div>
     </div>
-    <div style="display:flex; flex-direction:column;">
+    <div class="grid-cell" style="grid-column:2; grid-row:1;">
       <div style="display:flex; align-items:baseline; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:16px;">
         <div style="font-family:'Courier Prime',monospace; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#9E3F26;">{{ t.stepHead }}</div>
         <sc-if value="{{ r.time }}" hint-placeholder-val="{{ false }}">
@@ -145,15 +137,24 @@
           </div>
         </sc-for>
       </div>
-      <div class="notes-desktop" style="margin-top:auto;">
-        <sc-for list="{{ rightNotes }}" as="noteItem" hint-placeholder-count="0">
-          <div style="position:relative; margin:40px auto 0; max-width:400px; transform:rotate(-1.5deg); background:#FFF8E7; border:1px solid rgba(58,44,34,.1); padding:22px 24px 18px; box-shadow:0 12px 26px rgba(58,44,34,.16);">
-            <div style="position:absolute; top:-14px; left:50%; transform:translateX(-50%) rotate(-3deg); width:92px; height:30px; background:rgba(178,140,92,.55); box-shadow:0 2px 5px rgba(0,0,0,.08);"></div>
-            <div style="font-family:'Caveat',cursive; font-weight:600; font-size:21px; line-height:1.45; color:#4A3A2E;">{{ noteItem.text }}</div>
-            <div style="font-family:'Caveat',cursive; font-size:18px; color:#9E3F26; margin-top:10px; text-align:right;">{{ noteItem.sign }}</div>
-          </div>
-        </sc-for>
-      </div>
+    </div>
+    <div class="notes-desktop" style="grid-column:1; grid-row:2;">
+      <sc-for list="{{ leftNotes }}" as="noteItem" hint-placeholder-count="0">
+        <div style="position:relative; margin:40px auto 0; max-width:400px; transform:rotate(-1.5deg); background:#FFF8E7; border:1px solid rgba(58,44,34,.1); padding:22px 24px 18px; box-shadow:0 12px 26px rgba(58,44,34,.16);">
+          <div style="position:absolute; top:-14px; left:50%; transform:translateX(-50%) rotate(-3deg); width:92px; height:30px; background:rgba(178,140,92,.55); box-shadow:0 2px 5px rgba(0,0,0,.08);"></div>
+          <div style="font-family:'Caveat',cursive; font-weight:600; font-size:21px; line-height:1.45; color:#4A3A2E;">{{ noteItem.text }}</div>
+          <div style="font-family:'Caveat',cursive; font-size:18px; color:#9E3F26; margin-top:10px; text-align:right;">{{ noteItem.sign }}</div>
+        </div>
+      </sc-for>
+    </div>
+    <div class="notes-desktop" style="grid-column:2; grid-row:2;">
+      <sc-for list="{{ rightNotes }}" as="noteItem" hint-placeholder-count="0">
+        <div style="position:relative; margin:40px auto 0; max-width:400px; transform:rotate(-1.5deg); background:#FFF8E7; border:1px solid rgba(58,44,34,.1); padding:22px 24px 18px; box-shadow:0 12px 26px rgba(58,44,34,.16);">
+          <div style="position:absolute; top:-14px; left:50%; transform:translateX(-50%) rotate(-3deg); width:92px; height:30px; background:rgba(178,140,92,.55); box-shadow:0 2px 5px rgba(0,0,0,.08);"></div>
+          <div style="font-family:'Caveat',cursive; font-weight:600; font-size:21px; line-height:1.45; color:#4A3A2E;">{{ noteItem.text }}</div>
+          <div style="font-family:'Caveat',cursive; font-size:18px; color:#9E3F26; margin-top:10px; text-align:right;">{{ noteItem.sign }}</div>
+        </div>
+      </sc-for>
     </div>
   </div>
 

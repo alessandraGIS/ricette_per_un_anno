@@ -58,6 +58,7 @@ window.MARA_RECIPES = {
       meta: { it: "", en: "" },
       servings: { it: "Per uno stampo a cerniera da 24 cm", en: "For a 24 cm springform tin" },
       time: { it: "Cottura 25-30 min", en: "Baking 25-30 min" },
+      img: ["photos/tortacioccolato-fetta.jpg", "photos/tortacioccolato-intera.jpg"],
       photo: { it: "[ foto: la torta fondente al cioccolato spolverata di zucchero a velo ]", en: "[ photo: the melting chocolate cake dusted with icing sugar ]" },
       ing: {
         it: ["300 g di cioccolato fondente (50-60%)", "135 g di burro morbido", "135 g di zucchero", "4 uova", "65 g di farina", "65 g di latte", "zucchero a velo per decorare"],

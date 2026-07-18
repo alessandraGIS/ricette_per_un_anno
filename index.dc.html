@@ -106,21 +106,41 @@
         <a href="{{ featuredHref }}" style="text-decoration:none; color:#3A2C22; font-family:'DM Serif Display',serif; font-size:clamp(30px,4vw,38px); line-height:1.05;">{{ t.recipeName }}</a>
         <div style="font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:#A08561; border:1px solid rgba(160,133,97,.5); padding:3px 10px; border-radius:999px;">{{ t.recipeCat }}</div>
       </div>
-      <a href="{{ featuredHref }}" style="text-decoration:none; display:flex; justify-content:center; padding:14px 0 24px;">
-        <div style="position:relative; transform:rotate(-3deg); background:#fff; padding:18px 18px 38px; width:400px; max-width:100%; box-shadow:0 20px 42px rgba(58,44,34,.22);">
-          <sc-if value="{{ featuredImg }}" hint-placeholder-val="{{ false }}">
-            <div style="aspect-ratio:1/1; overflow:hidden;">
-              <img src="{{ featuredImg }}" alt="{{ t.photoRecipe }}" style="display:block; width:100%; height:100%; object-fit:contain;">
+      <sc-if value="{{ hasFeaturedStackedImg }}" hint-placeholder-val="{{ false }}">
+        <a href="{{ featuredHref }}" style="text-decoration:none; display:flex; justify-content:center; padding:14px 0 24px;">
+          <div style="display:flex; align-items:flex-start;">
+            <div style="position:relative; z-index:1; transform:rotate(-5deg) translateX(12px); background:#fff; padding:16px 16px 34px; width:clamp(190px,44vw,300px); box-shadow:0 16px 34px rgba(58,44,34,.2); margin-right:22px;">
+              <div style="aspect-ratio:1/1; overflow:hidden;">
+                <img src="{{ featuredImg2 }}" alt="{{ t.photoRecipe }}" style="display:block; width:100%; height:100%; object-fit:cover;">
+              </div>
+              <div style="position:absolute; top:-16px; left:50%; transform:translateX(-50%) rotate(-5deg); width:104px; height:36px; background:rgba(178,140,92,.55); box-shadow:0 2px 5px rgba(0,0,0,.08);"></div>
             </div>
-          </sc-if>
-          <sc-if value="{{ !featuredImg }}" hint-placeholder-val="{{ true }}">
-            <div style="aspect-ratio:4/3; background:repeating-linear-gradient(45deg,#ECD9BC 0 11px,#E4CFAC 11px 22px); display:flex; align-items:flex-end; padding:12px;">
-              <span style="font-family:'Courier Prime',monospace; font-size:12px; color:#7A6552; background:#FFFDF6; padding:4px 7px;">{{ t.photoRecipe }}</span>
+            <div style="position:relative; z-index:2; margin-top:46px; transform:rotate(4deg) translateX(-12px); background:#fff; padding:16px 16px 34px; width:clamp(190px,44vw,300px); box-shadow:0 20px 42px rgba(58,44,34,.26);">
+              <div style="aspect-ratio:1/1; overflow:hidden;">
+                <img src="{{ featuredImg }}" alt="{{ t.photoRecipe }}" style="display:block; width:100%; height:100%; object-fit:cover;">
+              </div>
+              <div style="position:absolute; top:-16px; left:50%; transform:translateX(-50%) rotate(-5deg); width:104px; height:36px; background:rgba(178,140,92,.55); box-shadow:0 2px 5px rgba(0,0,0,.08);"></div>
             </div>
-          </sc-if>
-          <div style="position:absolute; top:-16px; left:50%; transform:translateX(-50%) rotate(-5deg); width:104px; height:36px; background:rgba(178,140,92,.55); box-shadow:0 2px 5px rgba(0,0,0,.08);"></div>
-        </div>
-      </a>
+          </div>
+        </a>
+      </sc-if>
+      <sc-if value="{{ !hasFeaturedStackedImg }}" hint-placeholder-val="{{ true }}">
+        <a href="{{ featuredHref }}" style="text-decoration:none; display:flex; justify-content:center; padding:14px 0 24px;">
+          <div style="position:relative; transform:rotate(-3deg); background:#fff; padding:18px 18px 38px; width:400px; max-width:100%; box-shadow:0 20px 42px rgba(58,44,34,.22);">
+            <sc-if value="{{ featuredImg }}" hint-placeholder-val="{{ false }}">
+              <div style="aspect-ratio:1/1; overflow:hidden;">
+                <img src="{{ featuredImg }}" alt="{{ t.photoRecipe }}" style="display:block; width:100%; height:100%; object-fit:contain;">
+              </div>
+            </sc-if>
+            <sc-if value="{{ !featuredImg }}" hint-placeholder-val="{{ true }}">
+              <div style="aspect-ratio:4/3; background:repeating-linear-gradient(45deg,#ECD9BC 0 11px,#E4CFAC 11px 22px); display:flex; align-items:flex-end; padding:12px;">
+                <span style="font-family:'Courier Prime',monospace; font-size:12px; color:#7A6552; background:#FFFDF6; padding:4px 7px;">{{ t.photoRecipe }}</span>
+              </div>
+            </sc-if>
+            <div style="position:absolute; top:-16px; left:50%; transform:translateX(-50%) rotate(-5deg); width:104px; height:36px; background:rgba(178,140,92,.55); box-shadow:0 2px 5px rgba(0,0,0,.08);"></div>
+          </div>
+        </a>
+      </sc-if>
       <div style="display:flex; justify-content:flex-end; margin-top:22px;">
         <a href="{{ featuredHref }}" style="text-decoration:none; white-space:nowrap; font-family:'Courier Prime',monospace; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#9E3F26; border-bottom:1px solid #BE5A34; padding-bottom:3px;">{{ t.recipeLink }}</a>
       </div>
@@ -318,7 +338,7 @@ class Component extends DCLogic {
 
     const DB = window.MARA_RECIPES;
     if (!DB) {
-      return { ...base, t: t0, story: t0.story, notes: t0.notes, ingredients: [], steps: [], entries: [], cats: [], resultLabel: "", noResults: false, featuredHref: "#", featuredImg: "", recentEntries: [], hasRecent: false };
+      return { ...base, t: t0, story: t0.story, notes: t0.notes, ingredients: [], steps: [], entries: [], cats: [], resultLabel: "", noResults: false, featuredHref: "#", featuredImg: "", featuredImg2: "", hasFeaturedStackedImg: false, recentEntries: [], hasRecent: false };
     }
 
     // categorie disponibili (chiave canonica = italiano)
@@ -413,7 +433,9 @@ class Component extends DCLogic {
       resultLabel,
       noResults: n === 0,
       featuredHref: "Ricetta.dc.html?r=" + featId,
-      featuredImg: f.img || "",
+      featuredImg: (Array.isArray(f.img) ? f.img[0] : f.img) || "",
+      featuredImg2: Array.isArray(f.img) ? (f.img[1] || "") : "",
+      hasFeaturedStackedImg: Array.isArray(f.img) && f.img.filter(Boolean).length > 1,
       recentEntries,
       hasRecent: recentEntries.length > 0
     };

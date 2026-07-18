@@ -80,6 +80,24 @@
 
   <!-- photo -->
   <div style="padding:24px clamp(28px,5vw,64px) 0;">
+    <sc-if value="{{ hasStackedImg }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex; justify-content:center; padding:10px 0 40px;">
+        <div style="display:flex; align-items:flex-start;">
+          <div style="position:relative; z-index:1; transform:rotate(-5deg) translateX(12px); background:#fff; padding:16px 16px 34px; width:clamp(190px,44vw,300px); box-shadow:0 16px 34px rgba(58,44,34,.2); margin-right:22px;">
+            <div style="aspect-ratio:1/1; overflow:hidden;">
+              <img src="{{ r.img2 }}" alt="{{ r.photo }}" style="display:block; width:100%; height:100%; object-fit:cover;">
+            </div>
+            <div style="{{ pinStyle }}"></div>
+          </div>
+          <div style="position:relative; z-index:2; margin-top:46px; transform:rotate(4deg) translateX(-12px); background:#fff; padding:16px 16px 34px; width:clamp(190px,44vw,300px); box-shadow:0 20px 42px rgba(58,44,34,.26);">
+            <div style="aspect-ratio:1/1; overflow:hidden;">
+              <img src="{{ r.img }}" alt="{{ r.photo }}" style="display:block; width:100%; height:100%; object-fit:cover;">
+            </div>
+            <div style="{{ pinStyle }}"></div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
     <sc-if value="{{ hasFramedImg }}" hint-placeholder-val="{{ false }}">
       <div style="display:flex; justify-content:center; padding:10px 0 24px;">
         <div style="position:relative; transform:rotate(-2deg); background:#fff; padding:18px 18px 38px; width:400px; max-width:100%; box-shadow:0 20px 42px rgba(58,44,34,.22);">
@@ -230,7 +248,7 @@ class Component extends DCLogic {
 
     const DB = window.MARA_RECIPES;
     if (!DB || !this.state.id || !DB.recipes[this.state.id]) {
-      return { ...base, r: {}, ingredients: [], steps: [], notes: [], leftNotes: [], rightNotes: [], hasFramedImg: false, hasPlainImg: false, pinStyle: {}, provenance: "",
+      return { ...base, r: {}, ingredients: [], steps: [], notes: [], leftNotes: [], rightNotes: [], hasStackedImg: false, hasFramedImg: false, hasPlainImg: false, pinStyle: {}, provenance: "",
         prevHref: "#", nextHref: "#", prevName: "", nextName: "",
         prevStyle: { visibility: "hidden", flex: "1" }, nextStyle: { visibility: "hidden", flex: "1" } };
     }
@@ -245,9 +263,11 @@ class Component extends DCLogic {
     // per riempire lo spazio libero che l'elenco ingredienti, più corto, lascia a sinistra.
     const leftNotes = notes.filter((n, i) => i % 2 === 0);
     const rightNotes = notes.filter((n, i) => i % 2 === 1);
-    const r = { date: src.date[lang], cat: src.cat[lang], name: src.name[lang], meta: src.meta[lang], photo: src.photo[lang], img: src.img || "", servings: src.servings ? src.servings[lang] : "", time: src.time ? src.time[lang] : "" };
-    const hasFramedImg = !!r.img && !src.illustration;
-    const hasPlainImg = !!r.img && !!src.illustration;
+    const imgs = Array.isArray(src.img) ? src.img.filter(Boolean) : (src.img ? [src.img] : []);
+    const r = { date: src.date[lang], cat: src.cat[lang], name: src.name[lang], meta: src.meta[lang], photo: src.photo[lang], img: imgs[0] || "", img2: imgs[1] || "", servings: src.servings ? src.servings[lang] : "", time: src.time ? src.time[lang] : "" };
+    const hasStackedImg = imgs.length > 1 && !src.illustration;
+    const hasFramedImg = imgs.length === 1 && !src.illustration;
+    const hasPlainImg = imgs.length > 0 && !!src.illustration;
 
     // Stessa palette e stessa regola (ordine di prima comparsa in DB.order) usate
     // in "Il calendario.dc.html", così il colore di una categoria è coerente ovunque.
@@ -277,7 +297,7 @@ class Component extends DCLogic {
     const hidden = { visibility: "hidden", flex: "1" };
 
     return {
-      ...base, r, ingredients, steps, notes, leftNotes, rightNotes, hasFramedImg, hasPlainImg, pinStyle, provenance,
+      ...base, r, ingredients, steps, notes, leftNotes, rightNotes, hasStackedImg, hasFramedImg, hasPlainImg, pinStyle, provenance,
       prevHref: prevId ? "Ricetta.dc.html?r=" + prevId : "#",
       nextHref: nextId ? "Ricetta.dc.html?r=" + nextId : "#",
       prevName: prevId ? DB.recipes[prevId].name[lang] : "",

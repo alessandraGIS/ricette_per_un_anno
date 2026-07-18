@@ -4,6 +4,7 @@
 // `note.by` (o `notes[i].by`): "ale" per una nota di Alessandra, altrimenti si assume di Mara.
 // `notes`: array di note distinte (in ordine), al posto del singolo campo `note`.
 // `illustration: true` su una ricetta con `img`: niente cornice, sfondo trasparente (per immagini create, non foto).
+// `pageImg`: array di foto usato solo nella pagina della ricetta (Ricetta.dc.html), al posto di `img`; la home continua a usare `img`.
 window.MARA_RECIPES = {
   order: ["pastella", "zucchine", "tortacioccolato"],
   recipes: {
@@ -59,6 +60,7 @@ window.MARA_RECIPES = {
       servings: { it: "Per uno stampo a cerniera da 24 cm", en: "For a 24 cm springform tin" },
       time: { it: "Cottura 25-30 min", en: "Baking 25-30 min" },
       img: ["photos/tortacioccolato-fetta.jpg", "photos/tortacioccolato-intera.jpg"],
+      pageImg: ["photos/tortacioccolato-sformata.jpg", "photos/tortacioccolato-intera.jpg", "photos/tortacioccolato-fetta.jpg"],
       photo: { it: "[ foto: la torta fondente al cioccolato spolverata di zucchero a velo ]", en: "[ photo: the melting chocolate cake dusted with icing sugar ]" },
       ing: {
         it: ["300 g di cioccolato fondente (50-60%)", "135 g di burro morbido", "135 g di zucchero", "4 uova", "65 g di farina", "65 g di latte", "zucchero a velo per decorare"],

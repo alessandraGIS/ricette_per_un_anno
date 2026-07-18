@@ -29,6 +29,16 @@
     .notes-desktop { display:none !important; }
     .notes-mobile { display:block; }
     .grid-cell { grid-column:auto !important; grid-row:auto !important; }
+    .stacked-photos-row { flex-direction:column !important; align-items:center !important; }
+    .stacked-photo { width:62vw !important; }
+    .stacked-photo-a { margin-right:0 !important; transform:rotate(-5deg) translateX(-14px) !important; }
+    .stacked-photo-b { margin-top:-44px !important; transform:rotate(4deg) translateX(14px) !important; }
+    .fan-photos-row { flex-direction:column !important; align-items:center !important; }
+    .fan-photo { width:56vw !important; margin-left:0 !important; }
+    .fan-photos-row > .fan-photo:nth-child(1) { margin-top:0 !important; transform:rotate(-5deg) translateX(-14px) !important; z-index:1 !important; }
+    .fan-photos-row > .fan-photo:nth-child(2) { margin-top:-38px !important; transform:rotate(3deg) translateX(10px) !important; z-index:2 !important; }
+    .fan-photos-row > .fan-photo:nth-child(3) { margin-top:-38px !important; transform:rotate(-3deg) translateX(-8px) !important; z-index:3 !important; }
+    .fan-photos-row > .fan-photo:nth-child(n+4) { margin-top:-38px !important; transform:rotate(2deg) !important; z-index:4 !important; }
   }
 </style>
 </helmet>
@@ -82,19 +92,33 @@
   <div style="padding:24px clamp(28px,5vw,64px) 0;">
     <sc-if value="{{ hasStackedImg }}" hint-placeholder-val="{{ false }}">
       <div style="display:flex; justify-content:center; padding:10px 0 40px;">
-        <div style="display:flex; align-items:flex-start;">
-          <div style="position:relative; z-index:1; transform:rotate(-5deg) translateX(12px); background:#fff; padding:16px 16px 34px; width:clamp(190px,44vw,300px); box-shadow:0 16px 34px rgba(58,44,34,.2); margin-right:22px;">
+        <div class="stacked-photos-row" style="display:flex; align-items:flex-start;">
+          <div class="stacked-photo stacked-photo-a" style="position:relative; z-index:1; transform:rotate(-5deg) translateX(12px); background:#fff; padding:16px 16px 34px; width:clamp(190px,44vw,300px); box-shadow:0 16px 34px rgba(58,44,34,.2); margin-right:22px;">
             <div style="aspect-ratio:1/1; overflow:hidden;">
               <img src="{{ r.img2 }}" alt="{{ r.photo }}" style="display:block; width:100%; height:100%; object-fit:cover;">
             </div>
             <div style="{{ pinStyle }}"></div>
           </div>
-          <div style="position:relative; z-index:2; margin-top:46px; transform:rotate(4deg) translateX(-12px); background:#fff; padding:16px 16px 34px; width:clamp(190px,44vw,300px); box-shadow:0 20px 42px rgba(58,44,34,.26);">
+          <div class="stacked-photo stacked-photo-b" style="position:relative; z-index:2; margin-top:46px; transform:rotate(4deg) translateX(-12px); background:#fff; padding:16px 16px 34px; width:clamp(190px,44vw,300px); box-shadow:0 20px 42px rgba(58,44,34,.26);">
             <div style="aspect-ratio:1/1; overflow:hidden;">
               <img src="{{ r.img }}" alt="{{ r.photo }}" style="display:block; width:100%; height:100%; object-fit:cover;">
             </div>
             <div style="{{ pinStyle }}"></div>
           </div>
+        </div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ hasFanImg }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex; justify-content:center; padding:10px 0 40px;">
+        <div class="fan-photos-row" style="display:flex; align-items:flex-end;">
+          <sc-for list="{{ fanPhotos }}" as="photoItem" hint-placeholder-count="3">
+            <div class="fan-photo" style="{{ photoItem.style }}">
+              <div style="aspect-ratio:1/1; overflow:hidden;">
+                <img src="{{ photoItem.src }}" alt="{{ r.photo }}" style="display:block; width:100%; height:100%; object-fit:cover;">
+              </div>
+              <div style="{{ pinStyle }}"></div>
+            </div>
+          </sc-for>
         </div>
       </div>
     </sc-if>
@@ -248,7 +272,7 @@ class Component extends DCLogic {
 
     const DB = window.MARA_RECIPES;
     if (!DB || !this.state.id || !DB.recipes[this.state.id]) {
-      return { ...base, r: {}, ingredients: [], steps: [], notes: [], leftNotes: [], rightNotes: [], hasStackedImg: false, hasFramedImg: false, hasPlainImg: false, pinStyle: {}, provenance: "",
+      return { ...base, r: {}, ingredients: [], steps: [], notes: [], leftNotes: [], rightNotes: [], hasStackedImg: false, hasFanImg: false, fanPhotos: [], hasFramedImg: false, hasPlainImg: false, pinStyle: {}, provenance: "",
         prevHref: "#", nextHref: "#", prevName: "", nextName: "",
         prevStyle: { visibility: "hidden", flex: "1" }, nextStyle: { visibility: "hidden", flex: "1" } };
     }
@@ -263,11 +287,32 @@ class Component extends DCLogic {
     // per riempire lo spazio libero che l'elenco ingredienti, più corto, lascia a sinistra.
     const leftNotes = notes.filter((n, i) => i % 2 === 0);
     const rightNotes = notes.filter((n, i) => i % 2 === 1);
-    const imgs = Array.isArray(src.img) ? src.img.filter(Boolean) : (src.img ? [src.img] : []);
+    const rawImg = src.pageImg || src.img;
+    const imgs = Array.isArray(rawImg) ? rawImg.filter(Boolean) : (rawImg ? [rawImg] : []);
     const r = { date: src.date[lang], cat: src.cat[lang], name: src.name[lang], meta: src.meta[lang], photo: src.photo[lang], img: imgs[0] || "", img2: imgs[1] || "", servings: src.servings ? src.servings[lang] : "", time: src.time ? src.time[lang] : "" };
-    const hasStackedImg = imgs.length > 1 && !src.illustration;
+    const hasStackedImg = imgs.length === 2 && !src.illustration;
+    const hasFanImg = imgs.length > 2 && !src.illustration;
     const hasFramedImg = imgs.length === 1 && !src.illustration;
     const hasPlainImg = imgs.length > 0 && !!src.illustration;
+    // Foto "a ventaglio" per le ricette con più di due immagini nella pagina della ricetta:
+    // rotazione e scarto crescenti dal centro verso i bordi, sovrapposte con margine negativo.
+    const fanMid = (imgs.length - 1) / 2;
+    const fanPhotos = imgs.map((src2, i) => {
+      const off = i - fanMid;
+      const rotate = off * 9;
+      const shiftX = off * 18;
+      return {
+        src: src2,
+        style: {
+          position: "relative", zIndex: i + 1,
+          transform: "rotate(" + rotate + "deg) translateX(" + shiftX + "px)",
+          background: "#fff", padding: "16px 16px 34px",
+          width: "clamp(160px,29vw,260px)",
+          boxShadow: "0 " + (14 + i * 3) + "px " + (30 + i * 4) + "px rgba(58,44,34,.24)",
+          marginLeft: i === 0 ? "0" : "-46px"
+        }
+      };
+    });
 
     // Stessa palette e stessa regola (ordine di prima comparsa in DB.order) usate
     // in "Il calendario.dc.html", così il colore di una categoria è coerente ovunque.
@@ -297,7 +342,7 @@ class Component extends DCLogic {
     const hidden = { visibility: "hidden", flex: "1" };
 
     return {
-      ...base, r, ingredients, steps, notes, leftNotes, rightNotes, hasStackedImg, hasFramedImg, hasPlainImg, pinStyle, provenance,
+      ...base, r, ingredients, steps, notes, leftNotes, rightNotes, hasStackedImg, hasFanImg, fanPhotos, hasFramedImg, hasPlainImg, pinStyle, provenance,
       prevHref: prevId ? "Ricetta.dc.html?r=" + prevId : "#",
       nextHref: nextId ? "Ricetta.dc.html?r=" + nextId : "#",
       prevName: prevId ? DB.recipes[prevId].name[lang] : "",

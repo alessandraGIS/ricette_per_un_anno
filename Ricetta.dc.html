@@ -93,17 +93,21 @@
     <sc-if value="{{ hasStackedImg }}" hint-placeholder-val="{{ false }}">
       <div style="display:flex; justify-content:center; padding:10px 0 40px;">
         <div class="stacked-photos-row" style="display:flex; align-items:flex-start;">
-          <div class="stacked-photo stacked-photo-a" style="position:relative; z-index:1; transform:rotate(-5deg) translateX(12px); background:#fff; padding:16px 16px 34px; width:clamp(190px,44vw,300px); box-shadow:0 16px 34px rgba(58,44,34,.2); margin-right:22px;">
-            <div style="aspect-ratio:1/1; overflow:hidden;">
-              <img src="{{ r.img2 }}" alt="{{ r.photo }}" style="display:block; width:100%; height:100%; object-fit:cover;">
+          <div class="stacked-photo stacked-photo-a" style="position:relative; z-index:1; width:clamp(190px,44vw,300px); margin-right:22px; transform:rotate(-5deg) translateX(12px);">
+            <div style="position:relative; background:#fff; padding:5% 5% 10%; box-shadow:0 16px 34px rgba(58,44,34,.2);">
+              <div style="aspect-ratio:1/1; overflow:hidden;">
+                <img src="{{ r.img2 }}" alt="{{ r.photo }}" style="display:block; width:100%; height:100%; object-fit:cover;">
+              </div>
+              <div style="{{ pinStyle }}"></div>
             </div>
-            <div style="{{ pinStyle }}"></div>
           </div>
-          <div class="stacked-photo stacked-photo-b" style="position:relative; z-index:2; margin-top:46px; transform:rotate(4deg) translateX(-12px); background:#fff; padding:16px 16px 34px; width:clamp(190px,44vw,300px); box-shadow:0 20px 42px rgba(58,44,34,.26);">
-            <div style="aspect-ratio:1/1; overflow:hidden;">
-              <img src="{{ r.img }}" alt="{{ r.photo }}" style="display:block; width:100%; height:100%; object-fit:cover;">
+          <div class="stacked-photo stacked-photo-b" style="position:relative; z-index:2; width:clamp(190px,44vw,300px); margin-top:46px; transform:rotate(4deg) translateX(-12px);">
+            <div style="position:relative; background:#fff; padding:5% 5% 10%; box-shadow:0 20px 42px rgba(58,44,34,.26);">
+              <div style="aspect-ratio:1/1; overflow:hidden;">
+                <img src="{{ r.img }}" alt="{{ r.photo }}" style="display:block; width:100%; height:100%; object-fit:cover;">
+              </div>
+              <div style="{{ pinStyle }}"></div>
             </div>
-            <div style="{{ pinStyle }}"></div>
           </div>
         </div>
       </div>
@@ -112,11 +116,13 @@
       <div style="display:flex; justify-content:center; padding:10px 0 40px;">
         <div class="fan-photos-row" style="display:flex; align-items:flex-end;">
           <sc-for list="{{ fanPhotos }}" as="photoItem" hint-placeholder-count="3">
-            <div class="fan-photo" style="{{ photoItem.style }}">
-              <div style="aspect-ratio:1/1; overflow:hidden;">
-                <img src="{{ photoItem.src }}" alt="{{ r.photo }}" style="display:block; width:100%; height:100%; object-fit:cover;">
+            <div class="fan-photo" style="{{ photoItem.outerStyle }}">
+              <div style="{{ photoItem.innerStyle }}">
+                <div style="aspect-ratio:1/1; overflow:hidden;">
+                  <img src="{{ photoItem.src }}" alt="{{ r.photo }}" style="display:block; width:100%; height:100%; object-fit:cover;">
+                </div>
+                <div style="{{ pinStyle }}"></div>
               </div>
-              <div style="{{ pinStyle }}"></div>
             </div>
           </sc-for>
         </div>
@@ -124,11 +130,13 @@
     </sc-if>
     <sc-if value="{{ hasFramedImg }}" hint-placeholder-val="{{ false }}">
       <div style="display:flex; justify-content:center; padding:10px 0 24px;">
-        <div style="position:relative; transform:rotate(-2deg); background:#fff; padding:18px 18px 38px; width:400px; max-width:100%; box-shadow:0 20px 42px rgba(58,44,34,.22);">
-          <div style="aspect-ratio:1/1; overflow:hidden;">
-            <img src="{{ r.img }}" alt="{{ r.photo }}" style="display:block; width:100%; height:100%; object-fit:contain;">
+        <div style="position:relative; width:400px; max-width:100%; transform:rotate(-2deg);">
+          <div style="position:relative; background:#fff; padding:4.5% 4.5% 9.5%; box-shadow:0 20px 42px rgba(58,44,34,.22);">
+            <div style="aspect-ratio:1/1; overflow:hidden;">
+              <img src="{{ r.img }}" alt="{{ r.photo }}" style="display:block; width:100%; height:100%; object-fit:contain;">
+            </div>
+            <div style="{{ pinStyle }}"></div>
           </div>
-          <div style="{{ pinStyle }}"></div>
         </div>
       </div>
     </sc-if>
@@ -303,13 +311,15 @@ class Component extends DCLogic {
       const shiftX = off * 18;
       return {
         src: src2,
-        style: {
+        outerStyle: {
           position: "relative", zIndex: i + 1,
-          transform: "rotate(" + rotate + "deg) translateX(" + shiftX + "px)",
-          background: "#fff", padding: "16px 16px 34px",
           width: "clamp(160px,29vw,260px)",
-          boxShadow: "0 " + (14 + i * 3) + "px " + (30 + i * 4) + "px rgba(58,44,34,.24)",
-          marginLeft: i === 0 ? "0" : "-46px"
+          marginLeft: i === 0 ? "0" : "-46px",
+          transform: "rotate(" + rotate + "deg) translateX(" + shiftX + "px)"
+        },
+        innerStyle: {
+          position: "relative", background: "#fff", padding: "5% 5% 10%",
+          boxShadow: "0 " + (14 + i * 3) + "px " + (30 + i * 4) + "px rgba(58,44,34,.24)"
         }
       };
     });
@@ -321,9 +331,9 @@ class Component extends DCLogic {
     DB.order.forEach(k => { const ck = DB.recipes[k].cat.it; if (!seenCatKeys.includes(ck)) seenCatKeys.push(ck); });
     const catColor = CAT_PALETTE[seenCatKeys.indexOf(src.cat.it) % CAT_PALETTE.length];
     const pinStyle = {
-      position: "absolute", top: "-13px", left: "50%", transform: "translateX(-50%)",
-      width: "22px", height: "22px", borderRadius: "50%", background: catColor,
-      boxShadow: "0 3px 6px rgba(58,44,34,.35), inset 0 -2px 3px rgba(0,0,0,.25), inset 0 2px 2px rgba(255,255,255,.45)"
+      position: "absolute", top: "-14px", left: "50%", transform: "translateX(-50%) rotate(-4deg)",
+      width: "96px", height: "32px", background: catColor, opacity: 0.6,
+      boxShadow: "0 2px 5px rgba(0,0,0,.08)"
     };
     const ingredients = src.ing[lang].map(s => {
       const sub = s.startsWith("§");

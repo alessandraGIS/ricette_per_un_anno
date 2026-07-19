@@ -32,13 +32,13 @@
     .stacked-photos-row { flex-direction:column !important; align-items:center !important; }
     .stacked-photo { width:62vw !important; }
     .stacked-photo-a { margin-right:0 !important; transform:rotate(-5deg) translateX(-14px) !important; }
-    .stacked-photo-b { margin-top:-44px !important; transform:rotate(4deg) translateX(14px) !important; }
+    .stacked-photo-b { margin-top:-12px !important; transform:rotate(4deg) translateX(14px) !important; }
     .fan-photos-row { flex-direction:column !important; align-items:center !important; }
     .fan-photo { width:56vw !important; margin-left:0 !important; }
     .fan-photos-row > .fan-photo:nth-child(1) { margin-top:0 !important; transform:rotate(-5deg) translateX(-14px) !important; z-index:1 !important; }
-    .fan-photos-row > .fan-photo:nth-child(2) { margin-top:-38px !important; transform:rotate(3deg) translateX(10px) !important; z-index:2 !important; }
-    .fan-photos-row > .fan-photo:nth-child(3) { margin-top:-38px !important; transform:rotate(-3deg) translateX(-8px) !important; z-index:3 !important; }
-    .fan-photos-row > .fan-photo:nth-child(n+4) { margin-top:-38px !important; transform:rotate(2deg) !important; z-index:4 !important; }
+    .fan-photos-row > .fan-photo:nth-child(2) { margin-top:-10px !important; transform:rotate(3deg) translateX(10px) !important; z-index:2 !important; }
+    .fan-photos-row > .fan-photo:nth-child(3) { margin-top:-10px !important; transform:rotate(-3deg) translateX(-8px) !important; z-index:3 !important; }
+    .fan-photos-row > .fan-photo:nth-child(n+4) { margin-top:-10px !important; transform:rotate(2deg) !important; z-index:4 !important; }
   }
 </style>
 </helmet>
@@ -314,7 +314,7 @@ class Component extends DCLogic {
         outerStyle: {
           position: "relative", zIndex: i + 1,
           width: "clamp(160px,29vw,260px)",
-          marginLeft: i === 0 ? "0" : "-46px",
+          marginLeft: i === 0 ? "0" : "-16px",
           transform: "rotate(" + rotate + "deg) translateX(" + shiftX + "px)"
         },
         innerStyle: {

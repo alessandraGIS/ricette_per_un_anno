@@ -6,7 +6,7 @@
 // `illustration: true` su una ricetta con `img`: niente cornice, sfondo trasparente (per immagini create, non foto).
 // `pageImg`: array di foto usato solo nella pagina della ricetta (Ricetta.dc.html), al posto di `img`; la home continua a usare `img`.
 window.MARA_RECIPES = {
-  order: ["pastella", "zucchine", "tortacioccolato"],
+  order: ["pastella", "zucchine", "tortacioccolato", "clafoutis"],
   recipes: {
     pastella: {
       published: true,
@@ -73,6 +73,29 @@ window.MARA_RECIPES = {
       notes: [
         { it: "Puoi accompagnare la torta con panna montata o con una crema inglese o, per esagerare, con una salsa al cioccolato.", en: "You can serve the cake with whipped cream or custard or, to go all out, a chocolate sauce." },
         { it: "In alternativa al bagnomaria, il cioccolato può essere sciolto nel forno a microonde insieme al latte: spezzetta il cioccolato in una ciotola adatta al microonde, aggiungi il latte e scalda a potenza media per 30 secondi alla volta, mescolando bene dopo ogni intervallo, finché non si ottiene una crema liscia e omogenea.", en: "As an alternative to the bain-marie, the chocolate can be melted in the microwave together with the milk: break the chocolate into a microwave-safe bowl, add the milk and heat at medium power for 30 seconds at a time, stirring well after each interval, until you get a smooth, even cream.", by: "ale" }
+      ]
+    },
+    clafoutis: {
+      published: false,
+      day: "10", mIt: "luglio", mEn: "July",
+      date: { it: "10 luglio 2004", en: "10 July 2004" },
+      cat: { it: "dolci", en: "desserts" },
+      name: { it: "Clafoutis alle ciliegie", en: "Cherry clafoutis" },
+      meta: { it: "", en: "" },
+      servings: { it: "Per una pirofila da 24 cm", en: "For a 24 cm baking dish" },
+      time: { it: "Cottura 35-40 min", en: "Baking 35-40 min" },
+      photo: { it: "[ foto: il clafoutis alle ciliegie appena sfornato ]", en: "[ photo: the cherry clafoutis fresh out of the oven ]" },
+      ing: {
+        it: ["400 g di ciliegie", "3 uova", "80 g di zucchero", "30 g di farina 00", "60 g di fecola di patate", "100 ml di latte", "100 ml di panna fresca", "1 cucchiaio di brandy", "scorza grattugiata di 1 limone non trattato", "1 pizzico di sale", "burro e farina per la pirofila", "zucchero a velo (facoltativo)"],
+        en: ["400 g cherries", "3 eggs", "80 g sugar", "30 g plain flour (type 00)", "60 g potato starch", "100 ml milk", "100 ml fresh cream", "1 tbsp brandy", "grated zest of 1 unwaxed lemon", "1 pinch of salt", "butter and flour for the baking dish", "icing sugar (optional)"]
+      },
+      steps: {
+        it: ["Preriscalda il forno a 180 °C in modalità statica.", "Imburra e infarina una pirofila in vetro o ceramica da 24 cm e distribuisci sul fondo le ciliegie denocciolate.", "In una ciotola sbatti le uova con lo zucchero senza montarle. Aggiungi la farina, la fecola, il pizzico di sale e la scorza grattugiata del limone. Versa quindi il latte, la panna e il brandy, mescolando fino a ottenere una pastella liscia e senza grumi.", "Versa delicatamente il composto sulle ciliegie e cuoci in forno per 35-40 minuti, finché la superficie sarà ben dorata e leggermente gonfia.", "Lascia intiepidire prima di servire. Il clafoutis è ottimo sia tiepido sia completamente freddo, con una leggera spolverata di zucchero a velo."],
+        en: ["Preheat the oven to 180 °C conventional setting.", "Butter and flour a 24 cm glass or ceramic baking dish and spread the pitted cherries over the bottom.", "In a bowl, beat the eggs with the sugar without whipping them. Add the flour, the potato starch, the pinch of salt and the grated lemon zest. Then pour in the milk, the cream and the brandy, mixing until you get a smooth, lump-free batter.", "Gently pour the batter over the cherries and bake for 35-40 minutes, until the top is nicely golden and slightly puffed.", "Let it cool slightly before serving. The clafoutis is delicious both warm and completely cold, with a light dusting of icing sugar."]
+      },
+      notes: [
+        { it: "Questa ricetta si presta anche ad altre varietà di frutta. Utilizza mirtilli, fragole, albicocche e pesche, tagliate a pezzi se necessario, adattando la quantità di zucchero in base alla loro dolcezza.", en: "This recipe also works well with other kinds of fruit. Use blueberries, strawberries, apricots or peaches, cut into pieces if needed, adjusting the amount of sugar to their sweetness." },
+        { it: "Nella ricetta tradizionale francese le ciliegie vengono lasciate con il nocciolo, che durante la cottura rilascia un delicato aroma di mandorla. Qui le abbiamo denocciolate: non vogliamo che i vostri denti corrano rischi inutili.", en: "In the traditional French recipe the cherries are left with their pits, which release a delicate almond aroma during baking. Here we've pitted them: we don't want your teeth taking any unnecessary risks.", by: "ale" }
       ]
     }
   }

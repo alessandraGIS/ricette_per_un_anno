@@ -181,31 +181,39 @@
       </div>
       <div style="display:flex; flex-direction:column; gap:16px;">
         <sc-for list="{{ steps }}" as="step" hint-placeholder-count="6">
-          <div style="display:flex; gap:16px; align-items:baseline;">
-            <span style="font-family:'DM Serif Display',serif; font-size:22px; color:#BE5A34; min-width:28px;">{{ step.num }}</span>
-            <span style="font-size:17px; line-height:1.62; color:#4A3A2E;">{{ step.text }}</span>
-          </div>
+          <div style="font-size:17px; line-height:1.62; color:#4A3A2E;">{{ step.text }}</div>
         </sc-for>
       </div>
     </div>
-    <div class="notes-desktop" style="grid-column:1; grid-row:2;">
-      <sc-for list="{{ leftNotes }}" as="noteItem" hint-placeholder-count="0">
+    <sc-if value="{{ hasSingleNote }}" hint-placeholder-val="{{ false }}">
+      <div class="notes-desktop" style="grid-column:1 / span 2; grid-row:2; display:flex; justify-content:center;">
         <div style="position:relative; margin:40px auto 0; max-width:400px; transform:rotate(-1.5deg); background:#FFF8E7; border:1px solid rgba(58,44,34,.1); padding:22px 24px 18px; box-shadow:0 12px 26px rgba(58,44,34,.16);">
           <div style="position:absolute; top:-14px; left:50%; transform:translateX(-50%) rotate(-3deg); width:92px; height:30px; background:rgba(178,140,92,.55); box-shadow:0 2px 5px rgba(0,0,0,.08);"></div>
-          <div style="font-family:'Caveat',cursive; font-weight:600; font-size:21px; line-height:1.45; color:#4A3A2E;">{{ noteItem.text }}</div>
-          <div style="font-family:'Caveat',cursive; font-size:18px; color:#9E3F26; margin-top:10px; text-align:right;">{{ noteItem.sign }}</div>
+          <div style="font-family:'Caveat',cursive; font-weight:600; font-size:21px; line-height:1.45; color:#4A3A2E;">{{ singleNote.text }}</div>
+          <div style="font-family:'Caveat',cursive; font-size:18px; color:#9E3F26; margin-top:10px; text-align:right;">{{ singleNote.sign }}</div>
         </div>
-      </sc-for>
-    </div>
-    <div class="notes-desktop" style="grid-column:2; grid-row:2;">
-      <sc-for list="{{ rightNotes }}" as="noteItem" hint-placeholder-count="0">
-        <div style="position:relative; margin:40px auto 0; max-width:400px; transform:rotate(-1.5deg); background:#FFF8E7; border:1px solid rgba(58,44,34,.1); padding:22px 24px 18px; box-shadow:0 12px 26px rgba(58,44,34,.16);">
-          <div style="position:absolute; top:-14px; left:50%; transform:translateX(-50%) rotate(-3deg); width:92px; height:30px; background:rgba(178,140,92,.55); box-shadow:0 2px 5px rgba(0,0,0,.08);"></div>
-          <div style="font-family:'Caveat',cursive; font-weight:600; font-size:21px; line-height:1.45; color:#4A3A2E;">{{ noteItem.text }}</div>
-          <div style="font-family:'Caveat',cursive; font-size:18px; color:#9E3F26; margin-top:10px; text-align:right;">{{ noteItem.sign }}</div>
-        </div>
-      </sc-for>
-    </div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ !hasSingleNote }}" hint-placeholder-val="{{ true }}">
+      <div class="notes-desktop" style="grid-column:1; grid-row:2;">
+        <sc-for list="{{ leftNotes }}" as="noteItem" hint-placeholder-count="0">
+          <div style="position:relative; margin:40px auto 0; max-width:400px; transform:rotate(-1.5deg); background:#FFF8E7; border:1px solid rgba(58,44,34,.1); padding:22px 24px 18px; box-shadow:0 12px 26px rgba(58,44,34,.16);">
+            <div style="position:absolute; top:-14px; left:50%; transform:translateX(-50%) rotate(-3deg); width:92px; height:30px; background:rgba(178,140,92,.55); box-shadow:0 2px 5px rgba(0,0,0,.08);"></div>
+            <div style="font-family:'Caveat',cursive; font-weight:600; font-size:21px; line-height:1.45; color:#4A3A2E;">{{ noteItem.text }}</div>
+            <div style="font-family:'Caveat',cursive; font-size:18px; color:#9E3F26; margin-top:10px; text-align:right;">{{ noteItem.sign }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div class="notes-desktop" style="grid-column:2; grid-row:2;">
+        <sc-for list="{{ rightNotes }}" as="noteItem" hint-placeholder-count="0">
+          <div style="position:relative; margin:40px auto 0; max-width:400px; transform:rotate(-1.5deg); background:#FFF8E7; border:1px solid rgba(58,44,34,.1); padding:22px 24px 18px; box-shadow:0 12px 26px rgba(58,44,34,.16);">
+            <div style="position:absolute; top:-14px; left:50%; transform:translateX(-50%) rotate(-3deg); width:92px; height:30px; background:rgba(178,140,92,.55); box-shadow:0 2px 5px rgba(0,0,0,.08);"></div>
+            <div style="font-family:'Caveat',cursive; font-weight:600; font-size:21px; line-height:1.45; color:#4A3A2E;">{{ noteItem.text }}</div>
+            <div style="font-family:'Caveat',cursive; font-size:18px; color:#9E3F26; margin-top:10px; text-align:right;">{{ noteItem.sign }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
   </div>
 
   <!-- notes: on mobile the two columns stack, so notes are shown together here at the end -->
@@ -280,7 +288,7 @@ class Component extends DCLogic {
 
     const DB = window.MARA_RECIPES;
     if (!DB || !this.state.id || !DB.recipes[this.state.id]) {
-      return { ...base, r: {}, ingredients: [], steps: [], notes: [], leftNotes: [], rightNotes: [], hasStackedImg: false, hasFanImg: false, fanPhotos: [], hasFramedImg: false, hasPlainImg: false, pinStyle: {}, provenance: "",
+      return { ...base, r: {}, ingredients: [], steps: [], notes: [], leftNotes: [], rightNotes: [], hasSingleNote: false, singleNote: {}, hasStackedImg: false, hasFanImg: false, fanPhotos: [], hasFramedImg: false, hasPlainImg: false, pinStyle: {}, provenance: "",
         prevHref: "#", nextHref: "#", prevName: "", nextName: "",
         prevStyle: { visibility: "hidden", flex: "1" }, nextStyle: { visibility: "hidden", flex: "1" } };
     }
@@ -293,6 +301,8 @@ class Component extends DCLogic {
     const notes = noteSrcs.filter(n => n && n[lang]).map(n => ({ text: n[lang], sign: n.by === "ale" ? "— Alessandra" : "— Mara" }));
     // Note distribuite tra le due colonne (sinistra sotto gli ingredienti, destra sotto il procedimento)
     // per riempire lo spazio libero che l'elenco ingredienti, più corto, lascia a sinistra.
+    const hasSingleNote = notes.length === 1;
+    const singleNote = hasSingleNote ? notes[0] : {};
     const leftNotes = notes.filter((n, i) => i % 2 === 0);
     const rightNotes = notes.filter((n, i) => i % 2 === 1);
     const rawImg = src.pageImg || src.img;
@@ -339,7 +349,7 @@ class Component extends DCLogic {
       const sub = s.startsWith("§");
       return { text: sub ? s.slice(1).trim() : s, sub, item: !sub };
     });
-    const steps = src.steps[lang].map((s, i) => ({ num: String(i + 1), text: s }));
+    const steps = src.steps[lang].map(s => ({ text: s }));
 
     const provenance = lang === "it"
       ? "Ricetta tratta dalla mail di mamma del " + src.date.it + ". Ho uniformato il formato; il testo della ricetta resta il suo."
@@ -352,7 +362,7 @@ class Component extends DCLogic {
     const hidden = { visibility: "hidden", flex: "1" };
 
     return {
-      ...base, r, ingredients, steps, notes, leftNotes, rightNotes, hasStackedImg, hasFanImg, fanPhotos, hasFramedImg, hasPlainImg, pinStyle, provenance,
+      ...base, r, ingredients, steps, notes, leftNotes, rightNotes, hasSingleNote, singleNote, hasStackedImg, hasFanImg, fanPhotos, hasFramedImg, hasPlainImg, pinStyle, provenance,
       prevHref: prevId ? "Ricetta.dc.html?r=" + prevId : "#",
       nextHref: nextId ? "Ricetta.dc.html?r=" + nextId : "#",
       prevName: prevId ? DB.recipes[prevId].name[lang] : "",

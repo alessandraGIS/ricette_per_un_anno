@@ -221,6 +221,10 @@ class Component extends DCLogic {
         coming: !x.published
       };
     });
+    // Le ricette "in arrivo" (non ancora pubblicate) vanno sempre in fondo all'elenco,
+    // dopo tutte quelle pubblicate; l'ordine relativo all'interno dei due gruppi resta
+    // quello di DB.order.
+    allEntries.sort((a, b) => (a.pub === b.pub) ? 0 : (a.pub ? -1 : 1));
 
     // Ordine di visualizzazione dei filtri (fisso, non legato all'ordine di comparsa
     // usato per i colori); le categorie non elencate qui finiscono in coda.

@@ -6,7 +6,7 @@
 // `illustration: true` su una ricetta con `img`: niente cornice, sfondo trasparente (per immagini create, non foto).
 // `pageImg`: array di foto usato solo nella pagina della ricetta (Ricetta.dc.html), al posto di `img`; la home continua a usare `img`.
 window.MARA_RECIPES = {
-  order: ["pastella", "zucchine", "tortacioccolato", "clafoutis"],
+  order: ["pastella", "zucchine", "tortacioccolato", "clafoutis", "insalatapantesca", "maionese", "insalatarussa"],
   recipes: {
     pastella: {
       published: true,
@@ -86,17 +86,79 @@ window.MARA_RECIPES = {
       time: { it: "Cottura 35-40 min", en: "Baking 35-40 min" },
       photo: { it: "[ foto: il clafoutis alle ciliegie appena sfornato ]", en: "[ photo: the cherry clafoutis fresh out of the oven ]" },
       ing: {
-        it: ["400 g di ciliegie", "3 uova", "80 g di zucchero", "30 g di farina 00", "60 g di fecola di patate", "100 ml di latte", "100 ml di panna fresca", "1 cucchiaio di brandy", "scorza grattugiata di 1 limone non trattato", "1 pizzico di sale", "burro e farina per la pirofila", "zucchero a velo (facoltativo)"],
-        en: ["400 g cherries", "3 eggs", "80 g sugar", "30 g plain flour (type 00)", "60 g potato starch", "100 ml milk", "100 ml fresh cream", "1 tbsp brandy", "grated zest of 1 unwaxed lemon", "1 pinch of salt", "butter and flour for the baking dish", "icing sugar (optional)"]
+        it: ["400 g di ciliegie", "3 uova", "80 g di zucchero", "30 g di farina 00", "60 g di fecola di patate", "100 ml di latte", "100 ml di panna fresca", "1 cucchiaio di brandy", "scorza grattugiata di 1 limone non trattato", "1 pizzico di sale", "burro per la pirofila", "zucchero a velo (facoltativo)"],
+        en: ["400 g cherries", "3 eggs", "80 g sugar", "30 g plain flour (type 00)", "60 g potato starch", "100 ml milk", "100 ml fresh cream", "1 tbsp brandy", "grated zest of 1 unwaxed lemon", "1 pinch of salt", "butter for the baking dish", "icing sugar (optional)"]
       },
       steps: {
-        it: ["Preriscalda il forno a 180 °C in modalità statica.", "Imburra e infarina una pirofila in vetro o ceramica da 24 cm e distribuisci sul fondo le ciliegie denocciolate.", "In una ciotola sbatti le uova con lo zucchero senza montarle. Aggiungi la farina, la fecola, il pizzico di sale e la scorza grattugiata del limone. Versa quindi il latte, la panna e il brandy, mescolando fino a ottenere una pastella liscia e senza grumi.", "Versa delicatamente il composto sulle ciliegie e cuoci in forno per 35-40 minuti, finché la superficie sarà ben dorata e leggermente gonfia.", "Lascia intiepidire prima di servire. Il clafoutis è ottimo sia tiepido sia completamente freddo, con una leggera spolverata di zucchero a velo."],
-        en: ["Preheat the oven to 180 °C conventional setting.", "Butter and flour a 24 cm glass or ceramic baking dish and spread the pitted cherries over the bottom.", "In a bowl, beat the eggs with the sugar without whipping them. Add the flour, the potato starch, the pinch of salt and the grated lemon zest. Then pour in the milk, the cream and the brandy, mixing until you get a smooth, lump-free batter.", "Gently pour the batter over the cherries and bake for 35-40 minutes, until the top is nicely golden and slightly puffed.", "Let it cool slightly before serving. The clafoutis is delicious both warm and completely cold, with a light dusting of icing sugar."]
+        it: ["Preriscalda il forno a 180 °C in modalità statica.", "Imburra una pirofila in vetro o ceramica da 24 cm e distribuisci sul fondo le ciliegie denocciolate.", "In una ciotola sbatti le uova con lo zucchero senza montarle. Aggiungi la farina, la fecola, il pizzico di sale e la scorza grattugiata del limone. Versa quindi il latte, la panna e il brandy, mescolando fino a ottenere una pastella liscia e senza grumi.", "Versa delicatamente il composto sulle ciliegie e cuoci in forno per 35-40 minuti, finché la superficie sarà ben dorata e leggermente gonfia.", "Lascia intiepidire prima di servire. Il clafoutis è ottimo sia tiepido sia completamente freddo, con una leggera spolverata di zucchero a velo."],
+        en: ["Preheat the oven to 180 °C conventional setting.", "Butter a 24 cm glass or ceramic baking dish and spread the pitted cherries over the bottom.", "In a bowl, beat the eggs with the sugar without whipping them. Add the flour, the potato starch, the pinch of salt and the grated lemon zest. Then pour in the milk, the cream and the brandy, mixing until you get a smooth, lump-free batter.", "Gently pour the batter over the cherries and bake for 35-40 minutes, until the top is nicely golden and slightly puffed.", "Let it cool slightly before serving. The clafoutis is delicious both warm and completely cold, with a light dusting of icing sugar."]
       },
       notes: [
         { it: "Questa ricetta si presta anche ad altre varietà di frutta. Utilizza mirtilli, fragole, albicocche e pesche, tagliate a pezzi se necessario, adattando la quantità di zucchero in base alla loro dolcezza.", en: "This recipe also works well with other kinds of fruit. Use blueberries, strawberries, apricots or peaches, cut into pieces if needed, adjusting the amount of sugar to their sweetness." },
-        { it: "Nella ricetta tradizionale francese le ciliegie vengono lasciate con il nocciolo, che durante la cottura rilascia un delicato aroma di mandorla. Qui le abbiamo denocciolate: non vogliamo che i vostri denti corrano rischi inutili.", en: "In the traditional French recipe the cherries are left with their pits, which release a delicate almond aroma during baking. Here we've pitted them: we don't want your teeth taking any unnecessary risks.", by: "ale" }
+        { it: "Nella ricetta tradizionale francese le ciliegie vengono lasciate con il nocciolo, che durante la cottura rilascia un delicato aroma di mandorla. Noi vi consigliamo di denocciolarle perché non vogliamo che i vostri denti corrano rischi inutili.", en: "In the traditional French recipe the cherries are left with their pits, which release a delicate almond aroma during baking. We recommend pitting them, because we don't want your teeth taking any unnecessary risks.", by: "ale" }
       ]
+    },
+    insalatapantesca: {
+      published: true,
+      day: "24", mIt: "agosto", mEn: "August",
+      date: { it: "24 agosto 2004", en: "24 August 2004" },
+      cat: { it: "contorni", en: "side dishes" },
+      name: { it: "Insalata pantesca", en: "Pantesca salad" },
+      meta: { it: "", en: "" },
+      servings: { it: "Per 4 persone", en: "Serves 4" },
+      time: { it: "Riposo 15-20 min", en: "Rest 15-20 min" },
+      img: "photos/pantesca.jpg",
+      photo: { it: "[ foto: l'insalata pantesca appena condita ]", en: "[ photo: the pantesca salad freshly dressed ]" },
+      ing: {
+        it: ["600 g di patate", "500 g di pomodori maturi", "1 cipolla", "1 cucchiaio di capperi", "abbondante basilico fresco (oppure origano, a piacere)", "3-4 cucchiai di olio extravergine di oliva", "1-2 cucchiai di aceto di vino bianco, a piacere", "sale", "pepe"],
+        en: ["600 g potatoes", "500 g ripe tomatoes", "1 onion", "1 tbsp capers", "plenty of fresh basil (or oregano, to taste)", "3-4 tbsp extra-virgin olive oil", "1-2 tbsp white wine vinegar, to taste", "salt", "pepper"]
+      },
+      steps: {
+        it: ["Cuoci le patate. Puoi lessarle intere con la buccia oppure, per velocizzare la preparazione, sbucciarle, tagliarle a cubetti e cuocerle nel forno a microonde fino a quando saranno tenere.", "Lava i pomodori e tagliali a cubetti.", "Affetta finemente la cipolla.", "Riunisci in una terrina le patate, i pomodori, la cipolla, i capperi e abbondante basilico spezzettato a mano. Se preferisci, puoi sostituire il basilico con l'origano.", "Condisci con olio extravergine di oliva, aceto, sale e pepe, quindi mescola delicatamente.", "L'insalata pantesca è ottima servita leggermente fresca e preparata con un po' di anticipo, così che le patate assorbano il condimento e tutti i sapori si amalgamino."],
+        en: ["Cook the potatoes. You can boil them whole with the skin on, or, to save time, peel them, cut them into cubes and microwave them until tender.", "Wash the tomatoes and cut them into cubes.", "Thinly slice the onion.", "Combine the potatoes, tomatoes, onion, capers and plenty of hand-torn basil in a bowl. If you prefer, you can replace the basil with oregano.", "Dress with extra-virgin olive oil, vinegar, salt and pepper, then mix gently.", "Pantesca salad is best served slightly chilled and made a little ahead of time, so the potatoes can soak up the dressing and all the flavours blend together."]
+      },
+      notes: [
+        { it: "Se utilizzi capperi sotto sale, lasciali in ammollo per qualche minuto, quindi sciacquali sotto l'acqua corrente e scolali bene prima di aggiungerli all'insalata.", en: "If using salt-packed capers, soak them for a few minutes, then rinse them under running water and drain well before adding them to the salad.", by: "ale" },
+        { it: "Se lo desideri, puoi aggiungere una manciata di olive denocciolate, presenti in molte versioni tradizionali dell'insalata pantesca.", en: "If you like, you can add a handful of pitted olives, which appear in many traditional versions of pantesca salad.", by: "ale" }
+      ]
+    },
+    maionese: {
+      published: true,
+      day: "05", mIt: "aprile", mEn: "April",
+      date: { it: "5 aprile 2004", en: "5 April 2004" },
+      cat: { it: "preparazioni di base", en: "basics" },
+      name: { it: "Maionese", en: "Mayonnaise" },
+      meta: { it: "", en: "" },
+      time: { it: "Pronta in 2 minuti", en: "Ready in 2 minutes" },
+      img: "photos/maionese.png",
+      photo: { it: "[ foto: la maionese appena fatta in una ciotola ]", en: "[ photo: the freshly made mayonnaise in a bowl ]" },
+      ing: {
+        it: ["1 uovo intero", "210 g di olio di semi", "1 punta di senape", "qualche goccia di succo di limone", "1 pizzico di sale"],
+        en: ["1 whole egg", "210 g vegetable oil", "1 dab of mustard", "a few drops of lemon juice", "1 pinch of salt"]
+      },
+      steps: {
+        it: ["Tira fuori l'uovo dal frigorifero con almeno un'ora di anticipo, così che sia a temperatura ambiente.", "Metti nel bicchiere del frullatore a immersione l'uovo, l'olio, la senape, il succo di limone e il sale.", "Appoggia il frullatore sul fondo del contenitore e azionalo senza muoverlo per circa 40 secondi. Quando la maionese inizia ad addensarsi, solleva lentamente il frullatore fino a incorporare tutto l'olio.", "In circa un minuto e mezzo la maionese sarà pronta."],
+        en: ["Take the egg out of the fridge at least an hour ahead, so it's at room temperature.", "Put the egg, oil, mustard, lemon juice and salt into the immersion blender's jug.", "Rest the blender on the bottom of the container and run it without moving it for about 40 seconds. When the mayonnaise starts to thicken, slowly lift the blender until all the oil is incorporated.", "The mayonnaise will be ready in about a minute and a half."]
+      },
+      note: { it: "La punta di senape è facoltativa, ma aiuta a stabilizzare l'emulsione e dona un gusto più deciso.", en: "The dab of mustard is optional, but it helps stabilise the emulsion and gives a stronger flavour." }
+    },
+    insalatarussa: {
+      published: true,
+      day: "09", mIt: "settembre", mEn: "September",
+      date: { it: "9 settembre 2004", en: "9 September 2004" },
+      cat: { it: "contorni", en: "side dishes" },
+      name: { it: "Insalata russa", en: "Russian salad" },
+      meta: { it: "", en: "" },
+      img: "photos/insalatarussa.png",
+      photo: { it: "[ foto: l'insalata russa in una ciotola ]", en: "[ photo: the Russian salad in a bowl ]" },
+      ing: {
+        it: ["2 carote medie (circa 200 g)", "2 patate medie (circa 350 g)", "100 g di pisellini surgelati", "3-4 cetriolini sottaceto (?)", "150-200 g di maionese (?)", "sale"],
+        en: ["2 medium carrots (about 200 g)", "2 medium potatoes (about 350 g)", "100 g frozen peas", "3-4 pickled gherkins (?)", "150-200 g mayonnaise (?)", "salt"]
+      },
+      steps: {
+        it: ["Pela le patate e le carote e tagliale a cubetti di circa 1 cm, cercando di ottenere pezzi della stessa dimensione.", "Cuoci separatamente patate e carote in acqua leggermente salata fino a quando saranno tenere ma ancora compatte. Scolale con delicatezza.", "Cuoci i pisellini in poca acqua bollente per 3-4 minuti, quindi scolali.", "Distribuisci le verdure su un vassoio o in una ciotola ampia e lasciale raffreddare completamente.", "Taglia i cetriolini a cubetti molto piccoli e uniscili alle verdure.", "Aggiungi un pizzico di sale, incorpora la maionese poco alla volta e mescola delicatamente, in modo da non rompere le patate."],
+        en: ["Peel the potatoes and carrots and cut them into roughly 1 cm cubes, trying to keep the pieces the same size.", "Cook the potatoes and carrots separately in lightly salted water until tender but still firm. Drain them gently.", "Cook the peas in a little boiling water for 3-4 minutes, then drain.", "Spread the vegetables on a tray or in a wide bowl and let them cool completely.", "Cut the gherkins into very small cubes and add them to the vegetables.", "Add a pinch of salt, fold in the mayonnaise a little at a time and mix gently, so as not to break up the potatoes."]
+      }
     }
   }
 };

@@ -206,12 +206,15 @@ class Component extends DCLogic {
     const catColorMap = {};
     seen.forEach((c, i) => { catColorMap[c.key] = CAT_PALETTE[i % CAT_PALETTE.length]; });
 
+    const MONTH_ORDER_IT = ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre"];
+
     const allEntries = DB.order.map((id) => {
       const x = DB.recipes[id];
       const ingText = (x.ing[langKey] || []).map(s => s.replace(/^§/, "")).join(" ");
       return {
         href: x.published ? "Ricetta.dc.html?r=" + id : "#",
         date: x.day + " " + (en ? x.mEn : x.mIt) + " 2004",
+        sortKey: MONTH_ORDER_IT.indexOf(x.mIt) * 100 + parseInt(x.day, 10),
         name: x.name[langKey],
         cat: x.cat[langKey],
         catKey: x.cat.it,
@@ -221,10 +224,9 @@ class Component extends DCLogic {
         coming: !x.published
       };
     });
-    // Le ricette "in arrivo" (non ancora pubblicate) vanno sempre in fondo all'elenco,
-    // dopo tutte quelle pubblicate; l'ordine relativo all'interno dei due gruppi resta
-    // quello di DB.order.
-    allEntries.sort((a, b) => (a.pub === b.pub) ? 0 : (a.pub ? -1 : 1));
+    // Ordine cronologico per data; le ricette "in arrivo" (non ancora pubblicate)
+    // vanno comunque sempre in fondo all'elenco, dopo tutte quelle pubblicate.
+    allEntries.sort((a, b) => (a.pub === b.pub) ? (a.sortKey - b.sortKey) : (a.pub ? -1 : 1));
 
     // Ordine di visualizzazione dei filtri (fisso, non legato all'ordine di comparsa
     // usato per i colori); le categorie non elencate qui finiscono in coda.

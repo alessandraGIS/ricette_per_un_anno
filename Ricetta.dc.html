@@ -231,16 +231,9 @@
     </sc-for>
   </div>
 
-  <!-- prev / next -->
-  <div style="display:flex; justify-content:space-between; gap:16px; padding:36px clamp(28px,5vw,64px) 48px; margin-top:24px; border-top:1px solid rgba(58,44,34,.12);">
-    <a href="{{ prevHref }}" style="{{ prevStyle }}">
-      <div style="font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#9E3F26; margin-bottom:6px;">{{ t.prev }}</div>
-      <div style="font-family:'DM Serif Display',serif; font-size:20px;">{{ prevName }}</div>
-    </a>
-    <a href="{{ nextHref }}" style="{{ nextStyle }}">
-      <div style="font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#9E3F26; margin-bottom:6px;">{{ t.next }}</div>
-      <div style="font-family:'DM Serif Display',serif; font-size:20px;">{{ nextName }}</div>
-    </a>
+  <!-- back to recipes -->
+  <div style="padding:36px clamp(28px,5vw,64px) 48px; margin-top:24px; border-top:1px solid rgba(58,44,34,.12);">
+    <a href="Il diario.dc.html" style="text-decoration:none; font-family:'Courier Prime',monospace; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#9E3F26; border-bottom:1px solid #BE5A34; padding-bottom:3px;">{{ t.back }}</a>
   </div>
 
   <!-- footer -->
@@ -277,8 +270,8 @@ class Component extends DCLogic {
     const active = { fontWeight: 700, color: "#BE5A34", cursor: "pointer", letterSpacing: ".04em" };
     const idle = { fontWeight: 400, color: "#9A836C", cursor: "pointer", letterSpacing: ".04em" };
     const T = {
-      it: { brand: "Le ricette di Mara", navRecipes: "Ricette", navStory: "La nostra storia", navCal: "Calendario", navContact: "Contatti", back: "← Torna alle ricette", ingHead: "Ingredienti", stepHead: "Preparazione", prev: "Ricetta precedente", next: "Ricetta successiva", footer: "Questo sito non usa cookie.", privacyLink: "Privacy e riutilizzo →" },
-      en: { brand: "Mara's Recipes", navRecipes: "Recipes", navStory: "Our story", navCal: "Calendar", navContact: "Contact", back: "← Back to the recipes", ingHead: "Ingredients", stepHead: "Method", prev: "Previous recipe", next: "Next recipe", footer: "This site does not use cookies.", privacyLink: "Privacy & reuse →" }
+      it: { brand: "Le ricette di Mara", navRecipes: "Ricette", navStory: "La nostra storia", navCal: "Calendario", navContact: "Contatti", back: "← Torna al diario delle ricette", ingHead: "Ingredienti", stepHead: "Preparazione", footer: "Questo sito non usa cookie.", privacyLink: "Privacy e riutilizzo →" },
+      en: { brand: "Mara's Recipes", navRecipes: "Recipes", navStory: "Our story", navCal: "Calendar", navContact: "Contact", back: "← Back to the recipe diary", ingHead: "Ingredients", stepHead: "Method", footer: "This site does not use cookies.", privacyLink: "Privacy & reuse →" }
     };
     const base = {
       t: T[lang],
@@ -292,12 +285,9 @@ class Component extends DCLogic {
 
     const DB = window.MARA_RECIPES;
     if (!DB || !this.state.id || !DB.recipes[this.state.id]) {
-      return { ...base, r: {}, ingredients: [], steps: [], notes: [], leftNotes: [], rightNotes: [], hasSingleNote: false, singleNote: {}, hasStackedImg: false, hasFanImg: false, fanPhotos: [], hasFramedImg: false, hasPlainImg: false, pinStyle: {}, provenance: "",
-        prevHref: "#", nextHref: "#", prevName: "", nextName: "",
-        prevStyle: { visibility: "hidden", flex: "1" }, nextStyle: { visibility: "hidden", flex: "1" } };
+      return { ...base, r: {}, ingredients: [], steps: [], notes: [], leftNotes: [], rightNotes: [], hasSingleNote: false, singleNote: {}, hasStackedImg: false, hasFanImg: false, fanPhotos: [], hasFramedImg: false, hasPlainImg: false, pinStyle: {}, provenance: "" };
     }
 
-    const order = DB.order.filter(k => DB.recipes[k] && DB.recipes[k].published);
     const id = this.state.id;
     const src = DB.recipes[id];
 
@@ -380,20 +370,8 @@ class Component extends DCLogic {
       ? "Ricetta tratta dalla mail di mamma del " + src.date.it + ". Ho uniformato il formato; il testo della ricetta resta il suo."
       : "From Mum's email of " + src.date.en + ". I've made the format consistent; the recipe text stays hers.";
 
-    const idx = order.indexOf(id);
-    const prevId = idx > 0 ? order[idx - 1] : null;
-    const nextId = idx >= 0 && idx < order.length - 1 ? order[idx + 1] : null;
-    const linkBase = { textDecoration: "none", color: "#3A2C22", flex: "1", padding: "18px 22px", background: "#FFFDF6", border: "1px solid rgba(58,44,34,.16)" };
-    const hidden = { visibility: "hidden", flex: "1" };
-
     return {
-      ...base, r, ingredients, steps, notes, leftNotes, rightNotes, hasSingleNote, singleNote, hasStackedImg, hasFanImg, fanPhotos, hasFramedImg, hasPlainImg, pinStyle, provenance,
-      prevHref: prevId ? "Ricetta.dc.html?r=" + prevId : "#",
-      nextHref: nextId ? "Ricetta.dc.html?r=" + nextId : "#",
-      prevName: prevId ? DB.recipes[prevId].name[lang] : "",
-      nextName: nextId ? DB.recipes[nextId].name[lang] : "",
-      prevStyle: prevId ? { ...linkBase, textAlign: "left" } : hidden,
-      nextStyle: nextId ? { ...linkBase, textAlign: "right" } : hidden
+      ...base, r, ingredients, steps, notes, leftNotes, rightNotes, hasSingleNote, singleNote, hasStackedImg, hasFanImg, fanPhotos, hasFramedImg, hasPlainImg, pinStyle, provenance
     };
   }
 }

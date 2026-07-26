@@ -6,7 +6,7 @@
 // `illustration: true` su una ricetta con `img`: niente cornice, sfondo trasparente (per immagini create, non foto).
 // `pageImg`: array di foto usato solo nella pagina della ricetta (Ricetta.dc.html), al posto di `img`; la home continua a usare `img`.
 window.MARA_RECIPES = {
-  order: ["pastella", "zucchine", "tortacioccolato", "clafoutis", "insalatapantesca", "maionese", "insalatarussa"],
+  order: ["pastella", "zucchine", "tortacioccolato", "clafoutis", "insalatapantesca", "maionese", "insalatarussa", "risiebisi"],
   recipes: {
     pastella: {
       published: true,
@@ -159,6 +159,31 @@ window.MARA_RECIPES = {
         it: ["Pela le patate e le carote e tagliale a cubetti di circa 1 cm, cercando di ottenere pezzi della stessa dimensione.", "Cuoci separatamente patate e carote in acqua leggermente salata fino a quando saranno tenere ma ancora compatte. Scolale con delicatezza.", "Cuoci i pisellini in poca acqua bollente per 3-4 minuti, quindi scolali.", "Distribuisci le verdure su un vassoio o in una ciotola ampia e lasciale raffreddare completamente.", "Taglia i cetriolini a cubetti molto piccoli e uniscili alle verdure.", "Aggiungi un pizzico di sale, incorpora la maionese poco alla volta e mescola delicatamente, in modo da non rompere le patate."],
         en: ["Peel the potatoes and carrots and cut them into roughly 1 cm cubes, trying to keep the pieces the same size.", "Cook the potatoes and carrots separately in lightly salted water until tender but still firm. Drain them gently.", "Cook the peas in a little boiling water for 3-4 minutes, then drain.", "Spread the vegetables on a tray or in a wide bowl and let them cool completely.", "Cut the gherkins into very small cubes and add them to the vegetables.", "Add a pinch of salt, fold in the mayonnaise a little at a time and mix gently, so as not to break up the potatoes."]
       }
+    },
+    risiebisi: {
+      published: true,
+      day: "06", mIt: "aprile", mEn: "April",
+      date: { it: "6 aprile 2004", en: "6 April 2004" },
+      cat: { it: "primi piatti", en: "first course" },
+      name: { it: "Risi e bisi", en: "Risi e bisi (rice and peas)" },
+      meta: { it: "", en: "" },
+      servings: { it: "Per 4 persone", en: "Serves 4" },
+      time: { it: "Cottura 25-30 minuti", en: "Cooking 25-30 minutes" },
+      img: "photos/risiebisi.png",
+      photo: { it: "[ foto: i risi e bisi appena mantecati ]", en: "[ photo: the freshly creamed risi e bisi ]" },
+      ing: {
+        it: ["700 g di piselli freschi", "350 g di riso Carnaroli", "2 cipollotti freschi oppure 1 cipolla", "2 cucchiai di olio extravergine di oliva", "40 g di burro", "circa 1,2 l di brodo vegetale caldo", "50 g di Parmigiano Reggiano grattugiato", "abbondante prezzemolo tritato", "sale"],
+        en: ["700 g fresh peas", "350 g Carnaroli rice", "2 fresh spring onions or 1 onion", "2 tbsp extra-virgin olive oil", "40 g butter", "about 1.2 l hot vegetable stock", "50 g grated Parmigiano Reggiano", "plenty of chopped parsley", "salt"]
+      },
+      steps: {
+        it: ["Scalda il brodo e mantienilo caldo.", "In una casseruola fai appassire dolcemente i cipollotti affettati con l'olio, senza lasciarli colorire. Aggiungi i piselli, sala leggermente e cuocili per 10-15 minuti, bagnandoli con un po' di brodo caldo.", "Preleva qualche cucchiaio di piselli e frullali subito con uno o due cubetti di ghiaccio: il ghiaccio aiuta a preservarne il colore brillante, mentre la crema renderà il piatto ancora più vellutato. Tieni da parte la crema ottenuta.", "Nel frattempo aggiungi il riso ai piselli e lascialo tostare per circa un minuto, mescolando bene.", "Prosegui la cottura aggiungendo il brodo poco alla volta, man mano che viene assorbito.", "Un minuto prima di terminare la cottura incorpora la crema di piselli e mescola bene. Se necessario aggiungi ancora un po' di brodo caldo: i risi e bisi devono rimanere morbidi e ben all'onda.", "Spegni il fuoco, aggiungi il burro, il Parmigiano e abbondante prezzemolo tritato. Manteca energicamente, lascia riposare un minuto e servi subito."],
+        en: ["Heat the stock and keep it hot.", "In a saucepan, gently sweat the sliced spring onions in the oil, without letting them colour. Add the peas, season lightly with salt and cook for 10-15 minutes, moistening with a little hot stock.", "Set aside a few spoonfuls of peas and blend them right away with one or two ice cubes: the ice helps keep their bright colour, while the purée will make the dish even creamier. Set the purée aside.", "Meanwhile, add the rice to the peas and toast it for about a minute, stirring well.", "Continue cooking, adding the stock a little at a time as it is absorbed.", "A minute before the rice is done, stir in the pea purée and mix well. If needed, add a little more hot stock: risi e bisi should stay soft and loose, almost soupy.", "Turn off the heat, add the butter, the Parmigiano and plenty of chopped parsley. Beat vigorously to cream it, let it rest for a minute and serve immediately."]
+      },
+      notes: [
+        { it: "Fuori stagione, puoi utilizzare pisellini surgelati di buona qualità. In questo caso è sufficiente cuocerli per circa 5 minuti prima di aggiungere il riso. Sconsiglio invece l'utilizzo dei piselli in scatola, che altererebbero consistenza e sapore del piatto.", en: "Out of season, you can use good-quality frozen peas. In that case, about 5 minutes of cooking before adding the rice is enough. I wouldn't recommend canned peas, though, as they would alter the texture and flavour of the dish." },
+        { it: "Risi e bisi è uno dei piatti più rappresentativi della tradizione veneta. A metà strada tra un risotto e una minestra, veniva preparato in primavera con i primi piselli freschi ed è ancora oggi uno dei grandi classici della cucina regionale. Questa versione ne è una nostra rilettura moderna, con la crema di piselli frullati a dare più corpo e colore al piatto.", en: "Risi e bisi is one of the most iconic dishes of Venetian tradition. Halfway between a risotto and a soup, it used to be made in spring with the season's first fresh peas, and it's still one of the great classics of the region's cuisine. This version is our modern take on it, with a blended pea purée adding extra body and colour to the dish.", by: "ale" },
+        { it: "Mio nonno paterno aggiungeva al brodo anche i baccelli dei piselli: rilasciano il loro aroma nel brodo, che a sua volta esalta il sapore di pisello in tutto il risotto. Se vuoi fare lo stesso, utilizza esclusivamente baccelli di piselli biologici, ben lavati.", en: "My paternal grandfather used to add the pea pods to the stock too: they release their aroma into the stock, which in turn brings out the pea flavour throughout the whole risotto. If you'd like to do the same, use only well-washed organic pea pods.", by: "ale" }
+      ]
     }
   }
 };

@@ -152,13 +152,14 @@ window.MARA_RECIPES = {
       img: "photos/insalatarussa.png",
       photo: { it: "[ foto: l'insalata russa in una ciotola ]", en: "[ photo: the Russian salad in a bowl ]" },
       ing: {
-        it: ["2 carote medie (circa 200 g)", "2 patate medie (circa 350 g)", "100 g di pisellini surgelati", "3-4 cetriolini sottaceto (?)", "150-200 g di maionese (?)", "sale"],
-        en: ["2 medium carrots (about 200 g)", "2 medium potatoes (about 350 g)", "100 g frozen peas", "3-4 pickled gherkins (?)", "150-200 g mayonnaise (?)", "salt"]
+        it: ["200 g di carote", "350 g di patate", "100 g di pisellini surgelati", "5-10 cetriolini sottaceto", "150-200 g di maionese", "sale"],
+        en: ["200 g carrots", "350 g potatoes", "100 g frozen peas", "5-10 pickled gherkins", "150-200 g mayonnaise", "salt"]
       },
       steps: {
         it: ["Pela le patate e le carote e tagliale a cubetti di circa 1 cm, cercando di ottenere pezzi della stessa dimensione.", "Cuoci separatamente patate e carote in acqua leggermente salata fino a quando saranno tenere ma ancora compatte. Scolale con delicatezza.", "Cuoci i pisellini in poca acqua bollente per 3-4 minuti, quindi scolali.", "Distribuisci le verdure su un vassoio o in una ciotola ampia e lasciale raffreddare completamente.", "Taglia i cetriolini a cubetti molto piccoli e uniscili alle verdure.", "Aggiungi un pizzico di sale, incorpora la maionese poco alla volta e mescola delicatamente, in modo da non rompere le patate."],
         en: ["Peel the potatoes and carrots and cut them into roughly 1 cm cubes, trying to keep the pieces the same size.", "Cook the potatoes and carrots separately in lightly salted water until tender but still firm. Drain them gently.", "Cook the peas in a little boiling water for 3-4 minutes, then drain.", "Spread the vegetables on a tray or in a wide bowl and let them cool completely.", "Cut the gherkins into very small cubes and add them to the vegetables.", "Add a pinch of salt, fold in the mayonnaise a little at a time and mix gently, so as not to break up the potatoes."]
-      }
+      },
+      note: { it: "Le quantità che trovi qui sono solo indicative: assaggia, fidati del tuo gusto e regolale pure come più ti piace.", en: "The quantities here are just a guide: taste as you go, trust your own palate and feel free to adjust them however you like." }
     },
     risiebisi: {
       published: true,

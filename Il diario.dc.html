@@ -94,17 +94,22 @@
     <div style="font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#A08561; padding:12px 0 4px;">{{ resultLabel }}</div>
 
     <sc-for list="{{ entries }}" as="e" hint-placeholder-count="6">
-      <a href="{{ e.href }}" class="diary-row" style="text-decoration:none; padding:15px 0; border-bottom:1px solid rgba(58,44,34,.12);" style-hover="background:#F5EAD4;">
-        <div style="font-family:'Caveat',cursive; font-size:23px; color:#9E3F26;">{{ e.date }}</div>
-        <div style="font-family:'Spectral',serif; font-size:19px; color:#3A2C22;">{{ e.name }}</div>
-        <div style="display:flex; align-items:center; gap:8px; font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#A08561;"><span style="{{ e.catDotStyle }}"></span>{{ e.cat }}</div>
-        <sc-if value="{{ e.pub }}" hint-placeholder-val="{{ true }}">
+      <sc-if value="{{ e.pub }}" hint-placeholder-val="{{ true }}">
+        <a href="{{ e.href }}" class="diary-row" style="text-decoration:none; padding:15px 0; border-bottom:1px solid rgba(58,44,34,.12); cursor:pointer;" style-hover="background:#F5EAD4;">
+          <div style="font-family:'Caveat',cursive; font-size:23px; color:#9E3F26;">{{ e.date }}</div>
+          <div style="font-family:'Spectral',serif; font-size:19px; color:#3A2C22;">{{ e.name }}</div>
+          <div style="display:flex; align-items:center; gap:8px; font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#A08561;"><span style="{{ e.catDotStyle }}"></span>{{ e.cat }}</div>
           <div style="font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:#6E6B33;">{{ t.published }}</div>
-        </sc-if>
-        <sc-if value="{{ e.coming }}" hint-placeholder-val="{{ false }}">
+        </a>
+      </sc-if>
+      <sc-if value="{{ e.coming }}" hint-placeholder-val="{{ false }}">
+        <div class="diary-row" style="padding:15px 0; border-bottom:1px solid rgba(58,44,34,.12); cursor:default; opacity:.55;">
+          <div style="font-family:'Caveat',cursive; font-size:23px; color:#9E3F26;">{{ e.date }}</div>
+          <div style="font-family:'Spectral',serif; font-size:19px; color:#3A2C22;">{{ e.name }}</div>
+          <div style="display:flex; align-items:center; gap:8px; font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#A08561;"><span style="{{ e.catDotStyle }}"></span>{{ e.cat }}</div>
           <div style="font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:#B9A88F;">{{ t.coming }}</div>
-        </sc-if>
-      </a>
+        </div>
+      </sc-if>
     </sc-for>
     <sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}">
       <div style="padding:44px 0; text-align:center; font-family:'Spectral',serif; font-style:italic; font-size:17px; color:#7A6552;">{{ t.noResults }}</div>

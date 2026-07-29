@@ -6,7 +6,7 @@
 // `illustration: true` su una ricetta con `img`: niente cornice, sfondo trasparente (per immagini create, non foto).
 // `pageImg`: array di foto usato solo nella pagina della ricetta (Ricetta.dc.html), al posto di `img`; la home continua a usare `img`.
 window.MARA_RECIPES = {
-  order: ["pastella", "zucchine", "tortacioccolato", "clafoutis", "insalatapantesca", "maionese", "insalatarussa", "risiebisi"],
+  order: ["pastella", "zucchine", "tortacioccolato", "clafoutis", "insalatapantesca", "maionese", "insalatarussa", "risiebisi", "cotolettepollo"],
   recipes: {
     pastella: {
       published: true,
@@ -160,6 +160,25 @@ window.MARA_RECIPES = {
         en: ["Peel the potatoes and carrots and cut them into roughly 1 cm cubes, trying to keep the pieces the same size.", "Cook the potatoes and carrots separately in lightly salted water until tender but still firm. Drain them gently.", "Cook the peas in a little boiling water for 3-4 minutes, then drain.", "Spread the vegetables on a tray or in a wide bowl and let them cool completely.", "Cut the gherkins into very small cubes and add them to the vegetables.", "Add a pinch of salt, fold in the mayonnaise a little at a time and mix gently, so as not to break up the potatoes."]
       },
       note: { it: "Le quantità che trovi qui sono solo indicative: assaggia, fidati del tuo gusto e regolale pure come più ti piace.", en: "The quantities here are just a guide: taste as you go, trust your own palate and feel free to adjust them however you like." }
+    },
+    cotolettepollo: {
+      published: true,
+      day: "28", mIt: "giugno", mEn: "June",
+      date: { it: "28 giugno 2004", en: "28 June 2004" },
+      cat: { it: "secondi piatti", en: "main course" },
+      name: { it: "Cotolette di pollo estive", en: "Summer chicken cutlets" },
+      meta: { it: "", en: "" },
+      servings: { it: "Per 4 persone", en: "Serves 4" },
+      img: "photos/cotolettepollo.png",
+      photo: { it: "[ foto: le cotolette di pollo con rucola e pomodori ]", en: "[ photo: the chicken cutlets with rocket and tomatoes ]" },
+      ing: {
+        it: ["4 cotolette di pollo (circa 600 g)", "1 uovo", "40 g di farina", "60-70 g di pangrattato", "olio di semi per friggere", "sale", "§ Per il condimento", "80 g di rucola (oppure valeriana)", "250 g di pomodori maturi", "qualche foglia di basilico", "1 piccolo spicchio d'aglio", "olio extravergine d'oliva"],
+        en: ["4 chicken cutlets (about 600 g)", "1 egg", "40 g flour", "60-70 g breadcrumbs", "vegetable oil, for frying", "salt", "§ For the dressing", "80 g rocket (or lamb's lettuce)", "250 g ripe tomatoes", "a few basil leaves", "1 small garlic clove", "extra-virgin olive oil"]
+      },
+      steps: {
+        it: ["Se necessario, batti leggermente le cotolette fino a ottenere uno spessore uniforme.", "Taglia i pomodori a piccoli cubetti e raccoglili in una ciotola con il basilico spezzettato e lo spicchio d'aglio intero. Aggiungi un pizzico di sale e lascia insaporire per una decina di minuti, quindi elimina l'aglio.", "Sbatti l'uovo con una forchetta e aggiungi un pizzico di sale.", "Passa ogni cotoletta prima nella farina, eliminando quella in eccesso, poi nell'uovo e infine nel pangrattato, facendolo aderire bene su entrambi i lati.", "Friggi le cotolette in abbondante olio di semi, poche alla volta, senza sovrapporle, finché saranno ben dorate e completamente cotte.", "Scolale su carta assorbente e salale ancora calde.", "Condisci la rucola con poco sale e un filo di olio extravergine d'oliva e disponila sul fondo del piatto da portata. Adagia sopra le cotolette e completa distribuendo i pomodori con il loro condimento."],
+        en: ["If needed, gently pound the cutlets to an even thickness.", "Cut the tomatoes into small cubes and place them in a bowl with the torn basil and the whole garlic clove. Add a pinch of salt and let them sit for about ten minutes, then remove the garlic.", "Beat the egg with a fork and add a pinch of salt.", "Coat each cutlet first in the flour, shaking off the excess, then in the egg and finally in the breadcrumbs, pressing gently so it sticks well on both sides.", "Fry the cutlets in plenty of vegetable oil, a few at a time without overlapping, until golden and fully cooked.", "Drain them on kitchen paper and salt them while still hot.", "Dress the rocket with a little salt and a drizzle of extra-virgin olive oil and arrange it on the bottom of the serving plate. Lay the cutlets on top and finish by scattering the tomatoes with their dressing over everything."]
+      }
     },
     risiebisi: {
       published: true,

@@ -130,7 +130,7 @@ window.MARA_RECIPES = {
       name: { it: "Maionese", en: "Mayonnaise" },
       meta: { it: "", en: "" },
       time: { it: "Pronta in 2 minuti", en: "Ready in 2 minutes" },
-      img: "photos/maionese.png",
+      img: "photos/maionese.jpg",
       photo: { it: "[ foto: la maionese appena fatta in una ciotola ]", en: "[ photo: the freshly made mayonnaise in a bowl ]" },
       ing: {
         it: ["1 uovo intero", "210 g di olio di semi", "1 punta di senape", "qualche goccia di succo di limone", "1 pizzico di sale"],
@@ -149,7 +149,7 @@ window.MARA_RECIPES = {
       cat: { it: "contorni", en: "side dishes" },
       name: { it: "Insalata russa", en: "Russian salad" },
       meta: { it: "", en: "" },
-      img: "photos/insalatarussa.png",
+      img: "photos/insalatarussa.jpg",
       photo: { it: "[ foto: l'insalata russa in una ciotola ]", en: "[ photo: the Russian salad in a bowl ]" },
       ing: {
         it: ["200 g di carote", "220 g di patate", "100 g di pisellini surgelati", "5-10 cetriolini sottaceto", "150-200 g di maionese", "sale"],
@@ -169,7 +169,7 @@ window.MARA_RECIPES = {
       name: { it: "Cotolette di pollo estive", en: "Summer chicken cutlets" },
       meta: { it: "", en: "" },
       servings: { it: "Per 4 persone", en: "Serves 4" },
-      img: "photos/cotolettepollo.png",
+      img: "photos/cotolettepollo.jpg",
       photo: { it: "[ foto: le cotolette di pollo con rucola e pomodori ]", en: "[ photo: the chicken cutlets with rocket and tomatoes ]" },
       ing: {
         it: ["4 cotolette di pollo (circa 600 g)", "1 uovo", "circa 100 g di pangrattato", "olio di semi per friggere", "sale", "§ Per il condimento", "80 g di rucola (oppure valeriana)", "250 g di pomodori maturi", "qualche foglia di basilico", "1 piccolo spicchio d'aglio", "olio extravergine d'oliva"],
@@ -189,7 +189,7 @@ window.MARA_RECIPES = {
       meta: { it: "", en: "" },
       servings: { it: "Per 4 persone", en: "Serves 4" },
       time: { it: "Cottura 25-30 minuti", en: "Cooking 25-30 minutes" },
-      img: "photos/risiebisi.png",
+      img: "photos/risiebisi.jpg",
       photo: { it: "[ foto: i risi e bisi appena mantecati ]", en: "[ photo: the freshly creamed risi e bisi ]" },
       ing: {
         it: ["700 g di piselli freschi", "350 g di riso Carnaroli", "2 cipollotti freschi oppure 1 cipolla", "2 cucchiai di olio extravergine di oliva", "40 g di burro", "circa 1,2 l di brodo vegetale", "50 g di Parmigiano Reggiano grattugiato", "abbondante prezzemolo tritato", "sale"],

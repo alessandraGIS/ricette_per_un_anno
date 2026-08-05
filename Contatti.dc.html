@@ -112,8 +112,12 @@ class Component extends DCLogic {
   renderVals() {
     const en = this.state.lang === "en";
 
-    // ✏️ Inserisci qui l'indirizzo email definitivo.
-    const EMAIL = "ricettedimara@example.com";
+    // ✏️ Indirizzo email. Scritto in due pezzi e ricomposto qui sotto:
+    // così nel codice della pagina non compare mai per intero e i bot
+    // che raccolgono indirizzi per lo spam non lo trovano.
+    const EMAIL_NOME = "info";
+    const EMAIL_DOMINIO = "lericettedimara.it";
+    const EMAIL = EMAIL_NOME + String.fromCharCode(64) + EMAIL_DOMINIO;
 
     const IT = {
       brand: "Le ricette di Mara",

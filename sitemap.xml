@@ -7,7 +7,7 @@
   <url><loc>https://www.lericettedimara.it/Contatti.dc.html</loc><priority>0.5</priority></url>
   <url><loc>https://www.lericettedimara.it/Privacy.dc.html</loc><priority>0.3</priority></url>
 
-  <!-- le singole ricette -->
+  <!-- le singole ricette (generate automaticamente da recipes.js) -->
   <url><loc>https://www.lericettedimara.it/Ricetta.dc.html?r=pastella</loc><priority>0.8</priority></url>
   <url><loc>https://www.lericettedimara.it/Ricetta.dc.html?r=zucchine</loc><priority>0.8</priority></url>
   <url><loc>https://www.lericettedimara.it/Ricetta.dc.html?r=tortacioccolato</loc><priority>0.8</priority></url>

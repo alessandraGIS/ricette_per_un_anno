@@ -1,0 +1,45 @@
+# Ogni volta che recipes.js viene modificato, questo automatismo rigenera
+# sitemap.xml e la salva nel sito. Serve a far sapere a Google che esiste
+# una ricetta nuova, senza doversene ricordare a mano.
+#
+# Non c'e' niente da installare o da avviare: gira sui computer di GitHub.
+
+name: Aggiorna la sitemap
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "recipes.js"
+      - "scripts/genera-sitemap.js"
+  workflow_dispatch: # permette anche di lanciarlo a mano dalla scheda Actions
+
+permissions:
+  contents: write
+
+jobs:
+  aggiorna:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Scarica il sito
+        uses: actions/checkout@v4
+
+      - name: Prepara Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Rigenera la sitemap
+        run: node scripts/genera-sitemap.js
+
+      - name: Salva la sitemap se e' cambiata
+        run: |
+          if git diff --quiet -- sitemap.xml; then
+            echo "Nessuna ricetta nuova: sitemap gia' aggiornata."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add sitemap.xml
+          git commit -m "sitemap aggiornata automaticamente"
+          git push

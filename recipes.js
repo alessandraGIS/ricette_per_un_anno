@@ -137,8 +137,8 @@ window.MARA_RECIPES = {
         en: ["1 whole egg", "210 g vegetable oil", "1 dab of mustard", "a few drops of lemon juice", "1 pinch of salt"]
       },
       steps: {
-        it: ["Tira fuori l'uovo dal frigorifero con almeno un'ora di anticipo, così che sia a temperatura ambiente.", "Metti nel bicchiere del frullatore a immersione l'uovo, l'olio, la senape, il succo di limone e il sale.", "Appoggia il frullatore sul fondo del contenitore e azionalo senza muoverlo per circa 40 secondi. Quando la maionese inizia ad addensarsi, solleva lentamente il frullatore fino a incorporare tutto l'olio.", "In circa un minuto e mezzo la maionese sarà pronta."],
-        en: ["Take the egg out of the fridge at least an hour ahead, so it's at room temperature.", "Put the egg, oil, mustard, lemon juice and salt into the immersion blender's jug.", "Rest the blender on the bottom of the container and run it without moving it for about 40 seconds. When the mayonnaise starts to thicken, slowly lift the blender until all the oil is incorporated.", "The mayonnaise will be ready in about a minute and a half."]
+        it: ["Tira fuori l'uovo dal frigorifero qualche ora prima, così che sia a temperatura ambiente.", "Metti nel bicchiere del frullatore a immersione l'uovo, l'olio, la senape, il succo di limone e il sale.", "Appoggia il frullatore sul fondo del contenitore e azionalo senza muoverlo per circa 40 secondi. Quando la maionese inizia ad addensarsi, solleva lentamente il frullatore fino a incorporare tutto l'olio.", "In circa un minuto e mezzo la maionese sarà pronta."],
+        en: ["Take the egg out of the fridge a few hours ahead, so it's at room temperature.", "Put the egg, oil, mustard, lemon juice and salt into the immersion blender's jug.", "Rest the blender on the bottom of the container and run it without moving it for about 40 seconds. When the mayonnaise starts to thicken, slowly lift the blender until all the oil is incorporated.", "The mayonnaise will be ready in about a minute and a half."]
       },
       note: { it: "La punta di senape è facoltativa, ma aiuta a stabilizzare l'emulsione e dona un gusto più deciso.", en: "The dab of mustard is optional, but it helps stabilise the emulsion and gives a stronger flavour." }
     },
@@ -152,8 +152,8 @@ window.MARA_RECIPES = {
       img: "photos/insalatarussa.jpg",
       photo: { it: "[ foto: l'insalata russa in una ciotola ]", en: "[ photo: the Russian salad in a bowl ]" },
       ing: {
-        it: ["200 g di carote", "220 g di patate", "100 g di pisellini surgelati", "5-10 cetriolini sottaceto", "150-200 g di maionese", "sale"],
-        en: ["200 g carrots", "220 g potatoes", "100 g frozen peas", "5-10 pickled gherkins", "150-200 g mayonnaise", "salt"]
+        it: ["200 g di carote", "250 g di patate", "100 g di pisellini surgelati", "5-10 cetriolini sottaceto", "150-200 g di maionese", "sale"],
+        en: ["200 g carrots", "250 g potatoes", "100 g frozen peas", "5-10 pickled gherkins", "150-200 g mayonnaise", "salt"]
       },
       steps: {
         it: ["Pela le patate e le carote e tagliale a cubetti di circa 1 cm, cercando di ottenere pezzi della stessa dimensione.", "Cuoci separatamente patate e carote in acqua leggermente salata fino a quando saranno tenere ma ancora compatte. Scolale con delicatezza.", "Cuoci i pisellini in poca acqua bollente per 3-4 minuti, quindi scolali.", "Distribuisci le verdure su un vassoio o in una ciotola ampia e lasciale raffreddare completamente.", "Taglia i cetriolini a cubetti molto piccoli e uniscili alle verdure.", "Aggiungi un pizzico di sale, incorpora la maionese poco alla volta e mescola delicatamente, in modo da non rompere le patate."],

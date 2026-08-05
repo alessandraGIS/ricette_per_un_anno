@@ -14,6 +14,40 @@
 <meta property="og:url" content="https://www.lericettedimara.it/Ricetta.dc.html">
 <meta property="og:image" content="https://www.lericettedimara.it/assets/hero-index.png">
 <meta name="twitter:card" content="summary_large_image">
+<script>
+// Questa stessa pagina mostra tutte le ricette, cambiando solo il pezzetto
+// finale dell'indirizzo (?r=maionese, ?r=risiebisi...). Senza questo blocco
+// Google le vedrebbe come un'unica pagina ripetuta e ne indicizzerebbe una sola.
+// Qui titolo, descrizione e indirizzo ufficiale vengono riscritti in base
+// alla ricetta effettivamente aperta.
+document.addEventListener("DOMContentLoaded", function () {
+  try {
+    var id = new URLSearchParams(location.search).get("r");
+    var DB = window.MARA_RECIPES;
+    if (!id || !DB || !DB.recipes || !DB.recipes[id]) return;
+    var r = DB.recipes[id];
+    var nome = r.name.it;
+    var cat = r.cat.it;
+    var ing = (r.ing.it || []).map(function (s) { return s.replace(/^§/, ""); }).slice(0, 5).join(", ");
+    var titolo = nome + " — Le ricette di Mara";
+    var desc = nome + " (" + cat + "): ingredienti, dosi e preparazione passo passo."
+             + (ing ? " Con " + ing + "." : "");
+    var url = "https://www.lericettedimara.it/Ricetta.dc.html?r=" + id;
+    document.title = titolo;
+    var set = function (sel, attr, val) {
+      var el = document.querySelector(sel);
+      if (el) el.setAttribute(attr, val);
+    };
+    set('meta[name="description"]', "content", desc);
+    set('link[rel="canonical"]', "href", url);
+    set('meta[property="og:title"]', "content", titolo);
+    set('meta[property="og:description"]', "content", desc);
+    set('meta[property="og:url"]', "content", url);
+    var img = r.img || (Array.isArray(r.pageImg) ? r.pageImg[0] : null);
+    if (img) set('meta[property="og:image"]', "content", "https://www.lericettedimara.it/" + img);
+  } catch (e) { /* meglio non bloccare mai la pagina per un meta tag */ }
+});
+</script>
 <script src="./support.js"></script>
 </head>
 <body>

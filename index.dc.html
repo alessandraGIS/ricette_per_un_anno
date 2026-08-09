@@ -191,7 +191,7 @@
       <div style="border-top:1px solid rgba(58,44,34,.12); padding-top:18px; margin-top:18px;">
         <div style="font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A08561; margin-bottom:6px;">{{ t.comingHead }}</div>
         <sc-for list="{{ comingEntries }}" as="ce" hint-placeholder-count="2">
-          <div class="recent-entry" style="padding:14px 0; border-bottom:1px solid rgba(58,44,34,.12);">
+          <div class="recent-entry" style="padding:14px 0; border-bottom:1px solid rgba(58,44,34,.12); cursor:default; opacity:.55;">
             <span style="font-family:'Caveat',cursive; font-size:20px; color:#9E3F26; min-width:110px; display:block;">{{ ce.date }}</span>
             <span style="font-family:'Spectral',serif; font-size:18px; color:#3A2C22;">{{ ce.name }}</span>
           </div>

@@ -6,7 +6,7 @@
 // `illustration: true` su una ricetta con `img`: niente cornice, sfondo trasparente (per immagini create, non foto).
 // `pageImg`: array di foto usato solo nella pagina della ricetta (Ricetta.dc.html), al posto di `img`; la home continua a usare `img`.
 window.MARA_RECIPES = {
-  order: ["pastella", "zucchine", "tortacioccolato", "clafoutis", "insalatapantesca", "maionese", "insalatarussa", "risiebisi", "cotolettepollo"],
+  order: ["pastella", "zucchine", "tortacioccolato", "orecchiettetonno", "clafoutis", "insalatapantesca", "maionese", "insalatarussa", "risiebisi", "cotolettepollo"],
   recipes: {
     pastella: {
       published: true,
@@ -74,6 +74,26 @@ window.MARA_RECIPES = {
         { it: "Puoi accompagnare la torta con panna montata o crema inglese.", en: "You can serve the cake with whipped cream or custard." },
         { it: "In alternativa al bagnomaria, il cioccolato può essere sciolto nel forno a microonde insieme al latte: spezzetta il cioccolato in una ciotola adatta al microonde, aggiungi il latte e scalda a potenza media per 30 secondi alla volta, mescolando bene dopo ogni intervallo, finché non si ottiene una crema liscia e omogenea.", en: "As an alternative to the bain-marie, the chocolate can be melted in the microwave together with the milk: break the chocolate into a microwave-safe bowl, add the milk and heat at medium power for 30 seconds at a time, stirring well after each interval, until you get a smooth, even cream.", by: "ale" }
       ]
+    },
+    orecchiettetonno: {
+      published: true,
+      day: "06", mIt: "febbraio", mEn: "February",
+      date: { it: "6 febbraio 2004", en: "6 February 2004" },
+      cat: { it: "primi piatti", en: "first course" },
+      name: { it: "Orecchiette al tonno, zucchine e scorza di limone", en: "Orecchiette with tuna, courgettes and lemon zest" },
+      meta: { it: "", en: "" },
+      servings: { it: "Per 4 persone", en: "Serves 4" },
+      img: "photos/orecchiettetonno.jpg",
+      photo: { it: "[ foto: le orecchiette al tonno e zucchine nella padella ]", en: "[ photo: the orecchiette with tuna and courgettes in the pan ]" },
+      ing: {
+        it: ["350 g di orecchiette", "300 g di filetto di tonno fresco", "600 g di zucchine", "3 cucchiai di olio", "scorza di 1 limone non trattato", "2 foglie di alloro", "1 spicchio d'aglio", "1 dl di vino bianco", "sale", "pepe", "prezzemolo abbondante"],
+        en: ["350 g orecchiette", "300 g fresh tuna fillet", "600 g courgettes", "3 tbsp oil", "zest of 1 unwaxed lemon", "2 bay leaves", "1 garlic clove", "1 dl white wine", "salt", "pepper", "plenty of parsley"]
+      },
+      steps: {
+        it: ["Metti sul fuoco l'acqua per la pasta e salala.", "Taglia a cubetti il tonno e le zucchine.", "Scalda un cucchiaio d'olio in una padella e fai saltare il tonno a fuoco vivo con l'alloro, giusto un paio di minuti: deve colorirsi fuori e restare rosato dentro. Insaporisci con sale e pepe, bagna con il vino, lascia sfumare e spegni subito. Elimina le foglie di alloro.", "In un'altra padella, abbastanza grande da contenere anche la pasta, scalda due cucchiai d'olio con l'aglio. Quando è imbiondito gettalo via e unisci le zucchine.", "Cuocile 10 minuti a fuoco vivace mescolando ogni tanto, poi sala: salandole solo alla fine restano sode invece di rilasciare acqua.", "Lessa le orecchiette, preleva un mestolo di acqua di cottura e scolale un minuto prima del tempo.", "Falle saltare un minuto nella padella con le zucchine, aggiungendo l'acqua di cottura se serve a legare.", "Togli dal fuoco, unisci il tonno con il suo fondo, la scorza di limone grattugiata e il prezzemolo tritato. Mescola e servi subito."],
+        en: ["Put the pasta water on to boil and salt it.", "Cut the tuna and courgettes into cubes.", "Heat a tablespoon of oil in a pan and sear the tuna over high heat with the bay leaves, just a couple of minutes: it should brown outside and stay pink inside. Season with salt and pepper, splash in the wine, let it evaporate and turn off the heat straight away. Remove the bay leaves.", "In another pan, large enough to hold the pasta too, heat two tablespoons of oil with the garlic. Once golden, discard it and add the courgettes.", "Cook them for 10 minutes over high heat, stirring occasionally, then salt them: salting only at the end keeps them firm instead of releasing water.", "Boil the orecchiette, scoop out a ladle of cooking water and drain them a minute before they're done.", "Toss them for a minute in the pan with the courgettes, adding the cooking water if needed to help bind everything together.", "Remove from the heat, add the tuna with its juices, the grated lemon zest and the chopped parsley. Toss and serve immediately."]
+      },
+      note: { it: "Attenzione a non cuocere troppo il tonno, che diventerebbe secco: deve essere appena scottato.", en: "Be careful not to overcook the tuna, or it will turn dry: it should be just seared.", by: "ale" }
     },
     clafoutis: {
       published: false,
@@ -207,3 +227,4 @@ window.MARA_RECIPES = {
     }
   }
 };
+

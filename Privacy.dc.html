@@ -95,6 +95,16 @@
     </div>
   </div>
 
+  <!-- fotografie -->
+  <div style="padding:16px clamp(28px,5vw,64px) 48px; max-width:680px;">
+    <div style="font-family:'DM Serif Display',serif; font-size:26px; margin-bottom:14px;">{{ t.photosHead }}</div>
+    <div style="font-size:18px; line-height:1.75; color:#4A3A2E;">
+      <sc-for list="{{ t.photosBody }}" as="para" hint-placeholder-count="1">
+        <p style="margin:0 0 18px;">{{ para }}</p>
+      </sc-for>
+    </div>
+  </div>
+
   <!-- back to recipes -->
   <div style="margin:0 clamp(28px,5vw,64px) 60px; display:flex; justify-content:flex-start;">
     <a href="index.dc.html" style="text-decoration:none; background:#BE5A34; color:#FBF4E6; font-family:'Spectral',serif; font-size:15px; letter-spacing:.02em; padding:13px 26px; border-radius:2px;">{{ t.cta }}</a>
@@ -134,6 +144,10 @@ class Component extends DCLogic {
         "Le ricette pubblicate qui nascono dalle mail che Mara ha inviato ad Alessandra: le condividiamo perché in tanti, negli anni, ce le hanno chieste.",
         "Siamo felici se vuoi provarle, cucinarle o ricondividerle altrove — ti chiediamo solo la cortesia di citare la fonte (“Le ricette di Mara”, con un link a questo sito) quando lo fai. Grazie!"
       ],
+      photosHead: "Fotografie",
+      photosBody: [
+        "Alcune fotografie presenti sul sito sono state ritoccate con l'ausilio di strumenti di intelligenza artificiale, esclusivamente per intervenire sullo sfondo, sull'inquadratura o su altri elementi esterni al piatto. L'aspetto delle preparazioni e degli alimenti non è stato modificato tramite intelligenza artificiale."
+      ],
       cta: "Torna alle ricette",
       footer: "Questo sito non usa cookie."
     };
@@ -155,6 +169,10 @@ class Component extends DCLogic {
       reuseBody: [
         "The recipes published here come from the emails Mara sent Alessandra: we share them because, over the years, many people have asked us for them.",
         "We're happy if you'd like to try them, cook them or share them elsewhere — we'd just ask that you credit the source (“Mara's Recipes”, with a link back to this site) when you do. Thank you!"
+      ],
+      photosHead: "Photographs",
+      photosBody: [
+        "Some photographs on this site have been retouched with the help of artificial intelligence tools, solely to adjust the background, framing or other elements outside the dish itself. The appearance of the dishes and food has not been altered using artificial intelligence."
       ],
       cta: "Back to the recipes",
       footer: "This site does not use cookies."

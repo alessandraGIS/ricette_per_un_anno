@@ -428,9 +428,13 @@ class Component extends DCLogic {
       ? (en ? n + " recipes" : n + " ricette")
       : (en ? n + (n === 1 ? " recipe found" : " recipes found") : n + (n === 1 ? " ricetta trovata" : " ricette trovate"));
 
-    // in evidenza: l'ultima ricetta pubblicata
-    const pub = DB.order.filter(id => DB.recipes[id].published);
-    const featId = pub.length ? pub[pub.length - 1] : DB.order[0];
+    // in evidenza: l'ultima ricetta aggiunta al sito. DB.recentOrder segue l'ordine
+    // in cui le ricette vengono via via pubblicate da Alessandra; è un elenco a parte
+    // rispetto a DB.order, che invece segue la cronologia del 2004 (usato da diario
+    // e calendario).
+    const recentSrc = DB.recentOrder || DB.order;
+    const pub = recentSrc.filter(id => DB.recipes[id].published);
+    const featId = pub.length ? pub[pub.length - 1] : recentSrc[0];
     const f = DB.recipes[featId];
 
     const t = {

@@ -227,16 +227,18 @@ document.addEventListener("DOMContentLoaded", function () {
         </sc-for>
       </div>
     </div>
-    <sc-if value="{{ hasSingleNote }}" hint-placeholder-val="{{ false }}">
-      <div class="notes-desktop" style="grid-column:1 / span 2; grid-row:2; display:flex; justify-content:center;">
-        <div style="position:relative; margin:40px auto 0; max-width:400px; transform:rotate(-1.5deg); background:#FFF8E7; border:1px solid rgba(58,44,34,.1); padding:22px 24px 18px; box-shadow:0 12px 26px rgba(58,44,34,.16);">
-          <div style="position:absolute; top:-14px; left:50%; transform:translateX(-50%) rotate(-3deg); width:92px; height:30px; background:rgba(178,140,92,.55); box-shadow:0 2px 5px rgba(0,0,0,.08);"></div>
-          <div style="font-family:'Caveat',cursive; font-weight:600; font-size:21px; line-height:1.45; color:#4A3A2E;">{{ singleNote.text }}</div>
-          <div style="font-family:'Caveat',cursive; font-size:18px; color:#9E3F26; margin-top:10px; text-align:right;">{{ singleNote.sign }}</div>
-        </div>
+    <sc-if value="{{ hasCenteredNotes }}" hint-placeholder-val="{{ false }}">
+      <div class="notes-desktop" style="grid-column:1 / span 2; grid-row:2;">
+        <sc-for list="{{ centeredNotes }}" as="noteItem" hint-placeholder-count="0">
+          <div style="{{ noteItem.style }}">
+            <div style="position:absolute; top:-14px; left:50%; transform:translateX(-50%) rotate(-3deg); width:92px; height:30px; background:rgba(178,140,92,.55); box-shadow:0 2px 5px rgba(0,0,0,.08);"></div>
+            <div style="font-family:'Caveat',cursive; font-weight:600; font-size:21px; line-height:1.45; color:#4A3A2E;">{{ noteItem.text }}</div>
+            <div style="font-family:'Caveat',cursive; font-size:18px; color:#9E3F26; margin-top:10px; text-align:right;">{{ noteItem.sign }}</div>
+          </div>
+        </sc-for>
       </div>
     </sc-if>
-    <sc-if value="{{ !hasSingleNote }}" hint-placeholder-val="{{ true }}">
+    <sc-if value="{{ !hasCenteredNotes }}" hint-placeholder-val="{{ true }}">
       <div class="notes-desktop" style="grid-column:1; grid-row:2;">
         <sc-for list="{{ leftNotes }}" as="cluster" hint-placeholder-count="0">
           <sc-for list="{{ cluster.items }}" as="noteItem" hint-placeholder-count="0">
@@ -327,7 +329,7 @@ class Component extends DCLogic {
 
     const DB = window.MARA_RECIPES;
     if (!DB || !this.state.id || !DB.recipes[this.state.id]) {
-      return { ...base, r: {}, ingredients: [], steps: [], notes: [], leftNotes: [], rightNotes: [], hasSingleNote: false, singleNote: {}, hasStackedImg: false, hasFanImg: false, fanPhotos: [], hasFramedImg: false, hasPlainImg: false, pinStyle: {}, provenance: "" };
+      return { ...base, r: {}, ingredients: [], steps: [], notes: [], leftNotes: [], rightNotes: [], hasCenteredNotes: false, centeredNotes: [], hasStackedImg: false, hasFanImg: false, fanPhotos: [], hasFramedImg: false, hasPlainImg: false, pinStyle: {}, provenance: "" };
     }
 
     const id = this.state.id;
@@ -335,8 +337,8 @@ class Component extends DCLogic {
 
     const noteSrcs = src.notes ? src.notes : (src.note ? [src.note] : []);
     const notes = noteSrcs.filter(n => n && n[lang]).map(n => ({ text: n[lang], sign: n.by === "ale" ? "— Ale" : "— Mara", by: n.by || "mara" }));
-    const hasSingleNote = notes.length === 1;
-    const singleNote = hasSingleNote ? notes[0] : {};
+    // Se a commentare e' una sola persona (un unico mazzetto), le note vanno
+    // centrate sotto le due colonne invece di essere alternate a destra e sinistra.
     // Note consecutive della stessa persona vengono raggruppate in un unico "mazzetto"
     // (leggermente sovrapposte, come fogliettini impilati); mazzetti diversi si alternano
     // tra le due colonne (sinistra sotto gli ingredienti, destra sotto il procedimento)
@@ -360,8 +362,10 @@ class Component extends DCLogic {
         }
       }));
     });
-    const leftNotes = noteClusters.filter((c, i) => i % 2 === 0);
-    const rightNotes = noteClusters.filter((c, i) => i % 2 === 1);
+    const hasCenteredNotes = noteClusters.length === 1;
+    const centeredNotes = hasCenteredNotes ? noteClusters[0].items : [];
+    const leftNotes = hasCenteredNotes ? [] : noteClusters.filter((c, i) => i % 2 === 0);
+    const rightNotes = hasCenteredNotes ? [] : noteClusters.filter((c, i) => i % 2 === 1);
     const rawImg = src.pageImg || src.img;
     const imgs = Array.isArray(rawImg) ? rawImg.filter(Boolean) : (rawImg ? [rawImg] : []);
     const r = { date: src.date[lang], cat: src.cat[lang], name: src.name[lang], meta: src.meta[lang], photo: src.photo[lang], img: imgs[0] || "", img2: imgs[1] || "", servings: src.servings ? src.servings[lang] : "", time: src.time ? src.time[lang] : "" };
@@ -413,7 +417,7 @@ class Component extends DCLogic {
       : "From Mum's email of " + src.date.en + ". I've made the format consistent; the recipe text stays hers.";
 
     return {
-      ...base, r, ingredients, steps, notes, leftNotes, rightNotes, hasSingleNote, singleNote, hasStackedImg, hasFanImg, fanPhotos, hasFramedImg, hasPlainImg, pinStyle, provenance
+      ...base, r, ingredients, steps, notes, leftNotes, rightNotes, hasCenteredNotes, centeredNotes, hasStackedImg, hasFanImg, fanPhotos, hasFramedImg, hasPlainImg, pinStyle, provenance
     };
   }
 }

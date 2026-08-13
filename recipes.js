@@ -8,8 +8,8 @@
 // `illustration: true` su una ricetta con `img`: niente cornice, sfondo trasparente (per immagini create, non foto).
 // `pageImg`: array di foto usato solo nella pagina della ricetta (Ricetta.dc.html), al posto di `img`; la home continua a usare `img`.
 window.MARA_RECIPES = {
-  order: ["pastella", "zucchine", "tortacioccolato", "orecchiettetonno", "clafoutis", "insalatapantesca", "maionese", "insalatarussa", "risiebisi", "cotolettepollo"],
-  recentOrder: ["pastella", "zucchine", "tortacioccolato", "clafoutis", "insalatapantesca", "maionese", "insalatarussa", "risiebisi", "cotolettepollo", "orecchiettetonno"],
+  order: ["pastella", "zucchine", "tortacioccolato", "orecchiettetonno", "tzatziki", "clafoutis", "insalatapantesca", "maionese", "insalatarussa", "risiebisi", "cotolettepollo"],
+  recentOrder: ["pastella", "zucchine", "tortacioccolato", "clafoutis", "insalatapantesca", "maionese", "insalatarussa", "risiebisi", "cotolettepollo", "orecchiettetonno", "tzatziki"],
   recipes: {
     pastella: {
       published: true,
@@ -97,6 +97,29 @@ window.MARA_RECIPES = {
         en: ["Put the pasta water on to boil and salt it.", "Cut the tuna and courgettes into cubes.", "Heat a tablespoon of oil in a pan and sear the tuna over high heat with the bay leaves, just a couple of minutes: it should brown outside and stay pink inside.", "Season with salt and pepper, splash in the wine, let it evaporate and turn off the heat straight away. Remove the bay leaves.", "In another pan, large enough to hold the pasta too, heat two tablespoons of oil with the garlic. Once golden, discard it and add the courgettes.", "Cook them for 10 minutes over high heat, stirring occasionally, then salt them: salting only at the end keeps them firm instead of releasing water.", "Boil the orecchiette, scoop out a ladle of cooking water and drain them a minute before they're done.", "Toss them for a minute in the pan with the courgettes, adding the cooking water if needed to help bind everything together.", "Remove from the heat, add the tuna with its juices, the grated lemon zest and the chopped parsley. Toss, finish with a drizzle of raw extra-virgin olive oil and serve immediately."]
       },
       note: { it: "Attenzione a non cuocere troppo il tonno, che diventerebbe secco: deve essere appena scottato.", en: "Be careful not to overcook the tuna, or it will turn dry: it should be just seared.", by: "ale" }
+    },
+    tzatziki: {
+      published: true,
+      day: "06", mIt: "luglio", mEn: "July",
+      date: { it: "6 luglio 2004", en: "6 July 2004" },
+      cat: { it: "salse", en: "sauces" },
+      name: { it: "Tzatziki", en: "Tzatziki" },
+      meta: { it: "", en: "" },
+      time: { it: "Riposo 1 h", en: "Rest 1 h" },
+      img: "photos/tzatziki.jpg",
+      photo: { it: "[ foto: lo tzatziki nella ciotola con le foglie di menta ]", en: "[ photo: the tzatziki in a bowl with mint leaves ]" },
+      ing: {
+        it: ["300 g di yogurt greco", "200 g di cetriolo", "1 spicchio d'aglio", "menta fresca", "aneto fresco o, in alternativa, finocchietto selvatico fresco", "olio extravergine d'oliva", "sale"],
+        en: ["300 g Greek yogurt", "200 g cucumber", "1 garlic clove", "fresh mint", "fresh dill or, alternatively, fresh wild fennel", "extra-virgin olive oil", "salt"]
+      },
+      steps: {
+        it: ["Grattugia il cetriolo con la buccia, usando i fori grossi della grattugia. Salalo e lascialo riposare 15 minuti in un colino.", "Strizzalo bene con le mani: deve perdere tutta l'acqua, altrimenti la salsa viene liquida.", "Schiaccia l'aglio e mescolalo allo yogurt.", "Unisci il cetriolo strizzato e le erbe tritate.", "Mescola, assaggia e regola di sale.", "Copri e lascia riposare in frigorifero almeno un'ora, perché i sapori si leghino.", "Al momento di servire completa con un filo d'olio extravergine a crudo."],
+        en: ["Grate the unpeeled cucumber on the coarse side of a grater. Salt it and let it drain in a colander for 15 minutes.", "Squeeze it well with your hands: it has to lose all its water, otherwise the sauce turns runny.", "Crush the garlic and stir it into the yogurt.", "Add the squeezed cucumber and the chopped herbs.", "Mix, taste and adjust the salt.", "Cover and chill for at least an hour, so the flavours come together.", "Just before serving, finish with a drizzle of raw extra-virgin olive oil."]
+      },
+      notes: [
+        { it: "Io aggiungo anche un cucchiaio di aceto di vino bianco insieme alle erbe: dà una punta di acidità che a me piace molto.", en: "I also add a tablespoon of white wine vinegar along with the herbs: it gives a touch of acidity that I really like.", by: "ale" },
+        { it: "Questa salsa greca è per noi indissolubilmente legata all'isola di Skyros, dove nel 1987, quando ero ancora una ragazzina, facemmo una vacanza meravigliosa e l'assaggiammo per la prima volta. A Skyros non siamo più tornate, ma da allora lo tzatziki è spesso sulla nostra tavola.", en: "For us this Greek sauce is inseparable from the island of Skyros, where in 1987, when I was still a girl, we had a wonderful holiday and tasted it for the first time. We never went back to Skyros, but since then tzatziki has often been on our table.", by: "ale" }
+      ]
     },
     clafoutis: {
       published: false,

@@ -237,9 +237,9 @@ class Component extends DCLogic {
         coming: !x.published
       };
     });
-    // Ordine cronologico per data; le ricette "in arrivo" (non ancora pubblicate)
-    // vanno comunque sempre in fondo all'elenco, dopo tutte quelle pubblicate.
-    allEntries.sort((a, b) => (a.pub === b.pub) ? (a.sortKey - b.sortKey) : (a.pub ? -1 : 1));
+    // Ordine cronologico per data, comprese le ricette "in arrivo": restano al
+    // loro posto nel calendario del 2004 invece di essere spinte in fondo.
+    allEntries.sort((a, b) => a.sortKey - b.sortKey);
 
     // Ordine di visualizzazione dei filtri (fisso, non legato all'ordine di comparsa
     // usato per i colori); le categorie non elencate qui finiscono in coda.

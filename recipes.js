@@ -172,7 +172,7 @@ window.MARA_RECIPES = {
       published: true,
       day: "05", mIt: "aprile", mEn: "April",
       date: { it: "5 aprile 2004", en: "5 April 2004" },
-      cat: { it: "preparazioni di base", en: "basics" },
+      cat: { it: "salse", en: "sauces" },
       name: { it: "Maionese", en: "Mayonnaise" },
       meta: { it: "", en: "" },
       time: { it: "Pronta in 2 minuti", en: "Ready in 2 minutes" },

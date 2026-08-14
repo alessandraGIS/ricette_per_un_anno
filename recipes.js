@@ -8,7 +8,7 @@
 // `illustration: true` su una ricetta con `img`: niente cornice, sfondo trasparente (per immagini create, non foto).
 // `pageImg`: array di foto usato solo nella pagina della ricetta (Ricetta.dc.html), al posto di `img`; la home continua a usare `img`.
 window.MARA_RECIPES = {
-  order: ["tortacioccolato", "orecchiettetonno", "caponatabastarda", "pastella", "maionese", "risiebisi", "zucchine", "cotolettepollo", "tzatziki", "insalatapantesca", "insalatarussa"],
+  order: ["tortacioccolato", "orecchiettetonno", "caponatabastarda", "pastella", "maionese", "risiebisi", "zucchine", "cotolettepollo", "tzatziki", "clafoutis", "insalatapantesca", "insalatarussa"],
   recentOrder: ["pastella", "zucchine", "tortacioccolato", "insalatapantesca", "maionese", "insalatarussa", "risiebisi", "cotolettepollo", "orecchiettetonno", "tzatziki", "caponatabastarda"],
   recipes: {
     pastella: {
@@ -126,15 +126,15 @@ window.MARA_RECIPES = {
       day: "22", mIt: "febbraio", mEn: "February",
       date: { it: "22 febbraio 2004", en: "22 February 2004" },
       cat: { it: "contorni", en: "side dishes" },
-      name: { it: "Caponata bastarda", en: "Cheat's caponata" },
+      name: { it: "Caponata bastarda", en: "Caponata bastarda (cheat's caponata)" },
       meta: { it: "", en: "" },
       servings: { it: "Per una teglia rettangolare da 40 x 25 cm", en: "For a 40 x 25 cm rectangular tin" },
       time: { it: "Cottura circa 1 h", en: "Baking about 1 h" },
       img: "photos/caponatabastarda.jpg",
-      photo: { it: "[ foto: la caponata bastarda nel piatto da portata ]", en: "[ photo: the cheat's caponata on the serving dish ]" },
+      photo: { it: "[ foto: la caponata bastarda nel piatto da portata ]", en: "[ photo: the caponata bastarda on the serving dish ]" },
       ing: {
-        it: ["800 g di melanzane (4 lunghe se di stagione, oppure 3 tonde fuori stagione)", "200 g di sedano (circa 4 coste)", "150 g di cipolla", "300 g di pomodori piccadilly (o datterini o ciliegini)", "50 g di uvetta, meglio se cilena", "30 g di pinoli", "30 g di capperi sott'aceto", "50 g di olive denocciolate (facoltative)", "2 cucchiai di zucchero", "2 cucchiai di aceto", "qualche foglia di basilico", "60 g di olio extravergine d'oliva", "sale"],
-        en: ["800 g aubergines (4 long ones in season, or 3 round ones out of season)", "200 g celery (about 4 sticks)", "150 g onion", "300 g piccadilly tomatoes (or datterini or cherry tomatoes)", "50 g raisins, preferably Chilean", "30 g pine nuts", "30 g capers in vinegar", "50 g pitted olives (optional)", "2 tbsp sugar", "2 tbsp vinegar", "a few basil leaves", "60 g extra-virgin olive oil", "salt"]
+        it: ["800 g di melanzane lunghe, se di stagione, o in alternativa tonde", "200 g di sedano", "150 g di cipolla", "300 g di pomodori piccadilly (o datterini o ciliegini)", "50 g di uvetta, meglio se cilena", "30 g di pinoli", "30 g di capperi sott'aceto", "50 g di olive denocciolate (facoltative)", "2 cucchiai di zucchero", "2 cucchiai di aceto", "qualche foglia di basilico", "60 g di olio extravergine d'oliva", "sale"],
+        en: ["800 g long aubergines, if in season, or round ones as an alternative", "200 g celery", "150 g onion", "300 g piccadilly tomatoes (or datterini or cherry tomatoes)", "50 g raisins, preferably Chilean", "30 g pine nuts", "30 g capers in vinegar", "50 g pitted olives (optional)", "2 tbsp sugar", "2 tbsp vinegar", "a few basil leaves", "60 g extra-virgin olive oil", "salt"]
       },
       steps: {
         it: ["Taglia le melanzane a tocchetti, trita grossolanamente la cipolla, taglia il sedano a pezzettini e i pomodori a metà.", "Mettili in una pirofila unta d'olio insieme all'uvetta, ai pinoli, ai capperi, alle olive se ti piacciono, al sale, allo zucchero, all'aceto e al basilico.", "Aggiungi l'olio rimasto e mescola bene.", "Metti in forno a circa 180°C e mescola ogni tanto: dopo circa un'ora la caponata dovrebbe essere pronta."],

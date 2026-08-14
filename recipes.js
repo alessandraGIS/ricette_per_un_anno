@@ -9,7 +9,7 @@
 // `pageImg`: array di foto usato solo nella pagina della ricetta (Ricetta.dc.html), al posto di `img`; la home continua a usare `img`.
 window.MARA_RECIPES = {
   order: ["tortacioccolato", "orecchiettetonno", "caponatabastarda", "pastella", "maionese", "risiebisi", "zucchine", "cotolettepollo", "tzatziki", "insalatapantesca", "insalatarussa"],
-  recentOrder: ["pastella", "zucchine", "tortacioccolato", "insalatapantesca", "maionese", "insalatarussa", "risiebisi", "cotolettepollo", "orecchiettetonno", "tzatziki"],
+  recentOrder: ["pastella", "zucchine", "tortacioccolato", "insalatapantesca", "maionese", "insalatarussa", "risiebisi", "cotolettepollo", "orecchiettetonno", "tzatziki", "caponatabastarda"],
   recipes: {
     pastella: {
       published: true,
@@ -122,7 +122,7 @@ window.MARA_RECIPES = {
       ]
     },
     caponatabastarda: {
-      published: false,
+      published: true,
       day: "22", mIt: "febbraio", mEn: "February",
       date: { it: "22 febbraio 2004", en: "22 February 2004" },
       cat: { it: "contorni", en: "side dishes" },
@@ -130,6 +130,7 @@ window.MARA_RECIPES = {
       meta: { it: "", en: "" },
       servings: { it: "Per una teglia rettangolare da 40 x 25 cm", en: "For a 40 x 25 cm rectangular tin" },
       time: { it: "Cottura circa 1 h", en: "Baking about 1 h" },
+      img: "photos/caponatabastarda.jpg",
       photo: { it: "[ foto: la caponata bastarda nel piatto da portata ]", en: "[ photo: the cheat's caponata on the serving dish ]" },
       ing: {
         it: ["800 g di melanzane (4 lunghe se di stagione, oppure 3 tonde fuori stagione)", "200 g di sedano (circa 4 coste)", "150 g di cipolla", "300 g di pomodori piccadilly (o datterini o ciliegini)", "50 g di uvetta, meglio se cilena", "30 g di pinoli", "30 g di capperi sott'aceto", "50 g di olive denocciolate (facoltative)", "2 cucchiai di zucchero", "2 cucchiai di aceto", "qualche foglia di basilico", "60 g di olio extravergine d'oliva", "sale"],

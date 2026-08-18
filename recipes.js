@@ -8,8 +8,8 @@
 // `illustration: true` su una ricetta con `img`: niente cornice, sfondo trasparente (per immagini create, non foto).
 // `pageImg`: array di foto usato solo nella pagina della ricetta (Ricetta.dc.html), al posto di `img`; la home continua a usare `img`.
 window.MARA_RECIPES = {
-  order: ["tortacioccolato", "orecchiettetonno", "caponatabastarda", "pastella", "maionese", "risiebisi", "zucchine", "cotolettepollo", "tzatziki", "clafoutis", "insalatapantesca", "insalatarussa"],
-  recentOrder: ["pastella", "zucchine", "tortacioccolato", "insalatapantesca", "maionese", "insalatarussa", "risiebisi", "cotolettepollo", "orecchiettetonno", "tzatziki", "caponatabastarda"],
+  order: ["tortacioccolato", "orecchiettetonno", "caponatabastarda", "pastella", "maionese", "risiebisi", "zucchine", "cotolettepollo", "tzatziki", "clafoutis", "pestotrapanese", "insalatapantesca", "insalatarussa"],
+  recentOrder: ["pastella", "zucchine", "tortacioccolato", "insalatapantesca", "maionese", "insalatarussa", "risiebisi", "cotolettepollo", "orecchiettetonno", "tzatziki", "caponatabastarda", "pestotrapanese"],
   recipes: {
     pastella: {
       published: true,
@@ -145,6 +145,26 @@ window.MARA_RECIPES = {
         { it: "D'estate uso le melanzane lunghe e tengo la buccia, che è sottile e tenera e aiuta i tocchetti a non sfaldarsi durante l'ora di forno; d'inverno uso quelle tonde, che hanno la buccia più spessa e coriacea, e le sbuccio. Le olive invece io non le metto, perché, a mio gusto personale, si sentono troppo.", en: "In summer I use the long aubergines and keep the skin on: it is thin and tender and helps the pieces hold together through the hour in the oven; in winter I use the round ones, whose skin is thicker and tougher, and I peel them. The olives I leave out, because to my own taste they come through too strongly." }
       ]
     },
+    pestotrapanese: {
+      published: true,
+      day: "18", mIt: "luglio", mEn: "July",
+      date: { it: "18 luglio 2004", en: "18 July 2004" },
+      cat: { it: "primi piatti", en: "first course" },
+      name: { it: "Pasta al pesto trapanese", en: "Pasta with Trapani pesto" },
+      meta: { it: "", en: "" },
+      servings: { it: "Per 4 persone", en: "Serves 4" },
+      img: "photos/pestotrapanese.jpg",
+      photo: { it: "[ foto: la pasta al pesto trapanese nel piatto ]", en: "[ photo: the pasta with Trapani pesto on the plate ]" },
+      ing: {
+        it: ["320 g di busiate o caserecce", "1 spicchio d'aglio", "60 g di mandorle spellate", "50 g di pecorino romano", "300 g di pomodori piccadilly o perini maturi", "20 g di basilico", "60 g di olio extravergine d'oliva"],
+        en: ["320 g busiate or caserecce", "1 garlic clove", "60 g blanched almonds", "50 g pecorino romano", "300 g piccadilly or ripe plum tomatoes", "20 g basil", "60 g extra-virgin olive oil"]
+      },
+      steps: {
+        it: ["Taglia i pomodori a metà ed elimina i semi.", "Grattugia il pecorino.", "Metti nel mixer l'aglio, le mandorle, il pecorino, i pomodori, il basilico e l'olio e aziona a scatti brevi, per evitare di scaldare la salsa: non frullare troppo a lungo, non deve venire liscia ma restare granulosa. Tradizionalmente si prepara nel mortaio.", "Cuoci la pasta in abbondante acqua salata.", "Recupera un po' di acqua di cottura e scola la pasta.", "Condiscila con il pesto, aggiungendo solo l'acqua che basta ad amalgamare il condimento."],
+        en: ["Halve the tomatoes and remove the seeds.", "Grate the pecorino.", "Put the garlic, the almonds, the pecorino, the tomatoes, the basil and the oil in a food processor and pulse in short bursts, so the sauce doesn't warm up: don't blend too long, it shouldn't turn smooth but stay grainy. Traditionally it is made in a mortar.", "Cook the pasta in plenty of salted water.", "Save a little of the cooking water and drain the pasta.", "Dress it with the pesto, adding only as much water as you need to bring the sauce together."]
+      },
+      note: { it: "Tradizionalmente il pesto trapanese si serve con le busiate, che però quassù nel profondo nord non sono facilissime da trovare: sostituiscile pure con la pasta che preferisci.", en: "Traditionally pesto trapanese is served with busiate, which up here in the far north of Italy are not easy to find: feel free to use whatever pasta you like.", by: "ale" }
+    },
     clafoutis: {
       published: false,
       day: "10", mIt: "luglio", mEn: "July",
@@ -165,7 +185,7 @@ window.MARA_RECIPES = {
       },
       notes: [
         { it: "Questa ricetta si presta anche ad altre varietà di frutta. Utilizza mirtilli, fragole, albicocche e pesche, tagliate a pezzi se necessario, adattando la quantità di zucchero in base alla loro dolcezza.", en: "This recipe also works well with other kinds of fruit. Use blueberries, strawberries, apricots or peaches, cut into pieces if needed, adjusting the amount of sugar to their sweetness." },
-        { it: "Nella ricetta tradizionale francese le ciliegie vengono lasciate con il nocciolo, che durante la cottura rilascia un delicato aroma di mandorla. Noi vi consigliamo di denocciolarle perché non vogliamo che i vostri denti corrano rischi inutili.", en: "In the traditional French recipe the cherries are left with their pits, which release a delicate almond aroma during baking. We recommend pitting them, because we don't want your teeth taking any unnecessary risks.", by: "ale" }
+        { it: "Nella ricetta tradizionale francese le ciliegie vengono lasciate con il nocciolo, che durante la cottura rilascia un delicato aroma di mandorla. Noi ti consigliamo di denocciolarle perché non vogliamo che i tuoi denti corrano rischi inutili.", en: "In the traditional French recipe the cherries are left with their pits, which release a delicate almond aroma during baking. We recommend pitting them, because we don't want your teeth taking any unnecessary risks.", by: "ale" }
       ]
     },
     insalatapantesca: {

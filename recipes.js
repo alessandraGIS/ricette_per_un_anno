@@ -8,8 +8,8 @@
 // `illustration: true` su una ricetta con `img`: niente cornice, sfondo trasparente (per immagini create, non foto).
 // `pageImg`: array di foto usato solo nella pagina della ricetta (Ricetta.dc.html), al posto di `img`; la home continua a usare `img`.
 window.MARA_RECIPES = {
-  order: ["tortacioccolato", "orecchiettetonno", "caponatabastarda", "pastella", "maionese", "risiebisi", "zucchine", "cotolettepollo", "tzatziki", "clafoutis", "pestotrapanese", "insalatapantesca", "insalatarussa"],
-  recentOrder: ["pastella", "zucchine", "tortacioccolato", "insalatapantesca", "maionese", "insalatarussa", "risiebisi", "cotolettepollo", "orecchiettetonno", "tzatziki", "caponatabastarda", "pestotrapanese"],
+  order: ["tortacioccolato", "orecchiettetonno", "caponatabastarda", "pastella", "maionese", "risiebisi", "zucchine", "cotolettepollo", "tzatziki", "clafoutis", "pestotrapanese", "pescheripiene", "insalatapantesca", "insalatarussa"],
+  recentOrder: ["pastella", "zucchine", "tortacioccolato", "insalatapantesca", "maionese", "insalatarussa", "risiebisi", "cotolettepollo", "orecchiettetonno", "tzatziki", "caponatabastarda", "pestotrapanese", "pescheripiene"],
   recipes: {
     pastella: {
       published: true,
@@ -144,6 +144,26 @@ window.MARA_RECIPES = {
         { it: "\"Bastarda\" perché è una versione semplificata e un po' blasfema della ricetta tradizionale. Velocissima da fare: si inforna tutto insieme, basta mescolare ogni tanto e, soprattutto, non si frigge.", en: "\"Bastarda\" because it's a simplified and slightly blasphemous version of the traditional recipe. Very quick to make: everything goes into the oven together, you just stir now and then and, above all, nothing is fried." },
         { it: "D'estate uso le melanzane lunghe e tengo la buccia, che è sottile e tenera e aiuta i tocchetti a non sfaldarsi durante l'ora di forno; d'inverno uso quelle tonde, che hanno la buccia più spessa e coriacea, e le sbuccio. Le olive invece io non le metto, perché, a mio gusto personale, si sentono troppo.", en: "In summer I use the long aubergines and keep the skin on: it is thin and tender and helps the pieces hold together through the hour in the oven; in winter I use the round ones, whose skin is thicker and tougher, and I peel them. The olives I leave out, because to my own taste they come through too strongly." }
       ]
+    },
+    pescheripiene: {
+      published: true,
+      day: "27", mIt: "luglio", mEn: "July",
+      date: { it: "27 luglio 2004", en: "27 July 2004" },
+      cat: { it: "dolci", en: "desserts" },
+      name: { it: "Pesche ripiene", en: "Stuffed peaches" },
+      meta: { it: "", en: "" },
+      time: { it: "Cottura 20-25 min", en: "Cooking 20-25 min" },
+      img: "photos/pescheripiene.jpg",
+      photo: { it: "[ foto: le pesche ripiene con il loro sughetto e la panna montata ]", en: "[ photo: the stuffed peaches with their syrup and whipped cream ]" },
+      ing: {
+        it: ["4 pesche gialle spaccarelle morbide", "50 g di amaretti", "40 g di mandorle", "50 g di zucchero", "50 g di burro", "un po' d'acqua", "panna montata, per servire"],
+        en: ["4 soft yellow freestone peaches", "50 g amaretti biscuits", "40 g almonds", "50 g sugar", "50 g butter", "a little water", "whipped cream, to serve"]
+      },
+      steps: {
+        it: ["Lava bene le pesche senza sbucciarle, tagliale a metà e rimuovi il nocciolo.", "Con un cucchiaino scava leggermente ogni metà, senza assottigliare troppo le pesche. Lavora sopra un colino appoggiato a una ciotola, per raccogliere il succo.", "Schiaccia bene la polpa con una forchetta. Sbriciola gli amaretti e uniscili alla polpa insieme a 1 cucchiaio di zucchero prelevato dal totale. Mescola fino a ottenere un composto morbido e riempi con questo le mezze pesche.", "Fai sciogliere in una padella ampia 30 g di burro, quindi sistema le pesche una accanto all'altra, con la parte farcita rivolta verso l'alto.", "Trita grossolanamente le mandorle e mescolale con lo zucchero rimasto. Distribuisci il composto sulle pesche e completa ciascuna con un fiocchetto del burro rimasto.", "Cuoci a fuoco vivace per pochi minuti, poi abbassa la fiamma e copri con il coperchio. Bagna con il succo messo da parte e prosegui bagnando ogni tanto con il fondo di cottura; se si asciuga troppo, aggiungi uno o due cucchiai d'acqua.", "Prosegui la cottura per circa 20-25 minuti, o finché le pesche saranno morbide ma ancora integre e sul fondo si sarà formato un sughetto denso e leggermente caramellato. Negli ultimi minuti togli il coperchio, se necessario, per farlo restringere.", "Servi le pesche, tiepide o fredde, con il loro sughetto e un cucchiaio di panna montata."],
+        en: ["Wash the peaches well without peeling them, cut them in half and remove the stone.", "With a teaspoon hollow out each half a little, without making the peaches too thin. Work over a sieve set on a bowl, so you collect the juice.", "Mash the pulp well with a fork. Crumble the amaretti and add them to the pulp along with 1 tablespoon of sugar taken from the total. Mix to a soft filling and use it to fill the peach halves.", "Melt 30 g of butter in a wide pan, then arrange the peaches side by side, filling upwards.", "Roughly chop the almonds and mix them with the remaining sugar. Scatter this over the peaches and top each one with a knob of the remaining butter.", "Cook over high heat for a few minutes, then lower the flame and cover with a lid. Moisten with the juice you set aside and carry on basting now and then with the cooking liquid; if it dries out too much, add a tablespoon or two of water.", "Continue cooking for about 20-25 minutes, or until the peaches are soft but still whole and a thick, lightly caramelised syrup has formed in the pan. In the last few minutes take off the lid, if needed, to let it reduce.", "Serve the peaches, warm or cold, with their syrup and a spoonful of whipped cream."]
+      },
+      note: { it: "È una mia fisima e non è necessario, ma ultimamente io tolgo la buccia: se vuoi provare, tuffa le pesche intere per venti secondi in acqua bollente e poi pelale.", en: "It's a quirk of mine and it isn't necessary, but lately I do peel them: if you want to try, dip the whole peaches in boiling water for twenty seconds and then peel them." }
     },
     pestotrapanese: {
       published: true,

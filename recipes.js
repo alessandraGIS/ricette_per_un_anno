@@ -8,8 +8,8 @@
 // `illustration: true` su una ricetta con `img`: niente cornice, sfondo trasparente (per immagini create, non foto).
 // `pageImg`: array di foto usato solo nella pagina della ricetta (Ricetta.dc.html), al posto di `img`; la home continua a usare `img`.
 window.MARA_RECIPES = {
-  order: ["tortacioccolato", "orecchiettetonno", "caponatabastarda", "pastella", "maionese", "risiebisi", "zucchine", "cotolettepollo", "tzatziki", "clafoutis", "pestotrapanese", "pescheripiene", "insalatapantesca", "insalatarussa"],
-  recentOrder: ["pastella", "zucchine", "tortacioccolato", "insalatapantesca", "maionese", "insalatarussa", "risiebisi", "cotolettepollo", "orecchiettetonno", "tzatziki", "caponatabastarda", "pestotrapanese", "pescheripiene"],
+  order: ["tortacioccolato", "orecchiettetonno", "caponatabastarda", "pastella", "maionese", "risiebisi", "tabuleh", "zucchine", "cotolettepollo", "tzatziki", "clafoutis", "pestotrapanese", "pescheripiene", "insalatapantesca", "insalatarussa"],
+  recentOrder: ["pastella", "zucchine", "tortacioccolato", "insalatapantesca", "maionese", "insalatarussa", "risiebisi", "cotolettepollo", "orecchiettetonno", "tzatziki", "caponatabastarda", "pestotrapanese", "pescheripiene", "tabuleh"],
   recipes: {
     pastella: {
       published: true,
@@ -143,6 +143,30 @@ window.MARA_RECIPES = {
       notes: [
         { it: "\"Bastarda\" perché è una versione semplificata e un po' blasfema della ricetta tradizionale. Velocissima da fare: si inforna tutto insieme, basta mescolare ogni tanto e, soprattutto, non si frigge.", en: "\"Bastarda\" because it's a simplified and slightly blasphemous version of the traditional recipe. Very quick to make: everything goes into the oven together, you just stir now and then and, above all, nothing is fried." },
         { it: "D'estate uso le melanzane lunghe e tengo la buccia, che è sottile e tenera e aiuta i tocchetti a non sfaldarsi durante l'ora di forno; d'inverno uso quelle tonde, che hanno la buccia più spessa e coriacea, e le sbuccio. Le olive invece io non le metto, perché, a mio gusto personale, si sentono troppo.", en: "In summer I use the long aubergines and keep the skin on: it is thin and tender and helps the pieces hold together through the hour in the oven; in winter I use the round ones, whose skin is thicker and tougher, and I peel them. The olives I leave out, because to my own taste they come through too strongly." }
+      ]
+    },
+    tabuleh: {
+      published: true,
+      day: "11", mIt: "giugno", mEn: "June",
+      date: { it: "11 giugno 2004", en: "11 June 2004" },
+      cat: { it: "primi piatti", en: "first course" },
+      name: { it: "Tabuleh", en: "Tabbouleh" },
+      meta: { it: "", en: "" },
+      servings: { it: "Per 6 persone", en: "Serves 6" },
+      time: { it: "Riposo 1 h", en: "Rest 1 h" },
+      img: "photos/tabuleh.jpg",
+      photo: { it: "[ foto: il tabuleh nella ciotola di terracotta ]", en: "[ photo: the tabbouleh in the earthenware bowl ]" },
+      ing: {
+        it: ["300 g di burghul fine", "400 g di pomodorini", "200 g di cipolle", "150 g di peperone verde", "abbondante prezzemolo fresco", "1 manciata di foglie di menta fresca", "4 limoni", "½ cucchiaino di cumino in polvere (facoltativo)", "50 g di olio extravergine d'oliva", "sale"],
+        en: ["300 g fine bulgur", "400 g cherry tomatoes", "200 g onions", "150 g green pepper", "plenty of fresh parsley", "1 handful of fresh mint leaves", "4 lemons", "½ tsp ground cumin (optional)", "50 g extra-virgin olive oil", "salt"]
+      },
+      steps: {
+        it: ["Versa il burghul in una terrina, bagnalo con il succo dei limoni e lascialo gonfiare, coperto, per circa un'ora.", "Nel frattempo lava e asciuga i pomodorini e tagliali a cubetti. Monda le cipolle e affettale molto sottilmente. Pulisci il peperone e taglialo a piccoli dadini.", "Quando il burghul sarà ben gonfio, sgranalo con una forchetta, quindi aggiungi i pomodorini, la cipolla e il peperone.", "Unisci abbondante prezzemolo e le foglie di menta tritati. Aggiungi anche il cumino in polvere, se lo usi.", "Condisci con l'olio extravergine d'oliva e il sale e mescola bene.", "Lascia riposare il tabuleh in frigorifero prima di servirlo."],
+        en: ["Put the bulgur in a bowl, moisten it with the juice of the lemons and let it swell, covered, for about an hour.", "Meanwhile wash and dry the cherry tomatoes and cut them into cubes. Peel the onions and slice them very thinly. Clean the pepper and cut it into small dice.", "When the bulgur has swelled nicely, loosen it with a fork, then add the tomatoes, the onion and the pepper.", "Add plenty of chopped parsley and mint leaves. Add the ground cumin too, if you are using it.", "Dress with the extra-virgin olive oil and the salt and mix well.", "Let the tabbouleh rest in the fridge before serving."]
+      },
+      notes: [
+        { it: "Per abbreviare i tempi puoi far gonfiare il burghul con mezzo litro di acqua bollente anziché con il succo dei limoni. In questo caso aggiungi succo di limone a piacere al momento di condire.", en: "To save time you can swell the bulgur with half a litre of boiling water instead of the lemon juice. In that case add lemon juice to taste when you dress it." },
+        { it: "Il prezzemolo deve essere molto abbondante! La menta invece, se preferisci, puoi sostituirla con il basilico.", en: "The parsley should be really plentiful! The mint, on the other hand, you can swap for basil if you prefer." }
       ]
     },
     pescheripiene: {

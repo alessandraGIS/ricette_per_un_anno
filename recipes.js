@@ -8,8 +8,8 @@
 // `illustration: true` su una ricetta con `img`: niente cornice, sfondo trasparente (per immagini create, non foto).
 // `pageImg`: array di foto usato solo nella pagina della ricetta (Ricetta.dc.html), al posto di `img`; la home continua a usare `img`.
 window.MARA_RECIPES = {
-  order: ["tortacioccolato", "orecchiettetonno", "caponatabastarda", "pastella", "maionese", "risiebisi", "tabuleh", "zucchine", "cotolettepollo", "tzatziki", "clafoutis", "pestotrapanese", "pescheripiene", "insalatapantesca", "insalatarussa"],
-  recentOrder: ["pastella", "zucchine", "tortacioccolato", "insalatapantesca", "maionese", "insalatarussa", "risiebisi", "cotolettepollo", "orecchiettetonno", "tzatziki", "caponatabastarda", "pestotrapanese", "pescheripiene", "tabuleh"],
+  order: ["tortacioccolato", "orecchiettetonno", "caponatabastarda", "pastella", "maionese", "risiebisi", "tabuleh", "zucchine", "cotolettepollo", "tzatziki", "clafoutis", "pestotrapanese", "pescheripiene", "insalatagreca", "insalatapantesca", "insalatarussa"],
+  recentOrder: ["pastella", "zucchine", "tortacioccolato", "insalatapantesca", "maionese", "insalatarussa", "risiebisi", "cotolettepollo", "orecchiettetonno", "tzatziki", "caponatabastarda", "pestotrapanese", "pescheripiene", "tabuleh", "insalatagreca"],
   recipes: {
     pastella: {
       published: true,
@@ -168,6 +168,25 @@ window.MARA_RECIPES = {
         { it: "Il prezzemolo deve essere molto abbondante! La menta invece, se preferisci, puoi sostituirla con il basilico. E se ti piace, aggiungi anche un po' di zaatar.", en: "The parsley should be really plentiful! The mint, on the other hand, you can swap for basil if you prefer. And if you like it, add a little za'atar too." },
         { it: "Bulgur e cous cous possono richiedere quantità d'acqua, modalità e tempi di preparazione diversi a seconda del prodotto. Se sulla confezione sono riportate indicazioni differenti, segui quelle, utilizzando comunque il succo di 3 limoni e regolando di conseguenza la quantità d'acqua. Meglio rimanere leggermente indietro con i liquidi: il bulgur o il cous cous deve risultare ben sgranato e non troppo umido, considerando che anche i pomodori rilasceranno parte della loro acqua.", en: "Bulgur and couscous can need different amounts of water, methods and timings depending on the product. If the packet says otherwise, follow that, still using the juice of 3 lemons and adjusting the water accordingly. Better to stay slightly short on liquid: the bulgur or couscous should end up well separated and not too wet, bearing in mind that the tomatoes will release some of their water too.", by: "ale" }
       ]
+    },
+    insalatagreca: {
+      published: true,
+      day: "01", mIt: "agosto", mEn: "August",
+      date: { it: "1 agosto 2004", en: "1 August 2004" },
+      cat: { it: "contorni", en: "side dishes" },
+      name: { it: "Insalata greca", en: "Greek salad" },
+      meta: { it: "", en: "" },
+      servings: { it: "Per 4 persone", en: "Serves 4" },
+      img: "photos/insalatagreca.jpg",
+      photo: { it: "[ foto: l'insalata greca nel piatto, con feta e olive ]", en: "[ photo: the Greek salad on the plate, with feta and olives ]" },
+      ing: {
+        it: ["500 g di pomodori ramati", "250 g di cetrioli", "100 g di peperone", "100 g di cipolla rossa", "80 g di olive nere Kalamata", "200 g di feta", "50 g di olio extravergine d'oliva", "origano secco", "qualche foglia di lattuga (facoltativa)", "qualche foglia di menta o di basilico fresco (facoltative)", "sale", "pepe"],
+        en: ["500 g vine tomatoes", "250 g cucumbers", "100 g pepper", "100 g red onion", "80 g Kalamata black olives", "200 g feta", "50 g extra-virgin olive oil", "dried oregano", "a few lettuce leaves (optional)", "a few fresh mint or basil leaves (optional)", "salt", "pepper"]
+      },
+      steps: {
+        it: ["Lava i pomodori e tagliali a spicchi.", "Pela i cetrioli e tagliali a rondelle non troppo sottili. Pela la cipolla e affettala sottilmente.", "Lava il peperone, dividilo a metà ed elimina il picciolo, i semi e i filamenti interni; taglialo quindi a striscioline sottili.", "Se la utilizzi, lava e asciuga bene la lattuga e spezzettala grossolanamente.", "Riunisci tutte le verdure in una terrina. Aggiungi le olive e la feta tagliata a cubetti.", "Cospargi con abbondante origano e, se ti piacciono, aggiungi qualche foglia di menta o di basilico.", "Condisci con sale, pepe e olio extravergine d'oliva. Mescola delicatamente e servi."],
+        en: ["Wash the tomatoes and cut them into wedges.", "Peel the cucumbers and slice them into rounds, not too thin. Peel the onion and slice it finely.", "Wash the pepper, halve it and remove the stalk, the seeds and the white ribs inside; then cut it into thin strips.", "If you are using it, wash and dry the lettuce well and tear it roughly.", "Put all the vegetables together in a bowl. Add the olives and the feta cut into cubes.", "Scatter over plenty of oregano and, if you like them, add a few mint or basil leaves.", "Dress with salt, pepper and extra-virgin olive oil. Toss gently and serve."]
+      }
     },
     pescheripiene: {
       published: true,

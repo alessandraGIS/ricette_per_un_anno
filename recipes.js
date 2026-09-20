@@ -8,8 +8,8 @@
 // `illustration: true` su una ricetta con `img`: niente cornice, sfondo trasparente (per immagini create, non foto).
 // `pageImg`: array di foto usato solo nella pagina della ricetta (Ricetta.dc.html), al posto di `img`; la home continua a usare `img`.
 window.MARA_RECIPES = {
-  order: ["tortacioccolato", "orecchiettetonno", "caponatabastarda", "pastella", "maionese", "risiebisi", "tabuleh", "zucchine", "cotolettepollo", "tzatziki", "clafoutis", "pestotrapanese", "pescheripiene", "insalatagreca", "insalatapantesca", "insalatarussa"],
-  recentOrder: ["pastella", "zucchine", "tortacioccolato", "insalatapantesca", "maionese", "insalatarussa", "risiebisi", "cotolettepollo", "orecchiettetonno", "tzatziki", "caponatabastarda", "pestotrapanese", "pescheripiene", "tabuleh", "insalatagreca"],
+  order: ["polloallimone", "tortacioccolato", "orecchiettetonno", "caponatabastarda", "pastella", "maionese", "risiebisi", "tabuleh", "zucchine", "cotolettepollo", "tzatziki", "clafoutis", "pestotrapanese", "pescheripiene", "insalatagreca", "insalatapantesca", "insalatarussa"],
+  recentOrder: ["pastella", "zucchine", "tortacioccolato", "insalatapantesca", "maionese", "insalatarussa", "risiebisi", "cotolettepollo", "orecchiettetonno", "tzatziki", "caponatabastarda", "pestotrapanese", "pescheripiene", "tabuleh", "insalatagreca", "polloallimone"],
   recipes: {
     pastella: {
       published: true,
@@ -167,6 +167,31 @@ window.MARA_RECIPES = {
       notes: [
         { it: "Il prezzemolo deve essere molto abbondante! La menta invece, se preferisci, puoi sostituirla con il basilico. E se ti piace, aggiungi anche un po' di zaatar.", en: "The parsley should be really plentiful! The mint, on the other hand, you can swap for basil if you prefer. And if you like it, add a little za'atar too." },
         { it: "Bulgur e cous cous possono richiedere quantità d'acqua, modalità e tempi di preparazione diversi a seconda del prodotto. Se sulla confezione sono riportate indicazioni differenti, segui quelle, utilizzando comunque il succo di 3 limoni e regolando di conseguenza la quantità d'acqua. Meglio rimanere leggermente indietro con i liquidi: il bulgur o il cous cous deve risultare ben sgranato e non troppo umido, considerando che anche i pomodori rilasceranno parte della loro acqua.", en: "Bulgur and couscous can need different amounts of water, methods and timings depending on the product. If the packet says otherwise, follow that, still using the juice of 3 lemons and adjusting the water accordingly. Better to stay slightly short on liquid: the bulgur or couscous should end up well separated and not too wet, bearing in mind that the tomatoes will release some of their water too.", by: "ale" }
+      ]
+    },
+    polloallimone: {
+      published: true,
+      day: "04", mIt: "gennaio", mEn: "January",
+      date: { it: "4 gennaio 2004", en: "4 January 2004" },
+      cat: { it: "secondi piatti", en: "main course" },
+      name: { it: "Pollo al limone", en: "Lemon roast chicken" },
+      meta: { it: "", en: "" },
+      servings: { it: "Da 4 a 6 porzioni, a seconda delle dimensioni del pollo", en: "4 to 6 servings, depending on the size of the chicken" },
+      time: { it: "Cottura 1 h - 1 h 20 min", en: "Cooking 1 h - 1 h 20 min" },
+      img: "photos/polloallimone.jpg",
+      photo: { it: "[ foto: il pollo al limone appena sfornato nella teglia ]", en: "[ photo: the lemon roast chicken fresh from the oven in its tin ]" },
+      ing: {
+        it: ["1 pollo intero", "1 limone non trattato", "sale", "pepe nero macinato al momento"],
+        en: ["1 whole chicken", "1 unwaxed lemon", "salt", "freshly ground black pepper"]
+      },
+      steps: {
+        it: ["Se necessario, fiammeggia rapidamente il pollo per eliminare eventuali residui di piume e rimuovi quelli rimasti con una pinzetta. Tamponalo accuratamente con carta da cucina, in modo che la pelle sia ben asciutta.", "Sala e pepa leggermente il pollo sia all'interno sia sulla superficie.", "Lava e asciuga il limone, tagliane le due estremità e inseriscilo intero nella cavità del pollo.", "Sistema il pollo, con il petto rivolto verso l'alto, in una teglia di metallo poco più grande del pollo, senza aggiungere olio o altri grassi.", "Cuoci in forno statico preriscaldato a 220 °C per 20 minuti. Abbassa quindi la temperatura a 180 °C e prosegui la cottura per altri 40-60 minuti circa, a seconda delle dimensioni del pollo, finché sarà ben cotto e dorato.", "Dopo circa 30 minuti dall'inizio della cottura, nella cavità del pollo inizierà a raccogliersi del sughetto. Inclina delicatamente il pollo per farlo scivolare nella teglia e usalo per bagnare la superficie. Ripeti l'operazione una o due volte durante il resto della cottura.", "Sforna il pollo e lascialo riposare per 10 minuti prima di tagliarlo.", "Togli il limone dalla cavità, taglia il pollo a pezzi e servilo con il fondo di cottura."],
+        en: ["If needed, quickly singe the chicken to remove any remaining feathers and pull out the stubs with tweezers. Pat it thoroughly dry with kitchen paper, so the skin is really dry.", "Season the chicken lightly with salt and pepper, both inside and all over the surface.", "Wash and dry the lemon, cut off both ends and put it whole into the cavity of the chicken.", "Place the chicken breast side up in a metal tin only slightly larger than the bird, without adding oil or any other fat.", "Roast in a static oven preheated to 220 °C for 20 minutes. Then lower the temperature to 180 °C and carry on for another 40-60 minutes or so, depending on the size of the chicken, until it is cooked through and golden.", "After about 30 minutes of cooking, juices will start to collect in the cavity. Tilt the chicken gently so they run into the tin and use them to baste the surface. Repeat once or twice during the rest of the cooking.", "Take the chicken out of the oven and let it rest for 10 minutes before carving.", "Remove the lemon from the cavity, cut the chicken into pieces and serve it with the pan juices."]
+      },
+      notes: [
+        { it: "Il pollo cuoce nel proprio grasso e nei propri succhi, quindi non aggiungere olio.", en: "The chicken cooks in its own fat and juices, so don't add any oil." },
+        { it: "In alternativa al limone, puoi usare una piccola arancia.", en: "Instead of the lemon, you can use a small orange." },
+        { it: "Se ti piace, puoi aggiungere nella cavità, insieme al limone, un piccolo rametto di rosmarino.", en: "If you like, you can add a small sprig of rosemary to the cavity along with the lemon.", by: "ale" }
       ]
     },
     insalatagreca: {

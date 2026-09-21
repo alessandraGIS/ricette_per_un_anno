@@ -8,7 +8,7 @@
 // `illustration: true` su una ricetta con `img`: niente cornice, sfondo trasparente (per immagini create, non foto).
 // `pageImg`: array di foto usato solo nella pagina della ricetta (Ricetta.dc.html), al posto di `img`; la home continua a usare `img`.
 window.MARA_RECIPES = {
-  order: ["polloallimone", "tortacioccolato", "orecchiettetonno", "caponatabastarda", "pastella", "maionese", "risiebisi", "tabuleh", "zucchine", "cotolettepollo", "tzatziki", "clafoutis", "pestotrapanese", "pescheripiene", "insalatagreca", "insalatapantesca", "insalatarussa"],
+  order: ["polloallimone", "tortacioccolato", "orecchiettetonno", "caponatabastarda", "pastella", "maionese", "risiebisi", "tabuleh", "zucchine", "cotolettepollo", "tzatziki", "pestotrapanese", "pescheripiene", "insalatagreca", "insalatapantesca", "insalatarussa"],
   recentOrder: ["pastella", "zucchine", "tortacioccolato", "insalatapantesca", "maionese", "insalatarussa", "risiebisi", "cotolettepollo", "orecchiettetonno", "tzatziki", "caponatabastarda", "pestotrapanese", "pescheripiene", "tabuleh", "insalatagreca", "polloallimone"],
   recipes: {
     pastella: {

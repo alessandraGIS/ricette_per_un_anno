@@ -179,6 +179,7 @@ window.MARA_RECIPES = {
       servings: { it: "Da 4 a 6 porzioni, a seconda delle dimensioni del pollo", en: "4 to 6 servings, depending on the size of the chicken" },
       time: { it: "Cottura 1 h - 1 h 20 min", en: "Cooking 1 h - 1 h 20 min" },
       img: "photos/polloallimone.jpg",
+      pageImg: ["photos/polloallimone.jpg", "photos/polloallimone-alto.jpg"],
       photo: { it: "[ foto: il pollo al limone appena sfornato nella teglia ]", en: "[ photo: the lemon roast chicken fresh from the oven in its tin ]" },
       ing: {
         it: ["1 pollo intero", "1 limone non trattato", "sale", "pepe nero macinato al momento"],

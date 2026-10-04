@@ -174,7 +174,7 @@ window.MARA_RECIPES = {
       day: "01", mIt: "gennaio", mEn: "January",
       date: { it: "1 gennaio 2004", en: "1 January 2004" },
       cat: { it: "dolci", en: "desserts" },
-      name: { it: "Baci di Mara (ovvero baci di dama)", en: "Baci di Mara (Italian hazelnut-and-chocolate cookies)" },
+      name: { it: "Baci di Mara (ovvero baci di dama)", en: "Mara's kisses (lady's kisses)" },
       meta: { it: "", en: "" },
       servings: { it: "Per circa 25 baci", en: "Makes about 25 baci" },
       time: { it: "Riposo 1 h  —  Cottura 18-20 min", en: "Rest 1 h  —  Baking 18-20 min" },

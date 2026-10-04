@@ -398,7 +398,7 @@ class Component extends DCLogic {
     // diario: tutte le ricette, in ordine; pubblicate cliccabili
     const allEntries = DB.order.map((id, i) => {
       const x = DB.recipes[id];
-      const ingText = (x.ing[langKey] || []).map(s => s.replace(/^§/, "")).join(" ");
+      const ingText = (x.ing[langKey] || []).filter(s => s[0] !== ">").map(s => s.replace(/^\u00a7/, "")).join(" ");
       return {
         n: String(i + 1).padStart(2, "0"),
         href: x.published ? "Ricetta.dc.html?r=" + id : "#",
@@ -451,7 +451,11 @@ class Component extends DCLogic {
     };
     if (!en) t.recipeKicker = "In evidenza · " + f.date.it;
 
-    const ingredients = f.ing[langKey].map(s => s.startsWith("§") ? s.slice(1).trim() : s);
+    // in home l'elenco e' compatto: si tolgono le righe di testo introduttive (">")
+    // e si spogliano i sottotitoli del loro "§".
+    const ingredients = f.ing[langKey]
+      .filter(s => !s.startsWith(">"))
+      .map(s => s.startsWith("§") ? s.slice(1).trim() : s);
     const steps = f.steps[langKey].map((s, i) => ({ num: String(i + 1), text: s }));
 
     // ultime 3 ricette pubblicate prima di quella già in evidenza

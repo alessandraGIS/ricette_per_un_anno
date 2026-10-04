@@ -223,7 +223,7 @@ class Component extends DCLogic {
 
     const allEntries = DB.order.map((id) => {
       const x = DB.recipes[id];
-      const ingText = (x.ing[langKey] || []).map(s => s.replace(/^§/, "")).join(" ");
+      const ingText = (x.ing[langKey] || []).filter(s => s[0] !== ">").map(s => s.replace(/^\u00a7/, "")).join(" ");
       return {
         href: x.published ? "Ricetta.dc.html?r=" + id : "#",
         date: x.day + " " + (en ? x.mEn : x.mIt) + " 2004",

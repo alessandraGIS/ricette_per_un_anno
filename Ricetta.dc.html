@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var r = DB.recipes[id];
     var nome = r.name.it;
     var cat = r.cat.it;
-    var ing = (r.ing.it || []).map(function (s) { return s.replace(/^§/, ""); }).slice(0, 5).join(", ");
+    var ing = (r.ing.it || []).filter(function (s) { return s[0] !== "§" && s[0] !== ">"; }).slice(0, 5).join(", ");
     var titolo = nome + " — Le ricette di Mara";
     var desc = nome + " (" + cat + "): ingredienti, dosi e preparazione passo passo."
              + (ing ? " Con " + ing + "." : "");
@@ -207,6 +207,9 @@ document.addEventListener("DOMContentLoaded", function () {
         <sc-for list="{{ ingredients }}" as="ing" hint-placeholder-count="7">
           <sc-if value="{{ ing.sub }}" hint-placeholder-val="{{ false }}">
             <div style="font-family:'Spectral',serif; font-style:italic; font-size:15px; color:#9E3F26; margin:16px 0 4px;">{{ ing.text }}</div>
+          </sc-if>
+          <sc-if value="{{ ing.intro }}" hint-placeholder-val="{{ false }}">
+            <div style="font-size:16px; line-height:1.55; color:#6B5A4A; padding:2px 0 8px;">{{ ing.text }}</div>
           </sc-if>
           <sc-if value="{{ ing.item }}" hint-placeholder-val="{{ true }}">
             <div style="font-size:17px; line-height:1.55; color:#4A3A2E; border-bottom:1px dotted rgba(58,44,34,.2); padding:5px 0;">{{ ing.text }}</div>
@@ -406,9 +409,12 @@ class Component extends DCLogic {
       width: "96px", height: "32px", background: catColor, opacity: 0.6,
       boxShadow: "0 2px 5px rgba(0,0,0,.08)"
     };
+    // "§" = sottotitolo di un gruppo; ">" = riga di testo che introduce il gruppo,
+    // senza pallino e senza filetto; tutto il resto e' un ingrediente.
     const ingredients = src.ing[lang].map(s => {
       const sub = s.startsWith("§");
-      return { text: sub ? s.slice(1).trim() : s, sub, item: !sub };
+      const intro = s.startsWith(">");
+      return { text: (sub || intro) ? s.slice(1).trim() : s, sub, intro, item: !sub && !intro };
     });
     const steps = src.steps[lang].map(s => ({ text: s }));
 

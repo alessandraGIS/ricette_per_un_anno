@@ -398,12 +398,28 @@ class Component extends DCLogic {
       };
     });
 
-    // Stessa palette e stessa regola (ordine di prima comparsa in DB.order) usate
-    // in "Il calendario.dc.html", così il colore di una categoria è coerente ovunque.
-    const CAT_PALETTE = ["#BE5A34", "#4F5FA0", "#7C8C3E", "#8A4A78", "#3E7D6E", "#5E8A4C", "#6E5690", "#A8435F"];
-    const seenCatKeys = [];
-    DB.order.forEach(k => { const ck = DB.recipes[k].cat.it; if (!seenCatKeys.includes(ck)) seenCatKeys.push(ck); });
-    const catColor = CAT_PALETTE[seenCatKeys.indexOf(src.cat.it) % CAT_PALETTE.length];
+    // Colori delle categorie, uguali a quelli delle altre pagine: mappa esplicita, così ogni
+    // tinta resta fissa anche se cambia l'ordine delle ricette in DB.order. Le tinte
+    // sono scelte ben distanziate fra loro per restare distinguibili nei pallini.
+    // Una categoria nuova, non elencata qui, riceve un colore di riserva (per ordine
+    // di prima comparsa in DB.order).
+    const CAT_COLORS = {
+      "dolci": "#BE5A34",
+      "primi piatti": "#A97718",
+      "secondi piatti": "#4F5FA0",
+      "contorni": "#5E8A4C",
+      "antipasti": "#2E7D9A",
+      "salse": "#A8435F",
+      "preparazioni di base": "#7A539C"
+    };
+    const CAT_PALETTE = ["#2E7D6B", "#8A4A78", "#7C8C3E", "#6E5690", "#3E7D6E"];
+    const spareCatKeys = [];
+    DB.order.forEach(k => {
+      const ck = DB.recipes[k].cat.it;
+      if (!CAT_COLORS[ck] && !spareCatKeys.includes(ck)) spareCatKeys.push(ck);
+    });
+    const catColor = CAT_COLORS[src.cat.it] ||
+      CAT_PALETTE[Math.max(0, spareCatKeys.indexOf(src.cat.it)) % CAT_PALETTE.length];
     const pinStyle = {
       position: "absolute", top: "-14px", left: "50%", transform: "translateX(-50%) rotate(-4deg)",
       width: "96px", height: "32px", background: catColor, opacity: 0.6,

@@ -211,13 +211,26 @@ class Component extends DCLogic {
       if (!seen.some(s => s.key === c.it)) seen.push({ key: c.it, label: c[langKey] });
     });
 
-    // Palette fissa condivisa fra le pagine: assegnata per ordine di prima comparsa
-    // in DB.order, così ogni categoria mantiene sempre lo stesso colore e le nuove
-    // categorie ricevono automaticamente il colore successivo (fino a 8; oltre,
-    // i colori ricominciano dal primo).
-    const CAT_PALETTE = ["#BE5A34", "#4F5FA0", "#7C8C3E", "#8A4A78", "#3E7D6E", "#5E8A4C", "#6E5690", "#A8435F"];
+    // Colori delle categorie, condivisi fra le pagine: mappa esplicita, così ogni
+    // tinta resta fissa anche se cambia l'ordine delle ricette in DB.order. Le tinte
+    // sono scelte ben distanziate fra loro per restare distinguibili nei pallini.
+    // Una categoria nuova, non elencata qui, riceve un colore di riserva (per ordine
+    // di prima comparsa in DB.order).
+    const CAT_COLORS = {
+      "dolci": "#BE5A34",
+      "primi piatti": "#A97718",
+      "secondi piatti": "#4F5FA0",
+      "contorni": "#5E8A4C",
+      "antipasti": "#2E7D9A",
+      "salse": "#A8435F",
+      "preparazioni di base": "#7A539C"
+    };
+    const CAT_PALETTE = ["#2E7D6B", "#8A4A78", "#7C8C3E", "#6E5690", "#3E7D6E"];
     const catColorMap = {};
-    seen.forEach((c, i) => { catColorMap[c.key] = CAT_PALETTE[i % CAT_PALETTE.length]; });
+    let catSpare = 0;
+    seen.forEach(c => {
+      catColorMap[c.key] = CAT_COLORS[c.key] || CAT_PALETTE[catSpare++ % CAT_PALETTE.length];
+    });
 
     const MONTH_ORDER_IT = ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre"];
 
@@ -243,7 +256,7 @@ class Component extends DCLogic {
 
     // Ordine di visualizzazione dei filtri (fisso, non legato all'ordine di comparsa
     // usato per i colori); le categorie non elencate qui finiscono in coda.
-    const CATEGORY_DISPLAY_ORDER = ["primi piatti", "secondi piatti", "piatti unici", "dolci", "preparazioni di base"];
+    const CATEGORY_DISPLAY_ORDER = ["antipasti", "primi piatti", "secondi piatti", "piatti unici", "contorni", "dolci", "salse", "preparazioni di base"];
     const seenForDisplay = [...seen].sort((a, b) => {
       const ia = CATEGORY_DISPLAY_ORDER.indexOf(a.key);
       const ib = CATEGORY_DISPLAY_ORDER.indexOf(b.key);

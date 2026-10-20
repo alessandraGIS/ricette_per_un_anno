@@ -8,8 +8,8 @@
 // `illustration: true` su una ricetta con `img`: niente cornice, sfondo trasparente (per immagini create, non foto).
 // `pageImg`: array di foto usato solo nella pagina della ricetta (Ricetta.dc.html), al posto di `img`; la home continua a usare `img`.
 window.MARA_RECIPES = {
-  order: ["bacidimara", "polloallimone", "tortacioccolato", "orecchiettetonno", "caponatabastarda", "pastella", "maionese", "risiebisi", "tabuleh", "zucchine", "cotolettepollo", "tzatziki", "pestotrapanese", "pescheripiene", "insalatagreca", "insalatapantesca", "insalatarussa"],
-  recentOrder: ["pastella", "zucchine", "tortacioccolato", "insalatapantesca", "maionese", "insalatarussa", "risiebisi", "cotolettepollo", "orecchiettetonno", "tzatziki", "caponatabastarda", "pestotrapanese", "pescheripiene", "tabuleh", "insalatagreca", "polloallimone", "bacidimara"],
+  order: ["bacidimara", "polloallimone", "tortacioccolato", "orecchiettetonno", "caponatabastarda", "pastella", "maionese", "risiebisi", "tabuleh", "zucchine", "cotolettepollo", "tzatziki", "pestotrapanese", "pescheripiene", "insalatagreca", "insalatapantesca", "insalatarussa", "capesantegratinate"],
+  recentOrder: ["pastella", "zucchine", "tortacioccolato", "insalatapantesca", "maionese", "insalatarussa", "risiebisi", "cotolettepollo", "orecchiettetonno", "tzatziki", "caponatabastarda", "pestotrapanese", "pescheripiene", "tabuleh", "insalatagreca", "polloallimone", "bacidimara", "capesantegratinate"],
   recipes: {
     pastella: {
       published: true,
@@ -168,6 +168,27 @@ window.MARA_RECIPES = {
         { it: "Il prezzemolo deve essere molto abbondante! La menta invece, se preferisci, puoi sostituirla con il basilico. E se ti piace, aggiungi anche un po' di zaatar.", en: "The parsley should be really plentiful! The mint, on the other hand, you can swap for basil if you prefer. And if you like it, add a little za'atar too." },
         { it: "Bulgur e cous cous possono richiedere quantità d'acqua, modalità e tempi di preparazione diversi a seconda del prodotto. Se sulla confezione sono riportate indicazioni differenti, segui quelle, utilizzando comunque il succo di 3 limoni e regolando di conseguenza la quantità d'acqua. Meglio rimanere leggermente indietro con i liquidi: il bulgur o il cous cous deve risultare ben sgranato e non troppo umido, considerando che anche i pomodori rilasceranno parte della loro acqua.", en: "Bulgur and couscous can need different amounts of water, methods and timings depending on the product. If the packet says otherwise, follow that, still using the juice of 3 lemons and adjusting the water accordingly. Better to stay slightly short on liquid: the bulgur or couscous should end up well separated and not too wet, bearing in mind that the tomatoes will release some of their water too.", by: "ale" }
       ]
+    },
+    capesantegratinate: {
+      published: true,
+      day: "30", mIt: "dicembre", mEn: "December",
+      date: { it: "30 dicembre 2004", en: "30 December 2004" },
+      cat: { it: "antipasti", en: "starters" },
+      name: { it: "Capesante gratinate", en: "Gratinated scallops" },
+      meta: { it: "", en: "" },
+      servings: { it: "Per 4 persone, come antipasto", en: "Serves 4, as a starter" },
+      time: { it: "Preparazione e cottura 20 min", en: "Preparation and cooking 20 min" },
+      img: "photos/capesantegratinate.jpg",
+      photo: { it: "[ foto: le capesante gratinate nei loro gusci, sul piatto da portata ]", en: "[ photo: the gratinated scallops in their shells, on the serving dish ]" },
+      ing: {
+        it: ["8 capesante con il guscio", "50 g di burro", "100 ml di panna fresca", "20 ml di brandy", "15 g di Parmigiano Reggiano grattugiato", "15 g di pangrattato", "poco prezzemolo fresco tritato", "sale"],
+        en: ["8 scallops in their shells", "50 g butter", "100 ml fresh cream", "20 ml brandy", "15 g grated Parmigiano Reggiano", "15 g breadcrumbs", "a little chopped fresh parsley", "salt"]
+      },
+      steps: {
+        it: ["Fai pulire le capesante dal pescivendolo, conservando gli otto gusci concavi, che serviranno per la preparazione.", "In una padella fai sciogliere 40 g di burro, aggiungi le capesante e falle cuocere a fuoco moderato per circa 5 minuti, girandole delicatamente. Sala leggermente.", "Versa il brandy e lascialo evaporare brevemente, quindi aggiungi la panna e poco prezzemolo tritato. Mescola delicatamente per amalgamare il condimento.", "Disponi una capasanta in ciascun guscio, distribuendo anche il fondo di cottura.", "Mescola il Parmigiano con il pangrattato e distribuisci il composto sulle capesante. Completa con un fiocchetto del burro rimasto.", "Disponi i gusci su una teglia e falli gratinare sotto il grill del forno già caldo per pochi minuti, finché la superficie sarà ben dorata.", "Servi subito, direttamente nei gusci."],
+        en: ["Have the fishmonger clean the scallops, keeping the eight curved shells, which you will need for the dish.", "Melt 40 g of butter in a pan, add the scallops and cook them over moderate heat for about 5 minutes, turning them gently. Season lightly with salt.", "Pour in the brandy and let it evaporate briefly, then add the cream and a little chopped parsley. Stir gently to bring the sauce together.", "Place one scallop in each shell, spooning over the pan juices as well.", "Mix the Parmigiano with the breadcrumbs and scatter it over the scallops. Finish each one with a knob of the remaining butter.", "Arrange the shells on a baking tray and brown them under a preheated grill for a few minutes, until the surface is golden.", "Serve at once, straight in the shells."]
+      },
+      note: { it: "La gratinatura deve essere rapida, perché le capesante sono già state cotte in padella. Il condimento deve rimanere cremoso, mentre la superficie deve risultare leggermente croccante.", en: "The browning must be quick, because the scallops have already been cooked in the pan. The sauce should stay creamy, while the surface should turn lightly crisp." }
     },
     bacidimara: {
       published: true,

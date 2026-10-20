@@ -90,6 +90,14 @@
     <div style="font-family:'Spectral',serif; font-style:italic; font-size:16px; color:#7A6552; margin-top:18px;">{{ t.emailNote }}</div>
   </div>
 
+  <!-- canale whatsapp -->
+  <div style="margin:0 clamp(28px,5vw,64px) 24px; background:#FFFDF6; border:1px solid rgba(58,44,34,.16); box-shadow:0 10px 30px rgba(58,44,34,.08); padding:clamp(30px,4vw,44px); position:relative;">
+    <div style="position:absolute; left:0; top:32px; bottom:32px; width:3px; background:#BE5A34;"></div>
+    <div style="font-family:'Courier Prime',monospace; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#9E3F26; margin-bottom:14px;">{{ t.waLabel }}</div>
+    <a href="{{ waUrl }}" target="_blank" rel="noopener" class="contact-email" style="text-decoration:none; font-family:'DM Serif Display',serif; font-size:clamp(22px,4vw,34px); color:#3A2C22; line-height:1.1;">{{ t.waCta }}</a>
+    <div style="font-family:'Spectral',serif; font-style:italic; font-size:16px; color:#7A6552; margin-top:18px;">{{ t.waNote }}</div>
+  </div>
+
   <!-- back to recipes -->
   <div style="margin:0 clamp(28px,5vw,64px) 60px; display:flex; justify-content:flex-start;">
     <a href="index.dc.html" style="text-decoration:none; background:#BE5A34; color:#FBF4E6; font-family:'Spectral',serif; font-size:15px; letter-spacing:.02em; padding:13px 26px; border-radius:2px;">{{ t.cta }}</a>
@@ -131,6 +139,9 @@ class Component extends DCLogic {
       intro: "Se hai un commento o un suggerimento su una ricetta — o semplicemente vuoi dirci la tua — scrivici. Leggiamo volentieri.",
       emailLabel: "La nostra email",
       emailNote: "Rispondiamo appena possibile, a distanza tra Venezia e Varese.",
+      waLabel: "Il canale WhatsApp",
+      waCta: "Segui il canale →",
+      waNote: "Un messaggio quando esce una ricetta nuova. Nient'altro.",
       cta: "Torna alle ricette",
       footer: "Questo sito non usa cookie.",
       privacyLink: "Privacy e riutilizzo →"
@@ -148,6 +159,9 @@ class Component extends DCLogic {
       intro: "If you have a comment or a suggestion about a recipe — or simply want to say hello — write to us. We love hearing from you.",
       emailLabel: "Our email",
       emailNote: "We reply as soon as we can, at a distance between Venice and Varese.",
+      waLabel: "Our WhatsApp channel",
+      waCta: "Follow the channel →",
+      waNote: "A message whenever a new recipe is published. Nothing else.",
       cta: "Back to the recipes",
       footer: "This site does not use cookies.",
       privacyLink: "Privacy & reuse →"
@@ -160,6 +174,9 @@ class Component extends DCLogic {
     return {
       t: { ...t0, email: EMAIL, emailUser: EMAIL_NOME, emailDomain: EMAIL_DOMINIO },
       mailto: "mailto:" + EMAIL,
+      // Il canale WhatsApp annuncia le ricette nuove. L'indirizzo sta qui una
+      // volta sola: se un giorno cambia, si corregge solo questa riga.
+      waUrl: "https://whatsapp.com/channel/0029VbEES23EVccQOr8eN53a",
       itStyle: en ? idle : active,
       enStyle: en ? active : idle,
       onIt: () => this.setState({ lang: "it" }),

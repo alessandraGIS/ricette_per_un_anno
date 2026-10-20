@@ -200,6 +200,18 @@
     </div>
   </div>
 
+  <!-- canale whatsapp -->
+  <div style="padding:0 clamp(28px,5vw,64px) 72px;">
+    <div style="border-top:1px solid rgba(58,44,34,.12); padding-top:34px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px;">
+      <div style="max-width:520px;">
+        <div style="font-family:'Courier Prime',monospace; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#9E3F26; margin-bottom:10px;">{{ t.waHead }}</div>
+        <div style="font-family:'DM Serif Display',serif; font-size:clamp(24px,3vw,30px); color:#3A2C22; line-height:1.15;">{{ t.waTitle }}</div>
+        <div style="font-size:16px; font-style:italic; color:#7A6552; margin-top:8px;">{{ t.waSub }}</div>
+      </div>
+      <a href="{{ waUrl }}" target="_blank" rel="noopener" style="text-decoration:none; white-space:nowrap; background:#BE5A34; color:#FBF4E6; font-family:'Spectral',serif; font-size:15px; letter-spacing:.02em; padding:13px 26px; border-radius:2px;">{{ t.waCta }}</a>
+    </div>
+  </div>
+
   <!-- footer -->
   <div style="padding:22px clamp(28px,5vw,64px) 32px; border-top:1px solid rgba(58,44,34,.12); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
     <div style="font-size:13px; font-style:italic; color:#7A6552;">{{ t.footer }}</div>
@@ -265,6 +277,10 @@ class Component extends DCLogic {
       noResults: "Nessuna ricetta corrisponde alla ricerca.",
       coming: "in arrivo",
       published: "pubblicata",
+      waHead: "Aggiornamenti",
+      waTitle: "Il canale WhatsApp",
+      waSub: "Un messaggio quando esce una ricetta nuova. Nient'altro.",
+      waCta: "Segui il canale",
       footer: "Questo sito non usa cookie.",
       privacyLink: "Privacy e riutilizzo →",
       photoHero: "[ foto: una cucina a Urbino, 2004 ]",
@@ -335,6 +351,10 @@ class Component extends DCLogic {
       noResults: "No recipe matches your search.",
       coming: "coming soon",
       published: "published",
+      waHead: "Updates",
+      waTitle: "The WhatsApp channel",
+      waSub: "A message whenever a new recipe is published. Nothing else.",
+      waCta: "Follow the channel",
       footer: "This site does not use cookies.",
       privacyLink: "Privacy & reuse →",
       photoHero: "[ photo: a Urbino kitchen, 2004 ]",
@@ -370,6 +390,9 @@ class Component extends DCLogic {
     const langKey = en ? "en" : "it";
 
     const base = {
+      // Il canale WhatsApp annuncia le ricette nuove. L'indirizzo sta qui una
+      // volta sola: se un giorno cambia, si corregge solo questa riga.
+      waUrl: "https://whatsapp.com/channel/0029VbEES23EVccQOr8eN53a",
       itStyle: en ? idle : active,
       enStyle: en ? active : idle,
       onIt: () => this.setState({ lang: "it" }),

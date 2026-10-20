@@ -43,7 +43,10 @@ document.addEventListener("DOMContentLoaded", function () {
     set('meta[property="og:title"]', "content", titolo);
     set('meta[property="og:description"]', "content", desc);
     set('meta[property="og:url"]', "content", url);
-    var img = r.img || (Array.isArray(r.pageImg) ? r.pageImg[0] : null);
+    // img e pageImg possono contenere una sola foto o un elenco: qui ne serve
+    // una sola, la prima fra quelle che la pagina mostra davvero.
+    var prima = function (v) { return (Array.isArray(v) ? v[0] : v) || null; };
+    var img = prima(r.pageImg) || prima(r.img);
     if (img) set('meta[property="og:image"]', "content", "https://www.lericettedimara.it/" + img);
   } catch (e) { /* meglio non bloccare mai la pagina per un meta tag */ }
 });

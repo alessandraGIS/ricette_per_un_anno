@@ -7,6 +7,9 @@
 // `notes`: array di note distinte (in ordine), al posto del singolo campo `note`.
 // `illustration: true` su una ricetta con `img`: niente cornice, sfondo trasparente (per immagini create, non foto).
 // `pageImg`: array di foto usato solo nella pagina della ricetta (Ricetta.dc.html), al posto di `img`; la home continua a usare `img`.
+// `anteprima`: una riga scritta a mano, che compare sotto al titolo quando si condivide il link della ricetta
+//   su WhatsApp o simili (per esempio: "Un antipasto delle feste, pronto in venti minuti"). Se manca,
+//   l'anteprima mostra solo foto e titolo: meglio niente che una frase scritta da una macchina.
 window.MARA_RECIPES = {
   order: ["bacidimara", "polloallimone", "tortacioccolato", "orecchiettetonno", "caponatabastarda", "pastella", "maionese", "risiebisi", "tabuleh", "zucchine", "cotolettepollo", "tzatziki", "pestotrapanese", "pescheripiene", "insalatagreca", "insalatapantesca", "insalatarussa", "capesantegratinate"],
   recentOrder: ["pastella", "zucchine", "tortacioccolato", "insalatapantesca", "maionese", "insalatarussa", "risiebisi", "cotolettepollo", "orecchiettetonno", "tzatziki", "caponatabastarda", "pestotrapanese", "pescheripiene", "tabuleh", "insalatagreca", "polloallimone", "bacidimara", "capesantegratinate"],

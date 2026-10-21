@@ -46,17 +46,15 @@ function proteggi(testo) {
 }
 
 function pagina(id, r) {
-  // Stesso titolo e stessa descrizione che Ricetta.dc.html costruisce via
-  // JavaScript, per non avere due versioni diverse della stessa ricetta.
   const nome = r.name.it;
-  const ing = (r.ing.it || [])
-    .filter((s) => s[0] !== "§" && s[0] !== ">")
-    .slice(0, 5)
-    .join(", ");
   const titolo = nome + " — Le ricette di Mara";
-  const desc =
-    nome + " (" + r.cat.it + "): ingredienti, dosi e preparazione passo passo." +
-    (ing ? " Con " + ing + "." : "");
+
+  // La riga che compare sotto al titolo nell'anteprima. La scrive Alessandra,
+  // nel campo "anteprima" della ricetta dentro recipes.js. Se non c'e', la
+  // paginetta non ne mette nessuna: meglio foto e titolo da soli che una frase
+  // scritta da una macchina. Niente si perde in cerca: queste paginette
+  // rimandano alla ricetta vera, ed e' da li' che Google legge la descrizione.
+  const desc = (r.anteprima || "").trim();
 
   // Sia img sia pageImg possono essere una sola foto o un elenco: per l'anteprima
   // serve una foto sola, e prendo la prima di quelle che la pagina della ricetta
@@ -72,15 +70,20 @@ function pagina(id, r) {
     '<meta charset="utf-8">',
     '<meta name="viewport" content="width=device-width, initial-scale=1">',
     "<title>" + proteggi(titolo) + "</title>",
-    '<meta name="description" content="' + proteggi(desc) + '">',
     '<link rel="canonical" href="' + SITO + "/Ricetta.dc.html?r=" + id + '">',
     '<meta property="og:type" content="article">',
     '<meta property="og:site_name" content="Le ricette di Mara">',
     '<meta property="og:locale" content="it_IT">',
     '<meta property="og:title" content="' + proteggi(titolo) + '">',
-    '<meta property="og:description" content="' + proteggi(desc) + '">',
     '<meta property="og:url" content="' + SITO + "/r/" + id + '.html">',
   ];
+
+  // Le due descrizioni vanno messe insieme o lasciate fuori insieme: molti
+  // programmi, non trovando og:description, ripiegano su quella normale.
+  if (desc) {
+    righe.push('<meta name="description" content="' + proteggi(desc) + '">');
+    righe.push('<meta property="og:description" content="' + proteggi(desc) + '">');
+  }
 
   if (foto) {
     righe.push('<meta property="og:image" content="' + SITO + "/" + encodeURI(foto) + '">');

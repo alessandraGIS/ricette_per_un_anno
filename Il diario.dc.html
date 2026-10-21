@@ -83,14 +83,21 @@
   <!-- diary -->
   <div style="padding:8px clamp(28px,5vw,64px) 64px;">
 
+    <!-- Due viste del ricettario, sopra le categorie: prima si sceglie il
+         ricettario, poi la portata. Sono un livello piu' alto dei filtri, e la
+         forma a linguetta lo dice senza bisogno di spiegazioni. -->
+    <div style="display:flex; gap:28px; align-items:flex-end; border-bottom:1px solid rgba(58,44,34,.16); padding:14px 0 0;">
+      <sc-for list="{{ views }}" as="v" hint-placeholder-count="2">
+        <span onClick="{{ v.onClick }}" style="{{ v.style }}">{{ v.label }}</span>
+      </sc-for>
+    </div>
+
     <!-- search + filters -->
     <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px 24px; padding:18px 0 10px; border-bottom:2px solid #3A2C22;">
       <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
         <sc-for list="{{ cats }}" as="c" hint-placeholder-count="6">
           <span onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.label }}</span>
         </sc-for>
-        <span style="width:1px; height:18px; background:rgba(58,44,34,.22); margin:0 4px;"></span>
-        <span onClick="{{ vegChip.onClick }}" style="{{ vegChip.style }}">{{ vegChip.label }}</span>
       </div>
       <div style="position:relative; display:flex; align-items:center; flex:1; min-width:200px; max-width:320px;">
         <span style="position:absolute; left:12px; font-family:'Courier Prime',monospace; font-size:13px; color:#B9A88F; pointer-events:none;">⌕</span>
@@ -162,7 +169,8 @@ class Component extends DCLogic {
       diarySub: "Una mail al giorno, un anno intero",
       searchPlaceholder: "Cerca una ricetta o un ingrediente…",
       catAll: "tutte",
-      catVeg: "vegetariane",
+      viewAll: "tutte le ricette",
+      viewVeg: "solo vegetariane",
       noResults: "Nessuna ricetta corrisponde alla ricerca.",
       coming: "in arrivo",
       published: "pubblicata",
@@ -180,7 +188,8 @@ class Component extends DCLogic {
       diarySub: "One email a day, a whole year",
       searchPlaceholder: "Search a recipe or an ingredient…",
       catAll: "all",
-      catVeg: "vegetarian",
+      viewAll: "all recipes",
+      viewVeg: "vegetarian only",
       noResults: "No recipe matches your search.",
       coming: "coming soon",
       published: "published",
@@ -206,7 +215,7 @@ class Component extends DCLogic {
 
     const DB = window.MARA_RECIPES;
     if (!DB) {
-      return { ...base, t: t0, entries: [], cats: [], vegChip: { label: t0.catVeg, style: { display: "none" }, onClick: () => {} }, resultLabel: "", noResults: false };
+      return { ...base, t: t0, entries: [], cats: [], views: [], resultLabel: "", noResults: false };
     }
 
     const seen = [];
@@ -215,21 +224,13 @@ class Component extends DCLogic {
       if (!seen.some(s => s.key === c.it)) seen.push({ key: c.it, label: c[langKey] });
     });
 
-    // Colori delle categorie, condivisi fra le pagine: mappa esplicita, così ogni
-    // tinta resta fissa anche se cambia l'ordine delle ricette in DB.order. Le tinte
-    // sono scelte ben distanziate fra loro per restare distinguibili nei pallini.
-    // Una categoria nuova, non elencata qui, riceve un colore di riserva (per ordine
-    // di prima comparsa in DB.order).
-    const CAT_COLORS = {
-      "dolci": "#BE5A34",
-      "primi piatti": "#A97718",
-      "secondi piatti": "#4F5FA0",
-      "contorni": "#5E8A4C",
-      "antipasti": "#2E7D9A",
-      "salse": "#A8435F",
-      "preparazioni di base": "#7A539C"
-    };
-    const CAT_PALETTE = ["#2E7D6B", "#8A4A78", "#7C8C3E", "#6E5690", "#3E7D6E"];
+    // I colori delle categorie stanno in recipes.js, accanto alle ricette, cosi'
+    // sono gli stessi in tutte le pagine e si cambiano in un posto solo.
+    const CAT_COLORS = DB.catColors || {};
+    // Se i colori mancassero (per esempio con una copia vecchia di recipes.js
+    // rimasta nella memoria del browser), si ripiega su un bruno neutro: meglio
+    // una pagina spenta che una pagina tinta di un colore che non vuol dire niente.
+    const CAT_PALETTE = (DB.catPalette && DB.catPalette.length) ? DB.catPalette : ["#7A6552"];
     const catColorMap = {};
     let catSpare = 0;
     seen.forEach(c => {
@@ -269,29 +270,62 @@ class Component extends DCLogic {
       return (ia === -1 ? CATEGORY_DISPLAY_ORDER.length : ia) - (ib === -1 ? CATEGORY_DISPLAY_ORDER.length : ib);
     });
 
-    const chipBase = { fontFamily: "'Courier Prime',monospace", fontSize: "11px", letterSpacing: ".1em", textTransform: "uppercase", padding: "7px 13px", borderRadius: "999px", cursor: "pointer", border: "1px solid rgba(58,44,34,.22)" };
-    const chipOn = { ...chipBase, background: "#BE5A34", color: "#FBF4E6", borderColor: "#BE5A34" };
-    const chipOff = { ...chipBase, background: "transparent", color: "#7A6552" };
+    // Ogni categoria porta nella pastiglia il suo colore, lo stesso del pallino
+    // che le compare accanto nell'elenco: filtro e riga parlano cosi' la stessa
+    // lingua. "Tutte" non e' una categoria e non ha un colore suo: resta in
+    // inchiostro, come le linguette.
+    //
+    // Il bordo va scritto per intero in tutti i casi, invece di lasciare la riga
+    // completa nello stile di base e cambiare poi il solo colore: quando una stessa
+    // proprieta' arriva in due forme diverse, quella vecchia puo' restare attaccata.
+    const INK = "#3A2C22";
+    const velo = (hex, a) => {
+      const n = parseInt(hex.slice(1), 16);
+      return "rgba(" + (n >> 16) + ", " + ((n >> 8) & 255) + ", " + (n & 255) + ", " + a + ")";
+    };
+    const chipBase = { fontFamily: "'Courier Prime',monospace", fontSize: "11px", letterSpacing: ".1em", textTransform: "uppercase", padding: "7px 13px", borderRadius: "999px", cursor: "pointer" };
+    const chip = (attiva, colore) => attiva
+      ? { ...chipBase, background: colore, color: "#FBF4E6", border: "1px solid " + colore }
+      : { ...chipBase, background: "transparent", color: colore, border: "1px solid " + velo(colore, .5) };
+    const chipNeutro = (attiva) => attiva
+      ? { ...chipBase, background: INK, color: "#FBF4E6", border: "1px solid " + INK }
+      : { ...chipBase, background: "transparent", color: "#7A6552", border: "1px solid rgba(58,44,34,.22)" };
+
     const cats = [{ key: "all", label: t0.catAll }, ...seenForDisplay].map(c => ({
       label: c.label,
-      style: this.state.cat === c.key ? chipOn : chipOff,
+      style: c.key === "all"
+        ? chipNeutro(this.state.cat === "all")
+        : chip(this.state.cat === c.key, catColorMap[c.key] || INK),
       onClick: () => this.setState({ cat: c.key })
     }));
 
-    // "vegetariane" e' un filtro di natura diversa dalle categorie: non sostituisce
-    // la scelta, la restringe. Sta quindi in uno stato suo e si combina con l'altra,
-    // cosi' si possono chiedere insieme i primi piatti e solo quelli vegetariani.
-    // Verde invece del terracotta delle categorie, sia accesa sia spenta: e' il
-    // segno che non e' una categoria ma un interruttore che si somma a quella
-    // scelta. Spenta resta tenue, cosi' si riconosce senza farsi notare troppo.
-    const VERDE = "#4F7A3A";
-    const vegOn = { ...chipBase, background: VERDE, color: "#FBF4E6", borderColor: VERDE };
-    const vegOff = { ...chipBase, background: "transparent", color: VERDE, borderColor: "rgba(79,122,58,.55)" };
-    const vegChip = {
-      label: t0.catVeg,
-      style: this.state.veg ? vegOn : vegOff,
-      onClick: () => this.setState({ veg: !this.state.veg })
+    // Le due viste. La categoria scelta resta valida passando dall'una all'altra:
+    // cambia solo l'insieme da cui si pesca, non la portata che si stava guardando.
+    // Le linguette non hanno colore: lo dicono gia' a parole, e il colore in questa
+    // pagina e' il linguaggio delle categorie. Dare una tinta anche alle viste
+    // avrebbe messo in concorrenza due significati invece di distinguerli.
+    const tabBase = {
+      fontFamily: "'Courier Prime',monospace", fontSize: "12px", letterSpacing: ".14em",
+      textTransform: "uppercase", padding: "0 0 9px", marginBottom: "-1px",
+      cursor: "pointer"
     };
+    // Il filetto va scritto per intero in tutte e due i casi, non lasciando la riga
+    // completa qui sopra e cambiando poi il solo colore: quando una stessa proprieta'
+    // arriva in due forme diverse, quella vecchia puo' restare attaccata e la
+    // linguetta appena lasciata resterebbe sottolineata.
+    const tab = (attiva) => ({
+      ...tabBase,
+      color: attiva ? INK : "#9A836C",
+      borderBottom: "2px solid " + (attiva ? INK : "transparent")
+    });
+    const views = [
+      { label: t0.viewAll, attiva: !this.state.veg, veg: false },
+      { label: t0.viewVeg, attiva: this.state.veg, veg: true }
+    ].map(v => ({
+      label: v.label,
+      style: tab(v.attiva),
+      onClick: () => this.setState({ veg: v.veg })
+    }));
 
     const q = this.state.query.trim().toLowerCase();
     const entries = allEntries.filter(e =>
@@ -305,7 +339,7 @@ class Component extends DCLogic {
       ? (en ? n + " recipes" : n + " ricette")
       : (en ? n + (n === 1 ? " recipe found" : " recipes found") : n + (n === 1 ? " ricetta trovata" : " ricette trovate"));
 
-    return { ...base, t: t0, entries, cats, vegChip, resultLabel, noResults: n === 0 };
+    return { ...base, t: t0, entries, cats, views, resultLabel, noResults: n === 0 };
   }
 }
 </script>

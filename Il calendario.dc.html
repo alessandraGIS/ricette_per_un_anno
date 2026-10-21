@@ -200,21 +200,13 @@ class Component extends DCLogic {
       if (!seenCats.some(s => s.key === c.it)) seenCats.push({ key: c.it, label: c[langKey] });
     });
 
-    // Colori delle categorie, condivisi fra le pagine: mappa esplicita, così ogni
-    // tinta resta fissa anche se cambia l'ordine delle ricette in DB.order. Le tinte
-    // sono scelte ben distanziate fra loro per restare distinguibili nei pallini.
-    // Una categoria nuova, non elencata qui, riceve un colore di riserva (per ordine
-    // di prima comparsa in DB.order).
-    const CAT_COLORS = {
-      "dolci": "#BE5A34",
-      "primi piatti": "#A97718",
-      "secondi piatti": "#4F5FA0",
-      "contorni": "#5E8A4C",
-      "antipasti": "#2E7D9A",
-      "salse": "#A8435F",
-      "preparazioni di base": "#7A539C"
-    };
-    const CAT_PALETTE = ["#2E7D6B", "#8A4A78", "#7C8C3E", "#6E5690", "#3E7D6E"];
+    // I colori delle categorie stanno in recipes.js, accanto alle ricette, cosi'
+    // sono gli stessi in tutte le pagine e si cambiano in un posto solo.
+    const CAT_COLORS = DB.catColors || {};
+    // Se i colori mancassero (per esempio con una copia vecchia di recipes.js
+    // rimasta nella memoria del browser), si ripiega su un bruno neutro: meglio
+    // una pagina spenta che una pagina tinta di un colore che non vuol dire niente.
+    const CAT_PALETTE = (DB.catPalette && DB.catPalette.length) ? DB.catPalette : ["#7A6552"];
     const catColorMap = {};
     let catSpare = 0;
     seenCats.forEach(c => {

@@ -7,6 +7,9 @@
 // `notes`: array di note distinte (in ordine), al posto del singolo campo `note`.
 // `illustration: true` su una ricetta con `img`: niente cornice, sfondo trasparente (per immagini create, non foto).
 // `pageImg`: array di foto usato solo nella pagina della ricetta (Ricetta.dc.html), al posto di `img`; la home continua a usare `img`.
+// `veg: true`: ricetta senza carne ne' pesce, segnalata dal filtro "vegetariane" in home e nel diario.
+//   Si decide a mano, ricetta per ricetta: un elenco di ingredienti non sa che un brodo puo' essere di carne
+//   o che certi capperi sono conservati con l'acciuga.
 // `anteprima`: una riga scritta a mano, che compare sotto al titolo quando si condivide il link della ricetta
 //   su WhatsApp o simili (per esempio: "Un antipasto delle feste, pronto in venti minuti"). Se manca,
 //   l'anteprima mostra solo foto e titolo: meglio niente che una frase scritta da una macchina.
@@ -16,6 +19,7 @@ window.MARA_RECIPES = {
   recipes: {
     pastella: {
       published: true,
+      veg: true,
       day: "26", mIt: "febbraio", mEn: "February",
       date: { it: "26 febbraio 2004", en: "26 February 2004" },
       cat: { it: "preparazioni di base", en: "basics" },
@@ -37,6 +41,7 @@ window.MARA_RECIPES = {
     },
     zucchine: {
       published: true,
+      veg: true,
       day: "27", mIt: "giugno", mEn: "June",
       date: { it: "27 giugno 2004", en: "27 June 2004" },
       cat: { it: "primi piatti", en: "first course" },
@@ -58,6 +63,7 @@ window.MARA_RECIPES = {
     },
     tortacioccolato: {
       published: true,
+      veg: true,
       day: "01", mIt: "febbraio", mEn: "February",
       date: { it: "1 febbraio 2004", en: "1 February 2004" },
       cat: { it: "dolci", en: "desserts" },
@@ -103,6 +109,7 @@ window.MARA_RECIPES = {
     },
     tzatziki: {
       published: true,
+      veg: true,
       day: "06", mIt: "luglio", mEn: "July",
       date: { it: "6 luglio 2004", en: "6 July 2004" },
       cat: { it: "salse", en: "sauces" },
@@ -126,6 +133,7 @@ window.MARA_RECIPES = {
     },
     caponatabastarda: {
       published: true,
+      veg: true,
       day: "22", mIt: "febbraio", mEn: "February",
       date: { it: "22 febbraio 2004", en: "22 February 2004" },
       cat: { it: "contorni", en: "side dishes" },
@@ -150,6 +158,7 @@ window.MARA_RECIPES = {
     },
     tabuleh: {
       published: true,
+      veg: true,
       day: "11", mIt: "giugno", mEn: "June",
       date: { it: "11 giugno 2004", en: "11 June 2004" },
       cat: { it: "primi piatti", en: "first course" },
@@ -195,6 +204,7 @@ window.MARA_RECIPES = {
     },
     bacidimara: {
       published: true,
+      veg: true,
       day: "01", mIt: "gennaio", mEn: "January",
       date: { it: "1 gennaio 2004", en: "1 January 2004" },
       cat: { it: "dolci", en: "desserts" },
@@ -248,6 +258,7 @@ window.MARA_RECIPES = {
     },
     insalatagreca: {
       published: true,
+      veg: true,
       day: "01", mIt: "agosto", mEn: "August",
       date: { it: "1 agosto 2004", en: "1 August 2004" },
       cat: { it: "contorni", en: "side dishes" },
@@ -267,6 +278,7 @@ window.MARA_RECIPES = {
     },
     pescheripiene: {
       published: true,
+      veg: true,
       day: "27", mIt: "luglio", mEn: "July",
       date: { it: "27 luglio 2004", en: "27 July 2004" },
       cat: { it: "dolci", en: "desserts" },
@@ -287,6 +299,7 @@ window.MARA_RECIPES = {
     },
     pestotrapanese: {
       published: true,
+      veg: true,
       day: "18", mIt: "luglio", mEn: "July",
       date: { it: "18 luglio 2004", en: "18 July 2004" },
       cat: { it: "primi piatti", en: "first course" },
@@ -330,6 +343,7 @@ window.MARA_RECIPES = {
     },
     insalatapantesca: {
       published: true,
+      veg: true,
       day: "24", mIt: "agosto", mEn: "August",
       date: { it: "24 agosto 2004", en: "24 August 2004" },
       cat: { it: "contorni", en: "side dishes" },
@@ -354,6 +368,7 @@ window.MARA_RECIPES = {
     },
     maionese: {
       published: true,
+      veg: true,
       day: "05", mIt: "aprile", mEn: "April",
       date: { it: "5 aprile 2004", en: "5 April 2004" },
       cat: { it: "salse", en: "sauces" },
@@ -374,6 +389,7 @@ window.MARA_RECIPES = {
     },
     insalatarussa: {
       published: true,
+      veg: true,
       day: "09", mIt: "settembre", mEn: "September",
       date: { it: "9 settembre 2004", en: "9 September 2004" },
       cat: { it: "contorni", en: "side dishes" },
@@ -412,6 +428,7 @@ window.MARA_RECIPES = {
     },
     risiebisi: {
       published: true,
+      veg: true,
       day: "06", mIt: "aprile", mEn: "April",
       date: { it: "6 aprile 2004", en: "6 April 2004" },
       cat: { it: "primi piatti", en: "first course" },

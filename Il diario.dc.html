@@ -89,6 +89,8 @@
         <sc-for list="{{ cats }}" as="c" hint-placeholder-count="6">
           <span onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.label }}</span>
         </sc-for>
+        <span style="width:1px; height:18px; background:rgba(58,44,34,.22); margin:0 4px;"></span>
+        <span onClick="{{ vegChip.onClick }}" style="{{ vegChip.style }}">{{ vegChip.label }}</span>
       </div>
       <div style="position:relative; display:flex; align-items:center; flex:1; min-width:200px; max-width:320px;">
         <span style="position:absolute; left:12px; font-family:'Courier Prime',monospace; font-size:13px; color:#B9A88F; pointer-events:none;">⌕</span>
@@ -135,7 +137,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { lang: "it", query: "", cat: "all", menuOpen: false };
+  state = { lang: "it", query: "", cat: "all", veg: false, menuOpen: false };
 
   componentDidMount() {
     const wait = () => {
@@ -160,6 +162,7 @@ class Component extends DCLogic {
       diarySub: "Una mail al giorno, un anno intero",
       searchPlaceholder: "Cerca una ricetta o un ingrediente…",
       catAll: "tutte",
+      catVeg: "vegetariane",
       noResults: "Nessuna ricetta corrisponde alla ricerca.",
       coming: "in arrivo",
       published: "pubblicata",
@@ -177,6 +180,7 @@ class Component extends DCLogic {
       diarySub: "One email a day, a whole year",
       searchPlaceholder: "Search a recipe or an ingredient…",
       catAll: "all",
+      catVeg: "vegetarian",
       noResults: "No recipe matches your search.",
       coming: "coming soon",
       published: "published",
@@ -202,7 +206,7 @@ class Component extends DCLogic {
 
     const DB = window.MARA_RECIPES;
     if (!DB) {
-      return { ...base, t: t0, entries: [], cats: [], resultLabel: "", noResults: false };
+      return { ...base, t: t0, entries: [], cats: [], vegChip: { label: t0.catVeg, style: { display: "none" }, onClick: () => {} }, resultLabel: "", noResults: false };
     }
 
     const seen = [];
@@ -244,8 +248,10 @@ class Component extends DCLogic {
         name: x.name[langKey],
         cat: x.cat[langKey],
         catKey: x.cat.it,
+        veg: !!x.veg,
         catDotStyle: { width: "8px", height: "8px", borderRadius: "50%", flexShrink: "0", display: "inline-block", background: catColorMap[x.cat.it] },
-        search: (x.name[langKey] + " " + x.cat[langKey] + " " + ingText).toLowerCase(),
+        search: (x.name[langKey] + " " + x.cat[langKey] + " " + ingText
+          + (x.veg ? (en ? " vegetarian" : " vegetariana vegetariane") : "")).toLowerCase(),
         pub: !!x.published,
         coming: !x.published
       };
@@ -272,18 +278,34 @@ class Component extends DCLogic {
       onClick: () => this.setState({ cat: c.key })
     }));
 
+    // "vegetariane" e' un filtro di natura diversa dalle categorie: non sostituisce
+    // la scelta, la restringe. Sta quindi in uno stato suo e si combina con l'altra,
+    // cosi' si possono chiedere insieme i primi piatti e solo quelli vegetariani.
+    // Verde invece del terracotta delle categorie, sia accesa sia spenta: e' il
+    // segno che non e' una categoria ma un interruttore che si somma a quella
+    // scelta. Spenta resta tenue, cosi' si riconosce senza farsi notare troppo.
+    const VERDE = "#4F7A3A";
+    const vegOn = { ...chipBase, background: VERDE, color: "#FBF4E6", borderColor: VERDE };
+    const vegOff = { ...chipBase, background: "transparent", color: VERDE, borderColor: "rgba(79,122,58,.55)" };
+    const vegChip = {
+      label: t0.catVeg,
+      style: this.state.veg ? vegOn : vegOff,
+      onClick: () => this.setState({ veg: !this.state.veg })
+    };
+
     const q = this.state.query.trim().toLowerCase();
     const entries = allEntries.filter(e =>
       (this.state.cat === "all" || e.catKey === this.state.cat) &&
+      (!this.state.veg || e.veg) &&
       (!q || e.search.includes(q))
     );
 
     const n = entries.length;
-    const resultLabel = (this.state.cat === "all" && !q)
+    const resultLabel = (this.state.cat === "all" && !this.state.veg && !q)
       ? (en ? n + " recipes" : n + " ricette")
       : (en ? n + (n === 1 ? " recipe found" : " recipes found") : n + (n === 1 ? " ricetta trovata" : " ricette trovate"));
 
-    return { ...base, t: t0, entries, cats, resultLabel, noResults: n === 0 };
+    return { ...base, t: t0, entries, cats, vegChip, resultLabel, noResults: n === 0 };
   }
 }
 </script>

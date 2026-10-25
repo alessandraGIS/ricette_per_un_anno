@@ -36,8 +36,8 @@ window.MARA_RECIPES = {
   },
   catPalette: ["#2E7D6B", "#8A4A78", "#7C8C3E", "#6E5690", "#3E7D6E"],
 
-  order: ["bacidimara", "polloallimone", "tortacioccolato", "orecchiettetonno", "caponatabastarda", "pastella", "maionese", "risiebisi", "tabuleh", "zucchine", "cotolettepollo", "tzatziki", "pestotrapanese", "pescheripiene", "insalatagreca", "insalatapantesca", "insalatarussa", "capesantegratinate"],
-  recentOrder: ["pastella", "zucchine", "tortacioccolato", "insalatapantesca", "maionese", "insalatarussa", "risiebisi", "cotolettepollo", "orecchiettetonno", "tzatziki", "caponatabastarda", "pestotrapanese", "pescheripiene", "tabuleh", "insalatagreca", "polloallimone", "bacidimara", "capesantegratinate"],
+  order: ["bacidimara", "polloallimone", "tortacioccolato", "orecchiettetonno", "gnocchiricottaspinaci", "caponatabastarda", "pastella", "maionese", "risiebisi", "tabuleh", "zucchine", "cotolettepollo", "tzatziki", "pestotrapanese", "pescheripiene", "insalatagreca", "insalatapantesca", "insalatarussa", "capesantegratinate"],
+  recentOrder: ["pastella", "zucchine", "tortacioccolato", "insalatapantesca", "maionese", "insalatarussa", "risiebisi", "cotolettepollo", "orecchiettetonno", "tzatziki", "caponatabastarda", "pestotrapanese", "pescheripiene", "tabuleh", "insalatagreca", "polloallimone", "bacidimara", "capesantegratinate", "gnocchiricottaspinaci"],
   recipes: {
     pastella: {
       published: true,
@@ -107,6 +107,32 @@ window.MARA_RECIPES = {
       notes: [
         { it: "Puoi accompagnare la torta con panna montata o crema inglese.", en: "You can serve the cake with whipped cream or custard." },
         { it: "In alternativa al bagnomaria, il cioccolato può essere sciolto nel forno a microonde insieme al latte: spezzetta il cioccolato in una ciotola adatta al microonde, aggiungi il latte e scalda a potenza media per 30 secondi alla volta, mescolando bene dopo ogni intervallo, finché non si ottiene una crema liscia e omogenea.", en: "As an alternative to the bain-marie, the chocolate can be melted in the microwave together with the milk: break the chocolate into a microwave-safe bowl, add the milk and heat at medium power for 30 seconds at a time, stirring well after each interval, until you get a smooth, even cream.", by: "ale" }
+      ]
+    },
+    gnocchiricottaspinaci: {
+      published: true,
+      veg: true,
+      day: "16", mIt: "febbraio", mEn: "February",
+      date: { it: "16 febbraio 2004", en: "16 February 2004" },
+      cat: { it: "primi piatti", en: "first course" },
+      name: { it: "Gnocchi di ricotta e spinaci", en: "Ricotta and spinach gnocchi" },
+      meta: { it: "", en: "" },
+      servings: { it: "Per 4 persone", en: "Serves 4" },
+      time: { it: "Preparazione 40 min, scolatura degli spinaci 1 ora, riposo 30 min", en: "Preparation 40 min, draining the spinach 1 hour, resting 30 min" },
+      img: "photos/gnocchiricottaspinaci.jpg",
+      photo: { it: "[ foto: gli gnocchi di ricotta e spinaci con burro e salvia ]", en: "[ photo: the ricotta and spinach gnocchi with butter and sage ]" },
+      ing: {
+        it: ["\u00a7 Per gli gnocchi", "500 g di spinaci freschi, crudi e puliti", "400 g di ricotta vaccina fresca", "40 g di farina 00", "30 g di pangrattato fine", "30 g di Parmigiano Reggiano grattugiato", "2 tuorli", "noce moscata (facoltativa)", "sale", "circa 50 g di farina per infarinare", "\u00a7 Per il condimento", "70 g di burro", "6-8 foglie di salvia", "40 g di Parmigiano Reggiano grattugiato"],
+        en: ["\u00a7 For the gnocchi", "500 g fresh spinach, raw and cleaned", "400 g fresh cow's milk ricotta", "40 g plain flour (type 00)", "30 g fine breadcrumbs", "30 g grated Parmigiano Reggiano", "2 egg yolks", "nutmeg (optional)", "salt", "about 50 g flour for dusting", "\u00a7 For the dressing", "70 g butter", "6-8 sage leaves", "40 g grated Parmigiano Reggiano"]
+      },
+      steps: {
+        it: ["Cuoci gli spinaci per circa 5 minuti, preferibilmente nel microonde oppure in acqua bollente. Trasferiscili in un colino e lasciali raffreddare per circa un'ora, strizzandoli bene a pi\u00f9 riprese.", "Se la ricotta \u00e8 umida, scolala bene.", "Trita brevemente gli spinaci con il mixer. Mescolali alla ricotta, ai tuorli, al Parmigiano, alla noce moscata e al sale. Incorpora infine la farina e il pangrattato, senza lavorare troppo il composto.", "Copri e lascia riposare in frigorifero per circa 30 minuti: l'impasto deve rimanere morbido e leggermente appiccicoso.", "Preleva l'impasto e forma palline grandi come una grossa noce, circa 30 g, aiutandoti con le mani leggermente bagnate. Passale delicatamente nella farina e disponile su un vassoio.", "Fai sciogliere a fuoco dolce il burro con la salvia, senza farlo scurire troppo.", "Porta a leggero bollore abbondante acqua salata in una pentola capiente. Immergi gli gnocchi e, quando vengono a galla, attendi circa 30 secondi e scolali delicatamente con una schiumarola.", "Distribuisci gli gnocchi nel piatto da portata, versa il burro alla salvia e completa con il Parmigiano."],
+        en: ["Cook the spinach for about 5 minutes, preferably in the microwave or else in boiling water. Transfer it to a colander and let it cool for about an hour, squeezing it well several times.", "If the ricotta is wet, drain it well.", "Chop the spinach briefly in a food processor. Mix it with the ricotta, the egg yolks, the Parmigiano, the nutmeg and the salt. Finally fold in the flour and the breadcrumbs, without overworking the mixture.", "Cover and leave to rest in the fridge for about 30 minutes: the mixture should stay soft and slightly sticky.", "Take the mixture and shape it into balls the size of a large walnut, about 30 g, with slightly wet hands. Roll them gently in flour and lay them on a tray.", "Melt the butter with the sage over low heat, without letting it darken too much.", "Bring a large pan of salted water to a gentle boil. Lower in the gnocchi and, once they rise to the surface, wait about 30 seconds and lift them out gently with a slotted spoon.", "Arrange the gnocchi on a serving dish, pour over the sage butter and finish with the Parmigiano."]
+      },
+      notes: [
+        { it: "Lascia gli spinaci cucinati in un colino per circa un'ora. Strizzali accuratamente con le mani, a pi\u00f9 riprese, durante il raffreddamento, applicando una certa forza, per eliminare bene l'acqua in eccesso. Dedica a questa operazione tutto il tempo necessario: \u00e8 fondamentale per la buona riuscita degli gnocchi.", en: "Leave the cooked spinach in a colander for about an hour. Squeeze it thoroughly with your hands, several times, as it cools, using a fair amount of force, to get rid of the excess water. Give this step all the time it needs: it is essential if the gnocchi are to turn out well." },
+        { it: "In alternativa puoi usare 400 g di spinaci surgelati: scaldali nel microonde fino a scongelarli completamente, poi strizzali con la stessa cura.", en: "You can use 400 g of frozen spinach instead: warm it in the microwave until it is completely thawed, then squeeze it with the same care." },
+        { it: "La cottura degli spinaci nel microonde \u00e8 preferibile perch\u00e9 evita che assorbano altra acqua. Mettili in un contenitore con coperchio adatto al microonde. Cuoci a 800 W per circa 5 minuti, mescolando a met\u00e0 cottura. A fine cottura verifica che siano appassiti. Se il forno \u00e8 piccolo, procedi in due volte con 250 g alla volta, pressandoli leggermente nel contenitore.", en: "Cooking the spinach in the microwave is preferable because it keeps it from taking on more water. Put it in a microwave-safe container with a lid. Cook at 800 W for about 5 minutes, stirring halfway through. At the end, check that it has wilted. If your microwave is small, do it in two batches of 250 g, pressing the spinach down lightly in the container.", by: "ale" }
       ]
     },
     orecchiettetonno: {

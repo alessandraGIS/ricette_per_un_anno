@@ -1,4 +1,13 @@
 User-agent: *
 Allow: /
 
+# Il sito riempie alcuni collegamenti con JavaScript: nel file grezzo, prima che
+# il JavaScript giri, restano scritti come segnaposto, per esempio
+# href="{{ featuredHref }}". I motori di ricerca li leggono come se fossero
+# indirizzi e provano a scaricarli, ottenendo un 404 su pagine che non sono mai
+# esistite. Queste due righe dicono di lasciarli stare: le pagine vere, elencate
+# nella sitemap, non sono toccate.
+Disallow: /*%7B%7B
+Disallow: /*{{
+
 Sitemap: https://www.lericettedimara.it/sitemap.xml

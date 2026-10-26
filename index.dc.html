@@ -208,7 +208,7 @@
         <div style="font-family:'DM Serif Display',serif; font-size:clamp(24px,3vw,30px); color:#3A2C22; line-height:1.15;">{{ t.waTitle }}</div>
         <div style="font-size:16px; font-style:italic; color:#7A6552; margin-top:8px;">{{ t.waSub }}</div>
       </div>
-      <a href="{{ waUrl }}" target="_blank" rel="noopener" style="text-decoration:none; white-space:nowrap; background:#BE5A34; color:#FBF4E6; font-family:'Spectral',serif; font-size:15px; letter-spacing:.02em; padding:13px 26px; border-radius:2px;">{{ t.waCta }}</a>
+      <a href="https://whatsapp.com/channel/0029VbEES23EVccQOr8eN53a" target="_blank" rel="noopener" style="text-decoration:none; white-space:nowrap; background:#BE5A34; color:#FBF4E6; font-family:'Spectral',serif; font-size:15px; letter-spacing:.02em; padding:13px 26px; border-radius:2px;">{{ t.waCta }}</a>
     </div>
   </div>
 
@@ -390,9 +390,6 @@ class Component extends DCLogic {
     const langKey = en ? "en" : "it";
 
     const base = {
-      // Il canale WhatsApp annuncia le ricette nuove. L'indirizzo sta qui una
-      // volta sola: se un giorno cambia, si corregge solo questa riga.
-      waUrl: "https://whatsapp.com/channel/0029VbEES23EVccQOr8eN53a",
       itStyle: en ? idle : active,
       enStyle: en ? active : idle,
       onIt: () => this.setState({ lang: "it" }),

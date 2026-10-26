@@ -133,6 +133,40 @@
     </sc-if>
   </div>
 
+  <!-- Elenco di collegamenti veri alle ricette, per i motori di ricerca e per chi
+       ha il JavaScript disattivato. Chi naviga normalmente non lo vede mai: il
+       browser ignora <noscript> appena il JavaScript parte, e sopra c'e' gia'
+       l'elenco vero con ricerca e filtri. Lo riscrive scripts/genera-elenco-ricette.js
+       a ogni ricetta nuova: non modificarlo a mano, e non togliere i due segni. -->
+  <noscript>
+    <div style="padding:0 clamp(28px,5vw,64px) 40px; font-size:15px; line-height:1.9; color:#4A3A2E;">
+      <!-- ELENCO-RICETTE-INIZIO -->
+      <p>Tutte le ricette pubblicate, in ordine di data:</p>
+      <ul>
+        <li><a href="Ricetta.dc.html?r=bacidimara">Baci di Mara (ovvero Baci di dama)</a> — 1 gennaio 2004 · dolci</li>
+        <li><a href="Ricetta.dc.html?r=polloallimone">Pollo al limone</a> — 4 gennaio 2004 · secondi piatti</li>
+        <li><a href="Ricetta.dc.html?r=tortacioccolato">Torta fondente al cioccolato</a> — 1 febbraio 2004 · dolci</li>
+        <li><a href="Ricetta.dc.html?r=orecchiettetonno">Orecchiette al tonno, zucchine e scorza di limone</a> — 6 febbraio 2004 · primi piatti</li>
+        <li><a href="Ricetta.dc.html?r=gnocchiricottaspinaci">Gnocchi di ricotta e spinaci</a> — 16 febbraio 2004 · primi piatti</li>
+        <li><a href="Ricetta.dc.html?r=caponatabastarda">Caponata bastarda</a> — 22 febbraio 2004 · contorni</li>
+        <li><a href="Ricetta.dc.html?r=pastella">Pastella per friggere</a> — 26 febbraio 2004 · preparazioni di base</li>
+        <li><a href="Ricetta.dc.html?r=maionese">Maionese</a> — 5 aprile 2004 · salse</li>
+        <li><a href="Ricetta.dc.html?r=risiebisi">Risi e bisi</a> — 6 aprile 2004 · primi piatti</li>
+        <li><a href="Ricetta.dc.html?r=tabuleh">Tabuleh</a> — 11 giugno 2004 · primi piatti</li>
+        <li><a href="Ricetta.dc.html?r=zucchine">Crema fredda di zucchine</a> — 27 giugno 2004 · primi piatti</li>
+        <li><a href="Ricetta.dc.html?r=cotolettepollo">Cotolette di pollo estive</a> — 28 giugno 2004 · secondi piatti</li>
+        <li><a href="Ricetta.dc.html?r=tzatziki">Tzatziki</a> — 6 luglio 2004 · salse</li>
+        <li><a href="Ricetta.dc.html?r=pestotrapanese">Pasta al pesto trapanese</a> — 18 luglio 2004 · primi piatti</li>
+        <li><a href="Ricetta.dc.html?r=pescheripiene">Pesche ripiene</a> — 27 luglio 2004 · dolci</li>
+        <li><a href="Ricetta.dc.html?r=insalatagreca">Insalata greca</a> — 1 agosto 2004 · contorni</li>
+        <li><a href="Ricetta.dc.html?r=insalatapantesca">Insalata pantesca</a> — 24 agosto 2004 · contorni</li>
+        <li><a href="Ricetta.dc.html?r=insalatarussa">Insalata russa</a> — 9 settembre 2004 · contorni</li>
+        <li><a href="Ricetta.dc.html?r=capesantegratinate">Capesante gratinate</a> — 30 dicembre 2004 · antipasti</li>
+      </ul>
+      <!-- ELENCO-RICETTE-FINE -->
+    </div>
+  </noscript>
+
   <!-- footer -->
   <div style="padding:22px clamp(28px,5vw,64px) 32px; border-top:1px solid rgba(58,44,34,.12); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
     <div style="font-size:13px; font-style:italic; color:#7A6552;">{{ t.footer }}</div>

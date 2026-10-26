@@ -3,7 +3,9 @@
 #
 #   - sitemap.xml, per far sapere a Google che esiste una ricetta nuova;
 #   - la cartella r/, le paginette che danno a WhatsApp e simili il titolo e la
-#     foto giusti quando si condivide il link di una ricetta.
+#     foto giusti quando si condivide il link di una ricetta;
+#   - l'elenco di collegamenti dentro "Il diario.dc.html", che da' ai motori di
+#     ricerca dei link veri alle ricette.
 #
 # Non c'e' niente da installare o da avviare: gira sui computer di GitHub.
 
@@ -16,6 +18,7 @@ on:
       - "recipes.js"
       - "scripts/genera-sitemap.js"
       - "scripts/genera-pagine-ricette.js"
+      - "scripts/genera-elenco-ricette.js"
   workflow_dispatch: # permette anche di lanciarlo a mano dalla scheda Actions
 
 permissions:
@@ -39,9 +42,12 @@ jobs:
       - name: Rigenera le paginette per le anteprime
         run: node scripts/genera-pagine-ricette.js
 
+      - name: Rigenera l'elenco dei collegamenti nel diario
+        run: node scripts/genera-elenco-ricette.js
+
       - name: Salva quello che e' cambiato
         run: |
-          git add -A sitemap.xml r
+          git add -A sitemap.xml r "Il diario.dc.html"
           if git diff --cached --quiet; then
             echo "Nessuna ricetta nuova: sitemap e anteprime erano gia' aggiornate."
             exit 0
